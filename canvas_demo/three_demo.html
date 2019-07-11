@@ -1,0 +1,54 @@
+<! DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            three.js的测试
+        </title>
+        <style>
+            body{
+                margin:0px;
+                padding:0px;
+            }
+        </style>
+        <script src="js/three.js"></script>
+    </head>
+    <body onload="main()">
+        <script>
+            //新建一个场景
+            function main(){
+                let scene=new THREE.Scene();//新建场景
+                let camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);//PrespectiveCamera远景相机，相机有多种，新建一个相机75度的视角相机拍摄面的长宽比，近裁剪面，远裁剪面
+                let renderer=new THREE.WebGLRenderer();//新建渲染器，渲染器也有多种，基本上是为了回退处理些不支持WebGL的旧式浏览器
+                renderer.setSize(window.innerWidth,window.innerHeight);//设置渲染空间的大小
+                renderer.setClearColor('#170E23',1);//设置默认的背景色
+                document.body.appendChild(renderer.domElement);//将渲染空间添加到body元素中去
+                let geometry=new THREE.ConeGeometry(5,5,4,1);//创建一个几何模型
+                let texture=new THREE.TextureLoader().load('img/1.jpg');
+                let material=new THREE.MeshLambertMaterial({map:texture,color:'#26183B'});//新建一个材料
+                let cube=new THREE.Mesh(geometry,material);//添加一个网孔
+                scene.add(cube);
+                camera.position.z=20;
+                let light=new THREE.DirectionalLight(0xffffff,0.9);
+                light.position.z=0;
+                light.position.x=5;
+                light.position.y=0;
+                scene.add(light);
+                let render=function(){
+                    requestAnimationFrame(render);
+                    // cube.rotation.x+=0.01;
+                    // cube.rotation.y+=0.03;
+                    cube.rotateY(0.01);
+                    // cube.rotation.z+=0.01;
+                    // if(camera.position.z<0){
+                    //     camera.position.z=100;
+                    // }
+                    // camera.position.z-=1;
+                    renderer.render(scene,camera);
+                }
+                render();
+            }
+        </script>
+    </body>
+
+</html>

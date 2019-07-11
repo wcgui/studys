@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=1920,  target-densitydpi=high-dpi，minimum-scale=1.0, maximum-scale=2.0, user-scalable=0">
+		<link rel="shortcut icon" href="images/162367125726955568.jpg" type="image/x-icon">
+		<title>可视化产品系统</title>
+		<script src="js/jquery.min.js"></script>
+		<style>
+			html{
+				height:100%;
+			}
+			body{
+				height:100%;
+				margin:0px;
+				padding:0px;
+				overflow: hidden;
+			}
+			.wrap{
+				width:100%;
+				height:100%;
+				overflow:hidden;
+			}
+			/*头部*/
+			.wrap .header-box{
+				height:60px;
+				position:fixed;
+				width:100%;
+				background:#161616;
+				overflow:hidden;
+				z-index: 999;
+			}
+			.wrap .header-box-left{
+				float:left;
+				height:60px;
+				line-height:60px;
+				margin-left:20px;
+			}
+			.wrap .header-box-left img{
+				width:45px;
+				height:45px;
+				margin-top:7px;
+				border-radius:50%;
+			}.wrap .header-box-left>a{
+				float:left;
+				height:60px;
+				line-height: 60px;
+				font-family:"黑体";
+				font-size:22px;
+				text-decoration: none;
+			}
+			.wrap .header-box-left>a:last-child{
+				font-weight:bold;
+				color:#05A4F8;
+				margin-left:15px;
+			}
+			.wrap .header-box-right{
+				float:right;
+				height:60px;
+				line-height:60px;
+			}
+			.wrap .header-box-right>span{
+				float:left;
+			}
+			.wrap .header-box-right>span:first-child{
+				color:#566065;
+				font-size:12px;	
+			}
+			.wrap .header-box-right .btn{
+				width:110px;
+				text-align: center;
+				cursor: pointer;
+				font-size:14px;
+			}
+			.wrap .header-box-right .btn-active{
+				color:white;
+				background:#73D12E;
+			}
+			.wrap .header-box-right .btn-active:hover{
+				background:rgba(115,209,46,0.8);
+			}
+			.wrap .header-box-right .preview-btn{
+				color:#0C79B7;
+				border-left:2px solid #383E41;
+			}
+			.wrap .header-box-right .preview-btn:hover,.save-btn:hover{
+				background:#373535;
+			} 
+			.wrap .header-box-right .save-btn{
+				color:#818E95;
+				width:85px;
+			}
+			.wrap .header-box-right .reform-btn{
+				padding-right:33px;
+			}
+			.wrap .header-box-right>span.reform-btn i{
+				background:url(images/repeal.png) 0px 10px no-repeat;
+				float: left;
+				width:25px;
+				height:37px;
+				cursor: pointer;
+				margin-top:6px;
+			}
+			.wrap .header-box-right>span.reform-btn i:last-child{
+				background:url(images/reform.png) 0px 8px no-repeat;
+			}
+			/*整体中间*/
+			.wrap .container{
+				background:#07070C;
+				height:100%;
+				padding-top:60px;
+				box-sizing: border-box;
+				position:relative;
+			}
+			.wrap .container .left-box{
+				width:75px;
+				background-color: #27292B;
+				height:100%;
+				margin-left:5px;
+				padding-top:60px;
+				position:absolute;
+				top:0px;
+				left:0px;
+				box-sizing:border-box;
+			}
+			.wrap .container .middle-box{
+				width:100%;
+				height:100%;
+				padding-left:80px;
+				background:#000;
+				box-sizing: border-box;
+			}
+			.wrap .container .right-box{
+				position:absolute;
+				top:0px;
+				right:0px;
+				padding-top:60px;
+				box-sizing: border-box;
+				height:100%;
+				/*width:325px;*/
+			}
+			.wrap .container .left-box>div.left-content-box{
+				height:120px;
+				color:#829096;
+				cursor: pointer;
+				background:url(images/chart.png) center 15px no-repeat;
+				box-sizing: border-box;
+				padding-top:75px;
+				text-align: center;
+				position:relative;
+			}
+			.wrap .container .left-box>div.left-content-box:hover,.wrap .container .left-box>div.btn-chart-active{
+				background-color:#73D12E;
+				background-image: url(images/chart1.png);
+				color:white;
+				width:80px;
+				left:-5px;
+				border-radius:5px 0px 0px 5px;
+			}
+			.wrap .container .left-box>div.template-box{
+				background-image:url(images/template.png);
+			}
+			.wrap .container .left-box>div.template-box:hover,.wrap .container .left-box>div.btn-template-active{
+				background-image: url(images/template1.png);
+				background-color:#73D12E;
+				color:white;
+				width:80px;
+				left:-5px;
+				border-radius:5px 0px 0px 5px;
+			}
+			.wrap .container .left-box>div.source-box{
+				width:300px;
+				background:#EAEAEA;
+				position:absolute;
+				top:0px;
+				padding-top:60px;
+				box-sizing: border-box;
+				left:75px;
+				height:100%;
+				border-left:4px solid #73D12E;
+				border-radius:0px 5px 5px 5px;
+			}
+			.wrap .container .left-box>div.source-box header{
+				height:65px;
+				font-size:18px;
+				background:#CCCCCC;
+				padding-left:20px;
+				line-height:65px;
+				font-weight:500;
+				border-radius:0px 5px 0px 0px;
+			}
+			.wrap .container .left-box>div.source-box header i{
+				background:url(images/cancel.png);
+				float:right;
+				width:44px;
+				height:41px;
+				margin:12px 10px 0px 0px;
+				cursor: pointer;
+			}
+			.wrap .container .left-box>div.source-box>div,.wrap .container .right-box .right-box-boxes .module-edit-box>div{
+				margin:10px 8px;
+				height:90%;
+				overflow-y: auto;
+				padding-right:8px;
+			}
+			.wrap .container .left-box>div.source-box>div>ul,.wrap .container .right-box .right-box-boxes .module-edit-box>div>ul{
+				/*height:2000px;*/
+				margin:0px;
+				padding:0px;
+				list-style:none;
+			}
+			/*滚动条样式*/
+			.wrap .container .left-box>div.source-box>div::-webkit-scrollbar,.wrap .container .right-box .right-box-boxes .module-edit-box>div::-webkit-scrollbar{/*滚动条整体样式*/
+			    width: 6px;     /*高宽分别对应横竖滚动条的尺寸*/
+			    height: 8px;
+			}
+			.wrap .container .left-box>div.source-box>div::-webkit-scrollbar-thumb ,.wrap .container .right-box .right-box-boxes .module-edit-box>div::-webkit-scrollbar-thumb{/*滚动条里面小方块*/
+			    border-radius: 5px;
+			    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+			    /* background: rgba(0,0,0,0.2); */
+			    background:#7D7D7D;
+			}
+			.wrap .container .left-box>div.source-box>div::-webkit-scrollbar-track,.wrap .container .right-box .right-box-boxes .module-edit-box>div::-webkit-scrollbar-track {/*滚动条里面轨道*/
+			    /*-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);*/
+			    border-radius: 5px;
+			    /* background: rgba(0,0,0,0.1); */
+			    background:#EAEAEA;
+			}
+			.wrap .container .left-box>div.source-box>div>ul>li>a,.wrap .container .right-box .right-box-boxes .module-edit-box>div>ul>li>a{
+				display: block;
+				text-decoration: none;
+				border:1px solid #D8D8D8;
+				border-radius:3px;
+				height:48px;
+				margin-bottom:10px;
+				line-height:48px;
+				color:#737373;
+				padding-left:55px;
+				background:url(images/catalogue.png) 30px center no-repeat;
+				cursor: pointer;
+				position:relative;
+			}
+			.wrap .container .left-box>div.source-box>div>ul>li>a>i,.wrap .container .right-box .right-box-boxes .module-edit-box>div>ul>li>a>i{
+				border:6px solid transparent;
+				float:right;
+				border-bottom-color:#7D7D7D;
+				margin-right:10px;
+				margin-top:15px;
+			}
+			.wrap .container .left-box>div.source-box>div>ul>li>a:hover>i,.wrap .container .left-box>div.source-box>div>ul>li>a>i.source-box-active,.wrap .container .right-box .right-box-boxes .module-edit-box>div>ul>li>a:hover>i,.wrap .container .right-box .right-box-boxes .module-edit-box>div>ul>li>a>i.module-btn-box{
+				transform:rotate(180deg) translateY(-6px);
+				border-bottom-color:#73D12E;
+			}
+			.wrap .container .left-box>div.source-box>div>ul>li>a:hover,.wrap .container .left-box>div.source-box>div>ul>li>a.source-box-active,.wrap .container .right-box .right-box-boxes .module-edit-box>div>ul>li>a:hover,.wrap .container .right-box .right-box-boxes .module-edit-box>div>ul>li>a.module-btn-box{
+				background-color:#D2E5C4;
+				border-color:#D2E5C4;
+			}
+			.wrap .container .left-box>div.source-box .source-detail-box{
+				margin:0px;
+				padding:0px;
+				display: none;
+				max-height:390px;
+				overflow-y:auto;
+			}
+			.wrap .container .left-box>div.source-box .source-detail-box>ul{
+				margin:0px;
+				padding:0px;
+				list-style:none;
+			}
+			/*图标内层的滚动条隐藏*/
+			.wrap .container .left-box>div.source-box .source-detail-box::-webkit-scrollbar{
+				width:0px;
+				height:0px;
+			}
+			.wrap .container .left-box>div.source-box .source-detail-box:after,.wrap .container .left-box>div.source-box .source-detail-box>ul:after{
+				display: block;
+				content:"";
+				clear:both;
+			}
+			.wrap .container .left-box>div.source-box .source-detail-box>ul>li{
+				float:left;
+				width:130px;
+				height:120px;
+				background:#fff;
+				margin-bottom:10px;
+				box-shadow: 0px 4px 5px #ccc;
+				padding:5px;
+				box-sizing: border-box;
+				cursor: pointer;
+			}
+			.wrap .container .left-box>div.source-box .source-detail-box>ul>li>p{
+				margin:0px;
+			}
+			.wrap .container .left-box>div.source-box .source-detail-box>ul>li>p>img{
+				width:120px;
+				height:85px;
+			}
+			.wrap .container .left-box>div.source-box .source-detail-box>ul>li:nth-child(odd){
+				margin-right:6px;
+			}
+			/*中间区域*/
+			.wrap .container .middle-box .workspace{
+				width:100%;
+				height:100%;
+			}
+			/*右边区域*/
+			.wrap .container .right-box>div:first-child{
+				background:rgba(231,231,231,1) url(images/fadeout.png) center center no-repeat;
+			}
+			.wrap .container .right-box #right-box-suspend{
+				position:absolute;
+				top:50%;
+				left:-25px;
+				width:25px;
+				height:170px;
+				transform: translateY(-50%);
+				cursor: pointer;
+				border-radius:10px 0px 0px 10px;
+			}
+			.wrap .container .right-box #right-box-suspend:hover{
+				background-color:rgba(231,231,231,0.8);
+			}
+			.wrap .container .right-box>div.right-box-active{
+				background-image:url(images/fadein.png);
+			}
+			.wrap .container .right-box .right-box-boxes{
+				width:325px;
+				height:100%;
+				border-radius:10px 0px 0px 10px;
+				background:#EAEAEA;
+			}
+			.wrap .container .right-box .right-box-boxes>header{
+				height:60px;
+				border-top-left-radius: 5px;
+				line-height:60px;
+				background:linear-gradient(#D0D0D0 30%, #EAEAEA 100%);
+			}
+			.wrap .container .right-box .right-box-boxes>header>span,.wrap .container .right-box .right-box-boxes .module-edit-box>header>span{
+				width:50%;
+				float:left;
+				font-weight:500;
+				text-align: center;
+				cursor:pointer;
+			}
+			.wrap .container .right-box .right-box-boxes>header>span:first-child{
+				border-top-left-radius: 5px;
+			}
+			.wrap .container .right-box .right-box-boxes>header>span.btn-active{
+				background:linear-gradient(#EAEAEA 30%, #D0D0D0 100%);
+			}
+			/*图表设置*/
+			.wrap .container .right-box .right-box-boxes>div.module-edit-box,.wrap .container .right-box .right-box-boxes>div.page-eidt-box{
+				margin-top:20px;
+				/*padding:0px 10px;*/
+				height:90%;
+				overflow: hidden;
+			}
+			.wrap .container .right-box .right-box-boxes .module-edit-box>header{
+				height:35px;
+				line-height:35px;
+				font-size:14px;
+				padding:0px 10px;
+				border-bottom: 1px solid #D3D3D3;
+				margin:0px 10px;
+			}
+			.wrap .container .right-box .right-box-boxes .module-edit-box>header>span.btn-active{
+				background:#D2E5C4;
+			}
+			.wrap .container .right-box .right-box-boxes .module-edit-box>div{
+				margin:20px 0px 10px;
+				height:100%;
+				padding:0px 25px;
+			}
+			.wrap .container .right-box .right-box-boxes .module-edit-box>div>ul>li{
+				margin-bottom:15px;
+			}
+			.wrap .container .right-box .right-box-boxes .module-edit-box>div>ul>li>a{
+				background-image:url();
+				padding-left:15px;
+				margin-bottom:0px;
+			}
+			.wrap .container .right-box .right-box-boxes .module-edit-box>div>ul>li>a>i{
+				margin-right:20px;
+			}
+			.wrap .container .right-box .right-box-boxes .module-edit-box>div>ul>li>div{
+				background:white;
+				padding:15px 20px;
+				display: none;
+				color:#504F4F;
+			}
+			.wrap .container .right-box .right-box-boxes .module-edit-box #module-edit-box .module-address-box p{
+				margin:10px 0px 0px 0px;
+			}
+			.wrap .container .right-box .right-box-boxes .module-edit-box #module-edit-box .module-address-box p>span{
+				display: inline-block;
+				width:20px;
+				margin-left:10px;
+			}
+			.wrap .container .right-box .right-box-boxes .module-edit-box #module-edit-box .module-address-box p>input{
+				width:70px;
+				margin-left:5px;
+				outline:0px;
+			}
+			.wrap .container .right-box .right-box-boxes .module-edit-box #module-edit-box  .module-hint-box-check{
+				border-radius:20px;
+				margin-bottom:15px;
+				border:1px solid #ccc;
+				width:50px;
+				height:20px;
+				position:relative;
+			}
+			.wrap .container .right-box .right-box-boxes .module-edit-box #module-edit-box  .module-hint-box-check>i{
+				position:absolute;
+				height:28px;
+				width:28px;
+				border-radius: 50%;
+				background:#009944;
+				top:-4px;
+				left:22px;
+			}
+			.wrap .container .right-box .right-box-boxes .module-edit-box #module-edit-box p{
+				margin:0px 0px 8px 0px;
+				font-size:14px;
+			}
+			.wrap .container .right-box .right-box-boxes .module-edit-box #module-edit-box  select,.wrap .container .right-box .right-box-boxes .module-edit-box #module-edit-box  input{
+				width:100%;
+				border-radius:3px;
+				outline:0px;
+				height:25px;
+				color:#504F4F;
+				background:#F4F4F4;
+				margin-bottom:8px;
+				border:1px solid #848484;
+			}
+			.wrap .container .right-box .right-box-boxes .module-edit-box #module-edit-box .module-axle-box div.backColor{
+				width:70px;
+				height:35px;
+				border-radius: 18px;
+				cursor: pointer;
+				background:#05A4F8;
+				margin-bottom: 10px;
+			}
+			.wrap .container .right-box .right-box-boxes .module-edit-box #module-edit-box .module-axle-box div.backColor input{
+				opacity: 0;
+				cursor: pointer;
+			}
+			.wrap .container .right-box .right-box-boxes .module-edit-box #module-edit-box .module-axle-box input[type="number"]{
+				background:white;
+				width:40%;
+			}
+			.wrap .container .right-box .right-box-boxes>div.page-eidt-box>div{
+				margin:0px 25px;
+			}
+			.wrap .container .right-box .right-box-boxes>div.page-eidt-box>div>header{
+				font-size:16px;
+				color:#000000;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="header-box">
+				<div class="header-box-left">
+					<a href="javascript:void(0);">
+						<img src="images/162367125726955568.jpg" title="返回首页">
+					</a>
+					<a href="javascript:void(0);" title="返回首页">
+						可视化产品系统
+					</a>
+				</div>
+				<div class="header-box-right">
+					<span>每3分钟网站会自动保存一次</span>
+					<span class="btn save-btn">立即保存</span>
+					<span class="reform-btn">
+						<i title="撤销"></i>
+						<i title="重做"></i>
+					</span>
+					<span class="btn preview-btn">预览</span>
+					<span class="btn btn-active">发布</span>
+				</div>
+			</div>
+			<div class="container">
+				<div class="left-box">
+					<div data-toggle="sourceShow" data-value="1" class="left-content-box">
+						图表库
+					</div>
+					<div data-toggle="sourceShow" data-value="2" class="left-content-box template-box">
+						模板库
+					</div>
+					<div class="source-box" style="display: none;">
+						<header>
+							<span id="source-span-box">可用图表库</span>
+							<i title="关闭" data-toggle="sourceHidden"></i>
+						</header>
+						<div>
+							<ul id="source-chart-box">
+								<li>
+									<a data-toggle="detailToggle" href="javascript:void(0)">柱状图<i></i></a>
+									<div class="source-detail-box">
+										<ul >
+											<li style="text-align: center;">
+												<p><img src="images/chart.png"></p>
+												<p>柱状图精选</p>
+											</li>
+											<li>2</li>
+											<li>1</li>
+											<li>2</li>
+											<li>1</li>
+											<li>2</li>
+											<li>1</li>
+											<li>2</li>
+											<li>1</li>
+											<li>2</li>
+											<li>1</li>
+											<li>2</li>
+										</ul>
+									</div>
+								</li>
+								<li>
+									<a data-toggle="detailToggle" href="javascript:void(0)">条状图<i></i></a>
+									
+								</li>
+								<li>
+									<a data-toggle="detailToggle" href="javascript:void(0)">饼图<i></i></a>
+									
+								</li>
+								<li>
+									<a data-toggle="detailToggle" href="javascript:void(0)">散点图<i></i></a>
+									
+								</li>
+								<li>
+									<a data-toggle="detailToggle" href="javascript:void(0)">K线图<i></i></a>
+									
+								</li>
+								<li>
+									<a data-toggle="detailToggle" href="javascript:void(0)">热力图<i></i></a>
+									
+								</li>
+								<li>
+									<a data-toggle="detailToggle" href="javascript:void(0)">树图<i></i></a>
+									
+								</li>
+								<li>
+									<a data-toggle="detailToggle" href="javascript:void(0)">关系图<i></i></a>
+									
+								</li>
+								<li>
+									<a data-toggle="detailToggle" href="javascript:void(0)">漏斗图<i></i></a>
+									
+								</li>
+							</ul>
+							<div id="source-template-box" style="background:red;height:100%;display: none;">测试</div>
+						</div>
+					</div>
+				</div>
+				<div class="middle-box">
+					<div class="workspace"></div>
+				</div>
+				<div class="right-box">
+					<div id="right-box-suspend" class="right-box-active"></div>
+					<div class="right-box-boxes">
+						<header id="pageModuleClick">
+							<span class="btn-active" data-value="page">页面设置</span>
+							<span data-value="module">图表设置</span>
+						</header>
+						<div class="module-edit-box">
+							<header id="module-edit-header">
+								<span data-value="Data">编辑数据</span>
+								<span data-value="Chart"class="btn-active">编辑图表</span>
+							</header>
+							<div id="module-edit-box">
+								<ul>
+									<li>
+										<a data-toggle="detailToggle" href="javascript:void(0)" >位置<i></i></a>
+										<div class="module-address-box">
+											<p><span>宽</span>:<input type="text"><span>高</span>:<input type="text" ></p>
+											<p><span>X</span>:<input type="text"><span>Y</span>:<input type="text" ></p>
+										</div>
+									</li>
+									<li>
+										<a data-toggle="detailToggle" href="javascript:void(0)">颜色<i></i></a>
+										<div class="module-color-box">
+											
+										</div>
+									</li>
+									<li>
+										<a data-toggle="detailToggle" href="javascript:void(0)">文字<i></i></a>
+										<div class="module-text-box"></div>
+									</li>
+									<li>
+										<a data-toggle="detailToggle" href="javascript:void(0)">图例<i></i></a>
+										<div class="module-legend-box">
+											<p>图例显示</p>
+											<div class="module-hint-box-check" data-value="legend"><i></i></div>
+											<p>图例位置</p>
+											<select>
+												<option>上居左</option>
+												<option>上居右</option>
+											</select>
+										</div>
+									</li>
+									<li>
+										<a data-toggle="detailToggle" href="javascript:void(0)">轴、网格线<i></i></a>
+										<div class="module-axle-box">
+											<p>网格线</p>
+											<select>
+												<option>横轴显示</option>
+												<option>竖轴显示</option>
+											</select>
+											<p>网格线颜色</p>
+											<div class="backColor"><input type="color" data-value="axleColor" title="点击更换颜色"></div>
+											<p>x轴标题</p>
+											<input type="text">
+											<p>y轴标题</p>
+											<input type="text">
+											<p>轴标签</p>
+											<select>
+												<option>全部显示</option>
+												<option>左边显示</option>
+											</select>
+											<p>轴线颜色</p>
+											<div class="backColor"><input type="color" data-value="axleColor" title="点击更换颜色"></div>
+											<p>y轴取值范围  (Min-Max)</p>
+											<div>
+												<input type="number">-<input type="number">
+											</div>
+										</div>
+									</li>
+									<li>
+										<a data-toggle="detailToggle" href="javascript:void(0)">交互提示框<i></i></a>
+										<div class="module-hint-box">
+											<p>交互提示框显示</p>
+											<div class="module-hint-box-check" data-value="hint"><i></i></div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div id="module-editData-box" style="background:red;height:100%;display: none;">测试</div>
+						</div>
+						<div class="page-eidt-box" >
+							<div>
+								<header>页面尺寸</header>
+								<div>
+									<span>宽:</span><input type="text"><span>高</span>:<input type="text" >
+								</div>
+							</div>
+							<div>
+								<header>页面背景</header>
+								<div>
+									
+								</div>
+							</div>
+							<div>
+								<header>页面主题</header>
+								<div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			//左侧区域点击事件
+			document.getElementsByClassName("left-box")[0].onclick=function(e){
+				let target=e.target;
+				let sourceBox=document.getElementsByClassName("source-box")[0];
+				if(target.dataset.toggle=="sourceShow"){
+					sourceBox.style.display="block";
+					if(target.dataset.value=="1"){
+						target.className+=" btn-chart-active";
+						let chartButton=document.getElementsByClassName("left-content-box");
+						let className1=chartButton[1].getAttribute("class").replace(/btn-template-active/g,"");
+						chartButton[1].className=className1;
+						$("#source-span-box").html("可用图表库");
+						$("#source-chart-box").show();
+						$("#source-template-box").hide();
+					}else if(target.dataset.value=="2"){
+						let chartButton=document.getElementsByClassName("left-content-box");
+						let className=chartButton[0].getAttribute("class").replace(/btn-chart-active/g,"");
+						chartButton[0].className=className;
+						target.className+=" btn-template-active";
+						$("#source-span-box").html("精选模板");
+						$("#source-template-box").show();
+						$("#source-chart-box").hide();
+					}
+				}else if(target.dataset.toggle=="sourceHidden"){
+					sourceBox.style.display="none";
+					let chartButton=document.getElementsByClassName("left-content-box");
+					let className=chartButton[0].getAttribute("class").replace(/btn-chart-active/g,"");
+					chartButton[0].className=className;
+					let className1=chartButton[1].getAttribute("class").replace(/btn-template-active/g,"");
+					chartButton[1].className=className1;
+				}else if(target.dataset.toggle=="detailToggle"){
+					$(target).parent().siblings().children(".source-detail-box").slideUp();
+					$(target).parent().siblings().find(".source-box-active").removeClass("source-box-active");
+					$(target).toggleClass("source-box-active");
+					$(target).children("i").toggleClass("source-box-active");
+					$(target).next().slideToggle();
+				}
+			}
+			//右侧区域点击隐藏显示
+			$("#right-box-suspend").click(function(e){
+				$(e.target).toggleClass("right-box-active").next().animate({width:parseInt($(e.target).next().css('width'),10)==325?0:325});
+			});
+			//编辑图表时的伸缩及里面的部分功能
+			$("#module-edit-box").click(function(e){
+				if(e.target.dataset.toggle=="detailToggle"){
+					$(e.target).parent().siblings().children("a").removeClass("module-btn-box").children("i").removeClass("module-btn-box");
+					$(e.target).toggleClass("module-btn-box").children("i").toggleClass("module-btn-box").parent().parent().siblings().children("div").slideUp();
+					$(e.target).next().slideToggle();
+				}else if($(e.target).data("value")=="hint"){
+					$(e.target).children("i").animate({left:parseInt($(e.target).children("i").css('left'),10)==22?0:22}).parent().siblings().html($(e.target).siblings().html()=="交互提示框隐藏"?"交互提示框显示":"交互提示框隐藏");
+				}else if($(e.target).data("value")=="axleColor"){
+					$(e.target).change(function(e){
+						$(e.target).parent().css({'background':$(e.target).val()});
+					});
+				}
+			});
+			//页面图表的切换
+			$("#pageModuleClick").click(function(e){
+				if(e.target.nodeName="SPAN"){
+					if(e.target.dataset.value=="page"){
+						$(".page-eidt-box").show();
+						$(".module-edit-box").hide();
+						$(e.target).removeClass("btn-active");
+					}else if(e.target.dataset.value=="module"){
+						$(".module-edit-box").show();
+						$(".page-eidt-box").hide();
+						$(e.target).removeClass("btn-active");
+					}
+					$(e.target).siblings().addClass("btn-active");
+				}
+			});
+			//编辑数据编辑图标的切换
+			$("#module-edit-header").click(function(e){
+				if(e.target.nodeName="SPAN"){
+					if(e.target.dataset.value=="Data"){
+						$("#module-edit-box").hide();
+						$("#module-editData-box").show();
+					}else if(e.target.dataset.value=="Chart"){
+						$("#module-editData-box").hide();
+						$("#module-edit-box").show();
+					}
+					$(e.target).addClass("btn-active");
+					$(e.target).siblings().removeClass("btn-active");
+				}
+			});
+		</script>
+	</body>
+</html>

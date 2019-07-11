@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<style>
+			html,body{
+				/*width:1900px;
+				height:950px;*/
+				margin:0px;
+				/*background:red;*/
+				font-size: 100px;
+			}
+			.warning{
+				background:#ADEEF7;
+				display: block;
+				width:100px;
+				height:30px;
+				text-align: center;
+				line-height: 30px;
+				border-radius: 5px;
+				color:#A5B3B5;
+				cursor: pointer;
+				font-size: 0.16rem;
+			}
+			h5.color1{
+			   background: linear-gradient(to bottom, #E6F4FF,#ACD2FF);
+			   -webkit-background-clip: text;
+			    color: transparent;
+			    background-clip:text;
+			}
+			.warning_trajectory>h5{
+				font-size:0.2rem;
+			    margin:0px;
+			    width:3rem;
+			    height:0.35rem;
+			    line-height:0.45rem;
+			    margin:0px auto;
+			    /* color:#B8C8DB; */
+			    text-align: center;
+			    overflow: hidden;
+			}
+			.warning_show{
+				position:fixed;
+				top:0px;
+				width:100%;
+				height:100%;
+				background:rgba(000,000,000,0.1);
+				display:none;
+			}
+			.warning_show_details{
+				width:12.15rem;
+				height:8.55rem;
+				margin:0.5rem auto 0px;
+				background:url(img/warning_details.png) no-repeat;
+				background-size:12.15rem 8.55rem;
+				padding:0.9rem 0.9rem 0rem;
+			}
+			.warning_show_details>div{
+				float:left;
+			}
+			.warning_mail_details{
+				width:3.65rem;
+				height:2.95rem;
+				border:0.01rem solid #30BAD1;
+				box-sizing: border-box;
+				font-size:0.16rem;
+				padding:0.5rem 0.4rem 0.3rem;
+				color:white;
+			}
+			.warning_video{
+				width:6.4rem;
+				height:2.95rem;
+				border:0.01rem solid #30BAD1;
+				box-sizing: border-box;
+				margin-left:0.3rem;
+			}
+			.warning_trajectory{
+				margin-top:0.15rem;
+				width:10.6rem;
+				height:3.85rem;
+				background:url(img/log_progress.png) no-repeat;
+				transform: translateX(-0.2rem);
+			}
+			.warning_mail_details ul>li{
+				height:0.35rem;
+			}
+			.warning_mail_details ul{
+				list-style: none;
+				margin:0;
+				padding:0;
+			}
+			.warning_mail_details ul i{
+				display: inline-block;
+				width:0.1rem;
+				height:0.1rem;
+				background:#FCD417;
+				border-radius: 50%;
+				margin-right:0.15rem;
+			}
+			.warning_li_line{
+				border-bottom:1px solid #125BA4;
+				margin-bottom:0.1rem;
+			}
+			.warning_trajectory_details{
+				margin-top:0.3rem;
+				margin-left:0.45rem;
+				width:9.9rem;
+				height:2.9rem;
+				outline:1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<span class="warning" onclick="warn_show()">warning</span>
+		<div class="warning_show">
+			<div class="warning_show_details">
+				<div class="warning_mail_details">
+					<ul>
+						<li><i></i><span>运单号：</span><span>AWBA00361018974</span></li>
+						<li><i></i><span>航班号：</span><span>DH9037</span></li>
+						<li><i></i><span>货物大类：</span><span>邮件</span></li>
+						<li class="warning_li_line"><i></i><span>货物小类：</span><span>邮件</span></li>
+						<li><i></i><span>代理人：</span><span>中国邮政航空有限责任公司</span></li>
+					</ul>
+				</div>
+				<div class="warning_video"></div>
+				<div class="warning_trajectory">
+					<h5 class="color1">物流轨迹图</h5>
+					<div class="warning_trajectory_details">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			function warn_show(){
+				$(".warning_show").show();
+			}
+		</script>
+	</body>
+</html>

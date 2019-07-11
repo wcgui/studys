@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            shapeGeometry的使用
+        </title>
+        <style>
+            body{
+                margin:0px;
+                padding:0px;
+            }
+        </style>
+        <script src="js/three.js"></script>
+        <script src="js/SceneUtils.js"></script>
+    </head>
+    <body>
+        <script>
+            function init(){
+                var scene=new THREE.Scene();//新建一个场景PerspectiveCamera
+                var renderer=new THREE.WebGLRenderer({antialias:true});//新建
+                renderer.setSize(window.innerWidth,window.innerHeight);
+                renderer.setClearColor(0xF1ADDA);
+                var camera=new THREE.PerspectiveCamera(50,window.innerWidth/window.innerHeight,0.1,1000);//antialias:抗锯齿
+                camera.position.set(0,0,100);
+                camera.lookAt(scene.position);
+                document.body.appendChild(renderer.domElement);
+                //心形
+                // var x=0,y=0;
+                // var heartShape=new THREE.Shape();//形状对象
+                // heartShape.moveTo(x+5,y+5);
+                // heartShape.bezierCurveTo( x + 5, y + 5, x + 4, y, x, y );
+                // heartShape.bezierCurveTo( x - 6, y, x - 6, y + 7,x - 6, y + 7 );
+                // heartShape.bezierCurveTo( x - 6, y + 11, x - 3, y + 15.4, x + 5, y + 19 );
+                // heartShape.bezierCurveTo( x + 12, y + 15.4, x + 16, y + 11, x + 16, y + 7 );
+                // heartShape.bezierCurveTo( x + 16, y + 7, x + 16, y, x + 10, y );
+                // heartShape.bezierCurveTo( x + 7, y, x + 5, y + 5, x + 5, y + 5 );
+                // var geometry=new THREE.ShapeGeometry(heartShape);
+                //面具形
+                function drawShape(){
+                    //shape形状类
+                    var shape=new THREE.Shape();
+                    shape.moveTo(10,10);//将绘图点移动到指定坐标
+                    shape.lineTo(10,40);//绘制一条直线
+                    shape.bezierCurveTo(15,25,25,25,30,40);//绘制一条三次曲线
+                    shape.splineThru([new THREE.Vector2(32,30),new THREE.Vector2(28,20),new THREE.Vector2(30,10)]);//沿着提供的坐标集合绘制一条光滑的曲线
+                    shape.quadraticCurveTo(20,15,10,10);//绘制一条二次曲线
+                    var hole1=new THREE.Path();//添加路径对象
+                    //（x,y,xRadius,yRadius,startAngle,endAngle,clockwise,rotation）x,y椭圆圆心坐标，xRadius:x轴的椭圆半径，yRadius:y轴中的椭圆半径startAngle:起始角度,endAngle:结束角度,clockwise:顺时针扫描椭圆，默认为false,rotation:椭圆的旋转角度
+                    //画一个绝对定位的椭圆
+                    hole1.absellipse(16,24,2,3,0,Math.PI,true);
+                    shape.holes.push(hole1);
+                    var hole2=new THREE.Path();
+                    hole2.absellipse(23,24,2,3,0,Math.PI*2,true);
+                    shape.holes.push(hole2);
+                    var hole3=new THREE.Path();
+                    hole3.absarc(20,16,2,0,Math.PI,true);
+                    shape.holes.push(hole3);
+                    var hole4=new THREE.Path();
+                    //画一个绝对定位的圆
+                    hole4.absarc(20,19,0.5,0,Math.PI*2,true);
+                    shape.holes.push(hole4);
+                    return shape;
+                }
+                //二维几何
+                var geometry=new THREE.ShapeGeometry(drawShape());
+                var mesh=createMesh(geometry);
+                function createMesh(geometry){
+                    var meshMaterial=new THREE.MeshNormalMaterial();
+                    meshMaterial.side=2;
+                    var wireframe=new THREE.MeshBasicMaterial({wireframe:true,color:0xE26198});
+                    var mesh=new THREE.SceneUtils.createMultiMaterialObject(geometry,[meshMaterial,wireframe]);
+                    return mesh;
+                }
+                scene.add(mesh);
+                function animate(){
+                    requestAnimationFrame(animate);
+                    mesh.rotation.y+=0.01;
+                    renderer.render(scene,camera);
+                }
+                animate();
+                window.addEventListener("resize",function(){
+                    camera.aspect=window.innerWidth/window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth,window.innerHeight);
+                },false);
+            }
+            window.onload=init;
+        </script>
+    </body>
+</html>

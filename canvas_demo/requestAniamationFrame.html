@@ -1,0 +1,171 @@
+<! DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>requestAnimationFrame练习</title>
+    <style>
+        body{
+            margin:0px;
+            padding:0px;
+        }
+    </style>
+    <script src="js/progress_air.js"></script>
+    <script src="js/progress_pie.js"></script>
+    <script src="js/progress_pie1.js"></script>
+</head>
+<body>
+    <div id="test" style="width:1px;height:3px;background:#0f0;overflow:hidden;"></div>
+    <input type="button" value="Run" id="run"/>
+    <div id="myChart" style="width:500px; height:400px;background-color:#070826;"></div>
+    <div id="myChart1" style="width:500px; height:400px;background-color:#070826;"></div>
+    <div id="myChart2" style="width:500px; height:400px;background-color:#070826;"></div>
+    <script>
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRquestAnimationFrame || window.msRequestAnimationFrame;
+        var start=null;
+        var ele=document.getElementById("test");
+        var progress=0;
+        function step(timestamp){
+            progress+=1;
+            ele.style.width=progress+"%";
+            //ele.innerHTML=progress+"%";
+            if(progress<100){
+                requestAnimationFrame(step);
+            }else{
+                ele.style.height="0";
+            }
+        }
+        requestAnimationFrame(step);
+        document.getElementById("run").addEventListener("click",function(){
+            ele.style.width="1px";
+            ele.style.height="3px";
+            progress=0;
+            requestAnimationFrame(step);
+        },false);
+    </script>
+    <script>
+        new Progress_air(document.getElementById("myChart"),
+            {
+                backgroundColor:'#000',//画布背景色
+                title:{//title的设置
+                    show:true,
+                    text:'浮世万千',
+                    top:24,
+                    left:10,
+                    textStyle:{
+                        color:'#fff',
+                        fontWeight:'bold',
+                        fontSize:24,
+                        fontFamily:'sans-serif'
+                    },
+                },
+                legend:{
+                    show:false,
+                    left:'',
+                    top:'',
+                    data:['王','长'],
+                    type:'circle',
+                    orient:'horizontal',//水平
+                    color:'#14AFF6',
+                    textStyle:{
+                        color:'blue',
+                        fontWeight:'bold',
+                        fontSize:24,
+                        fontFamily:'sans-serif'
+                    },
+                },
+                bottomBar:{
+                    color:'#42BAFE',
+                    lineWidth:4,//水平线宽度最小为1最大为10
+                },
+                radiusBar:{
+                    color:['#3AD5AF','#6FD8F7','red',],//圆圈的颜色设置
+                    lineWidth:5,//圆圈的线宽设置最大为10,最小为1
+                },
+                grid:{//容器的设置
+                    left:'10%',//距离容器左边的距离
+                    top:60,
+                    right:'10%',//距离容器右边的距离
+                    bottom:30,
+                },
+                dataVal:[//内容值
+                    {name:'王',value:900,},
+                    {name:'王',value:900,},
+                    {name:'王',value:900,},
+                    {name:'王',value:900,},
+                ],
+                dataCountVal:[1000,10000,1000,1000,1000,10000,]
+            });
+            new Progress_pie(document.getElementById("myChart1"),{
+                backgroundColor:'#000',
+                dataVal:{
+                    show:false,//控制进度的那个白虚线加载
+                    name:'王长贵',
+                    value:9000,
+                    color:'#fff',
+                    fontSize:24,
+                },
+                dataCountVal:10000,
+                progressWidth:10,//最小为1，最大为10
+                runShow:{
+                    lineWidth:2,//最小为3，最大为10,
+                    color:'#023C7A',//底圈的颜色
+                    radius:70,//外圈圆半径
+                    rangeWidth:10,
+                    isShow:true,//最外圈的圆圈是否滚动
+                    showTop:{
+                        color:'#0DCEDE',
+                    }
+                },
+                //控制圆心的位置
+                grid:{
+                    top:100,
+                    left:'50%',
+                    right:10,
+                    bottom:10,
+                }
+            });
+            new Progress_pie1(document.getElementById("myChart2"),{
+                backgroundColor:'#070826',
+                tootip:{
+                    backgroundColor:'rgba(255,255,255,0.3)',
+                    color:'#fff',
+                    fontSize:19,
+                },
+                firstCircle:{
+                    color:'#6E7ED3',
+                    rangeWidth:5,
+                    isRotation:true,//最外层的圆是否转动效果
+                    lineWidth:1,//最大为10，最小为1
+                },
+                secondCircle:{
+                    color:'#1A1F47',
+                    lineWidth:10,
+                    rangeWidth:10,
+                    isShow:true,//小圆球是否闪动
+                    isRotation:true,//第二层圈的里层圈是否滚动
+                    insideStyle:{
+                        color:'#6E80D3',
+                        show:true,//加载进度是否出现循环加载效果
+                    }
+                },
+                thirdCircle:{
+                    radius:50,//最内层圆的半径
+                    lineWidth:3,
+                },
+                //控制圆心的位置
+                grid:{
+                    top:100,
+                    left:'50%',
+                    right:10,
+                    bottom:10,
+                },
+                data:{
+                    itemStyle:{
+                        color:'#fff',
+                        fontSize:15,
+                    },
+                    value:5039,
+                },
+                dataCountVal:7400,
+            });
+    </script>
+</body>

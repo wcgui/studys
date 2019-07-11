@@ -1,0 +1,37 @@
+<! DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            three的light
+        </title>
+        <script src="js/three.js"></script>
+        <script src="js/OrbitControls.js"></script>
+    </head>
+    <body>
+        <script>
+            function init(){
+                var scene=new THREE.Scene();
+                var camera=new THREE.PerspectiveCamera(70,window.innerWidth/window.innerHeight,1,1000);
+                camera.position.set(0,100,250);
+                var renderer=new THREE.WebGLRenderer();
+                renderer.setSize(window.innerWidth,window.innerHeight);
+                document.body.appendChild(renderer.domElement);
+                window.addEventlistener("resize",onResize,false);
+                var controls=new THREE.OrbitControls(camera,renderer.domElement);
+                controls.target=new THREE.Vector3(0,100,0);
+                addSceneElements();
+                addLights();
+            }
+            function addLights(){
+                var dirLight=new THREE.DirectionalLight(0xffffff,1);
+                dirLight.position.set(100,100,100);
+                scene.add(dirLight);
+            }
+            function addSceneElements(){
+                var cube=new THREE.BoxGeometry(200,1,200);
+                // var floorMat=new THREE.MeshPhongMaterial({map:THREE.})
+            }
+        </script>
+    </body>
+</html>

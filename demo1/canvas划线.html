@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <style type="text/css">
+        body{
+            background-color: black;
+        }
+        canvas{
+            background-color: white;
+        }
+        .job-left{
+        	    position: relative;
+    width: 1345px;
+    height: 700px;
+    display: block;
+    float: left;
+    /* padding-left: 20px; */
+     overflow-y: auto; 
+    border-right: 1px solid #EFEFEF;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transform-origin: top left;
+        }
+        .job{
+        	        width: 1330px;
+    margin: 20px 0px 20px;
+    height:810px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0px 20px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+}
+        
+    </style>
+    <script type="text/javascript">
+//      window.onload= function(){
+//      	
+//          var oc= document.getElementById('c1');
+//          console.log(oc);
+//          let rect = oc.getBoundingClientRect();
+//          oc.onmousedown = function(ev){
+//          var ogc=oc.getContext('2d');
+//          ogc.translate(0,0);ogc.beginPath();
+//              var ev=ev || window.event;
+//              let mouseX = ev.offsetX - rect.left * (oc.width / rect.width),
+//			        mouseY = ev.offsetY - rect.top * (oc.height / rect.height);
+//			        console.log(mouseX,mouseY)
+//              ogc.moveTo(ev.offsetX,ev.offsetY);
+//              
+//
+//          }
+//          oc.onmousemove = function(ev){
+//          var ogc=oc.getContext('2d');
+////              var ev = ev || window.event;
+//              let mouseX = ev.offsetX - rect.left * (oc.width / rect.width),
+//		        	mouseY = ev.offsetY - rect.top * (oc.height / rect.height);
+//		        	console.log(mouseX,mouseY,"wang")
+//              ogc.lineTo(ev.offsetX,ev.offsetY);
+//              ogc.stroke();
+//          };
+////          oc.onmouseup = function(){
+////              oc.onmousemove = null;
+////              oc.onmouseup = null;
+////          };
+//      }
+    </script>
+</head>
+<body>
+<div class="job-left">
+	<div class="job">
+    </div>
+    
+</div>
+<script>window.onload= function(){
+	$(".job")
+	.append(`<canvas id="c1" width="1330" height="810" style="width:1330px;height:810px;">
+	        
+	    </canvas>`)
+	.on("mousedown","canvas",function(ev){
+		var oc= $(this)[0];
+            console.log(oc);
+        let rect = oc.getBoundingClientRect();
+        var ogc=oc.getContext('2d');
+        ogc.translate(0,0);ogc.beginPath();
+//          var ev=ev || window.event;
+            let mouseX = ev.offsetX - rect.left * (oc.width / rect.width),
+		        mouseY = ev.offsetY - rect.top * (oc.height / rect.height);
+		        console.log(mouseX,mouseY)
+            ogc.moveTo(ev.offsetX,ev.offsetY);
+            
+
+      })
+	.on("mousemove","canvas",function(ev){
+		var oc= $(this)[0];
+            console.log(oc);
+            let rect = oc.getBoundingClientRect();
+        var ogc=oc.getContext('2d');ogc.translate(0,0)
+//              var ev = ev || window.event;
+            let mouseX = ev.offsetX - rect.left * (oc.width / rect.width),
+	        	mouseY = ev.offsetY - rect.top * (oc.height / rect.height);
+	        	console.log(mouseX,mouseY,"wang")
+            ogc.lineTo(ev.offsetX,ev.offsetY);
+            ogc.stroke();
+        });}
+</script>
+</body>
+</html>

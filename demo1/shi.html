@@ -1,0 +1,2626 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title><script src="js/jquery-1.11.0.min.js"></script>
+		<script src="js/html2canvas.min.js"></script>
+		<style>html,
+	body {
+	  height: 100%;
+	}
+	.clear:after{
+		content:"";
+		display: block;
+		clear:both;
+	}
+	.clear:before{
+		    overflow: hidden;
+    content: "";
+    width: 0px;
+    height: 0px;
+    display: block;
+}	
+	.container {
+	  width: 100%;
+	  height: 100%;
+	  display: block;
+	  margin: 0 auto;
+	  max-width: 1920px;
+	  font-family: 'Microsoft Yahei';
+	  overflow-x: hidden;
+	  overflow-y: auto;
+	  min-width: 1300px;
+	}
+
+	.bar-box {
+	  width: 120px;
+	  height: 100%;
+	  background: #23b38f;
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  z-index: 102;
+	}
+
+	.main-box {
+	  width: 100%;
+	  height: 100%;
+	  display: block;
+	  float: left;
+	  padding-left: 120px;
+	  box-sizing: border-box;
+	}
+
+	.ec {
+	  width: 85px;
+	  height: 43px;
+	  background: url('../../../public/images/ec.png') center no-repeat;
+	  display: block;
+	  margin: 0 auto;
+	  margin-top: 15px;
+	  margin-bottom: 47px;
+	}
+
+	.bar-box li {
+	  width: 100%;
+	  height: 104px;
+	}
+
+	.bar-box li a {
+	  height: 104px;
+	  font-size: 16px;
+	  color: #fff;
+	  line-height: 104px;
+	  display: block;
+	  padding-left: 62px;
+	}
+
+	.bar-box .bar-zy a {
+	  background: url('../../../public/images/icon/a3.png') no-repeat;
+	  background-position: 20px 38px;
+	}
+
+	.bar-box .bar-kc a {
+	  background: url('../../../public/images/icon/a4.png') no-repeat;
+	  background-position: 20px 38px;
+	}
+
+	.bar-box .bar-rc a {
+	  background: url('../../../public/images/icon/a5.png') no-repeat;
+	  background-position: 20px 38px;
+	}
+
+	.bar-box .bar-sx a {
+	  background: url('../../../public/images/icon/a6.png') no-repeat;
+	  background-position: 20px 38px;
+	}
+
+	.bar-box .bar-wk a {
+	  background: url('../../../public/images/icon/a5.png') no-repeat;
+	  background-position: 20px 38px;
+	}
+
+	.bar-box .bar-tz a {
+	  background: url('../../../public/images/icon/a7.png') no-repeat;
+		background-position: 20px 38px;
+		position:relative;
+	}
+
+	.bar-box li a:hover {
+	  background-color: #0f9170;
+	  transition: all 0.5s;
+	}
+
+	.bar-box li .router-link-exact-active {
+	  background-color: #0f9170;
+	}
+
+	.msg-box {
+	  width: 100%;
+	  height: 45px;
+	  -moz-box-shadow: 0px 3px 10px #909090;
+	  -webkit-box-shadow: 0px 3px 10px #909090;
+	  box-shadow: 0px 3px 10px #909090;
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  background: #edf1f0;
+	  z-index: 100;
+	}
+
+	.msg-wrap {
+	  color: #4f4f4f;
+	  font-size: 12px;
+	  line-height: 45px;
+	  padding-left: 20px;
+	  background: url('../../../public/images/icon/a8.png') no-repeat;
+	  background-position: 4px 15px;
+	  margin-left: 156px;
+	  float: left;
+	}
+
+	.user-box {
+	  float: right;
+	  margin-right: 27px;
+	}
+
+	.header {
+	  width: 36px;
+	  height: 36px;
+	  display: block;
+	  margin-top: 4px;
+	  float: left;
+	  margin-right: 20px;
+	  border-radius: 36px;
+		cursor: pointer;
+	}
+
+	.username {
+	  color: #4f4f4f;
+	  line-height: 45px;
+	  float: left;
+	  padding-right: 10px;
+	}
+
+	.logout {
+	  color: #4f4f4f;
+	  line-height: 45px;
+	  display: block;
+	  float: left;
+	  padding-right: 20px;
+	  background: url('../../../public/images/icon/a10.png') no-repeat;
+	  background-position: 28px 16px;
+	}
+
+	.content-box {
+	  /* width: 100%; */
+	  height: auto;
+	  padding-top: 90px;
+	  padding-left: 40px;
+	  padding-bottom: 40px;
+	  display: block;
+	  overflow: hidden;
+	}
+
+	.public-name {
+	  color: #4f4f4f;
+	  font-size: 18px;
+	  line-height: 18px;
+	  padding-bottom: 16px;
+	  padding-left: 20px;
+	  background: url('../../../public/images/icon/a9.png') no-repeat;
+	  background-position: 0px 2px;
+	}
+
+
+
+	/* page */
+	.page-box {
+	  width: 100%;
+	  text-align: center;
+	  padding-top: 20px;
+	}
+
+	.page-wrap {
+	  display: inline-block;
+	}
+
+	.page-box a {
+	  color: #b0b0b0;
+	  display: inline-block;
+	  padding: 5px 10px;
+	  border: 1px solid #b0b0b0;
+	  vertical-align: top;
+	  margin: 0 5px;
+	}
+
+	.page-box .cur,
+	.page-box a:hover {
+	  color: #fff;
+	  background: #16d997;
+	  border: 1px solid #16d997;
+	}
+	.bar-tz em{
+		color: #fff;
+    background: #ff0000;
+    padding: 0 5px;
+		border-radius: 10px;
+		position:absolute;
+		top:65px;
+		left:25px;
+		height:25px;
+		line-height: 25px;
+		box-sizing: border-box;
+	}
+
+	/* 滚动条 */
+	::-webkit-scrollbar{
+	/*滚动条整体样式*/
+		width: 4px;
+	     /*高宽分别对应横竖滚动条的尺寸*/
+		height: 8px;
+	}
+	::-webkit-scrollbar-thumb {
+	/*滚动条里面小方块*/
+		border-radius: 5px;
+		-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+	        /* background: rgba(0,0,0,0.2); */
+		background: #7D7D7D;
+	}
+	::-webkit-scrollbar-track {
+	/*滚动条里面轨道*/
+	        /*-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);*/
+		border-radius: 5px;
+	        /* background: rgba(0,0,0,0.1); */
+		background: #EAEAEA;
+	}
+
+
+	@-webkit-keyframes bounceInDown {
+	  from, 60%, 75%, 90%, to {
+	    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	  }
+
+	  0% {
+	    opacity: 0;
+	    -webkit-transform: translate3d(0, -3000px, 0);
+	    transform: translate3d(0, -3000px, 0);
+	  }
+
+	  60% {
+	    opacity: 1;
+	    -webkit-transform: translate3d(0, 25px, 0);
+	    transform: translate3d(0, 25px, 0);
+	  }
+
+	  75% {
+	    -webkit-transform: translate3d(0, -10px, 0);
+	    transform: translate3d(0, -10px, 0);
+	  }
+
+	  90% {
+	    -webkit-transform: translate3d(0, 5px, 0);
+	    transform: translate3d(0, 5px, 0);
+	  }
+
+	  to {
+	    -webkit-transform: none;
+	    transform: none;
+	  }
+	}
+
+	@keyframes bounceInDown {
+	  from, 60%, 75%, 90%, to {
+	    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	  }
+
+	  0% {
+	    opacity: 0;
+	    -webkit-transform: translate3d(0, -3000px, 0);
+	    transform: translate3d(0, -3000px, 0);
+	  }
+
+	  60% {
+	    opacity: 1;
+	    -webkit-transform: translate3d(0, 25px, 0);
+	    transform: translate3d(0, 25px, 0);
+	  }
+
+	  75% {
+	    -webkit-transform: translate3d(0, -10px, 0);
+	    transform: translate3d(0, -10px, 0);
+	  }
+
+	  90% {
+	    -webkit-transform: translate3d(0, 5px, 0);
+	    transform: translate3d(0, 5px, 0);
+	  }
+
+	  to {
+	    -webkit-transform: none;
+	    transform: none;
+	  }
+	}
+			.content-box {
+    height: auto;
+    padding-top: 114px;
+    padding-left: 40px;
+    padding-bottom: 40px;
+    padding-right: 40px;
+    display: block;
+    overflow: hidden;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.container {
+    background: #edf1f0;
+}
+
+.course-top {
+    width: 100%;
+    height: 70px;
+    background: #fff;
+    position: fixed;
+    top: 45px;
+    left: 0;
+    padding-left: 120px;
+    z-index: 101;
+    border-top: 1px solid #d4d4d5;
+}
+
+.course-tab {
+    width: 100%;
+    text-align: center;
+}
+
+.course-tab p {
+    width: 80px;
+    height: 33px;
+    line-height: 33px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-block;
+    border-radius: 33px;
+    margin: 0 25px;
+    margin-top: 21px;
+    color: #4f4f4f;
+}
+
+.course-tab .cur,.course-tab p:hover {
+    color: #fff;
+    background: #16d997;
+    transition: all 0.4s;
+}
+
+.c-res-box {
+    width: 100%;
+    /* height: 820px; */
+    background: #fff;
+    display: block;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+
+
+/* 作业*********** */
+
+.new-job-btn {
+    width: 132px;
+    height: 42px;
+    display: block;
+    background: #16d997;
+    text-align: center;
+    font-size: 14px;
+    line-height: 42px;
+    color: #fff;
+    margin-bottom: 15px;
+    border-radius: 42px;
+    margin-top: 23px;
+}
+
+.job-left {
+    width: 1171px;
+    height: 100%;
+    display: block;
+    float: left;
+    margin-left: 20px;
+}
+
+.job-right {
+    width: 477px;
+    height: 100%;
+    display: block;
+    float: right;
+    margin-right: 20px;
+}
+
+.c-res-box h3 {
+    color: #4f4f4f;
+    font-size: 16px;
+    line-height: 16px;
+    padding-left: 26px;
+    background: url('../../../public/images/icon/a9.png') center left no-repeat;
+    margin: 20px 0;
+}
+
+.job-left-block {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 20px;
+}
+
+.job-left-block .block {
+    width: 383px;
+    height: 207px;
+    display: block;
+    float: left;
+    margin-right: 10px;
+}
+
+.job-left-block .block-1 {
+    background: url('../../../public/images/c1.png') center left no-repeat;
+}
+
+.job-left-block .block-2 {
+    background: url('../../../public/images/c2.png') center left no-repeat;
+}
+
+.job-left-block .block-3 {
+    background: url('../../../public/images/c3.png') center left no-repeat;
+    margin-right: 0;
+}
+
+.job-left-block h4 {
+    color: #fffefe;
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 25px;
+    padding-left: 25px;
+    padding-bottom: 20px;
+}
+
+.b-num {
+    color: #fff;
+    font-size: 29px;
+    line-height: 29px;
+    padding-left: 25px;
+    padding-bottom: 20px;
+}
+
+.b-num span {
+    font-size: 12px;
+    line-height: 12px;
+    margin-left: 5px;
+}
+
+.b-list-box {
+    width: 352px;
+    border-top: 1px dashed #fffefe;
+    display: block;
+    margin: 0 auto;
+}
+
+.b-list {
+    color: #fffefe;
+    font-size: 14px;
+    line-height: 14px;
+    padding-top: 10px;
+}
+
+.b-list span {
+    float: right;
+}
+
+.job-list {
+    width: 100%;
+    height: 165px;
+    position: relative;
+    background: #f7f7f7;
+    -moz-box-shadow: 0px 3px 10px #909090;
+    -webkit-box-shadow: 0px 3px 10px #909090;
+    box-shadow: 0px 3px 10px #909090;
+    margin-bottom: 10px;
+    /* transition: all 0.4s; */
+    box-sizing: border-box;
+}
+
+.job-list:hover{
+    border: 1px solid #16d997;
+}
+
+.job-list-name {
+    color: #4f4f4f;
+    font-size: 12px;
+    line-height: 12px;
+    padding-top: 14px;
+    padding-left: 25px;
+}
+
+.job-list h2 {
+    color: #4f4f4f;
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: bold;
+    padding: 15px 0;
+    padding-left: 25px;
+}
+
+.job-list-desc {
+    width: 400px;
+    color: #4f4f4f;
+    font-size: 14px;
+    line-height: 20px;
+    padding-left: 25px;
+    max-height: 80px;
+    overflow: hidden;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+}
+
+.job-list-time {
+    width: 209px;
+    height: 43px;
+    background: #16d997;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #4f4f4f;
+    font-size: 16px;
+    line-height: 43px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.job-list-statue {
+    width: 450px;
+    height: 52px;
+    position: absolute;
+    top: 82px;
+    right: 0;
+}
+
+.job-s-list {
+    float: left;
+    padding-left: 72px;
+}
+
+.job-s-list p {
+    color: #4f4f4f;
+    font-size: 26px;
+    line-height: 26px;
+    font-weight: bold;
+}
+
+.job-s-list span {
+    color: #a9a9a9;
+    font-size: 14px;
+    line-height: 14px;
+}
+
+.job-right-box {
+    /* padding-left: 24px; */
+    padding-top: 24px;
+    color: #4f4f4f;
+    font-size: 14px;
+    line-height: 14px;
+    background: #edf1f0;
+    height: 720px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.job-right-box p {
+    padding:8px  0px;
+    cursor: pointer;
+    padding-left:24px;
+}
+
+.job-right-box p:hover{
+    background:#ccc;
+}
+
+.job-right-box span {
+    float: right;
+    padding-right: 20px;
+}
+
+.job-coffect-right .job-right-box span{
+    float: left;
+    font-size: 16px;
+}
+
+.job-right-box em {
+  color: #7dd4ff;
+  width: 30px;
+  line-height: 33px;
+  text-align: center;
+  display: block;
+  float: left;
+}
+
+.c-res-list {
+    display: none;
+}
+
+.c-res-cur{
+    display: block;
+}
+
+
+/* 话题*********** */
+
+.topic-btn {
+    width: 100%;
+    height: 42px;
+    margin-bottom: 15px;
+    margin-top: 23px;
+    position: relative;
+}
+
+.topic-btn a {
+    float: left;
+    margin-right: 40px;
+}
+
+.container .new-topic-btn {
+    width: 132px;
+    height: 42px;
+    display: block;
+    background: #16d997;
+    text-align: center;
+    font-size: 14px;
+    line-height: 42px;
+    color: #fff;
+    border-radius: 42px;
+    border:none;
+}
+
+.all-topic-btn {
+    width: 132px;
+    height: 42px;
+    display: block;
+    background: transparent;
+    text-align: center;
+    font-size: 14px;
+    line-height: 42px;
+    color: #4f4f4f;
+    border-radius: 42px;
+    border: 1px solid #4f4f4f;
+}
+
+.good-topic-btn {
+    width: 132px;
+    height: 42px;
+    display: block;
+    background: transparent;
+    text-align: center;
+    font-size: 14px;
+    line-height: 42px;
+    color: #4f4f4f;
+    border-radius: 42px;
+    border: 1px solid #4f4f4f;
+}
+.select-btn{
+    background: #16d997;
+    border:none;
+    color:#fff;
+}
+
+.search {
+    width: 230px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.search input {
+    width: 190px;
+    height: 35px;
+    border: 1px solid #aaa;
+    border-radius: 35px;
+    padding-left: 40px;
+    background: transparent;
+}
+
+.search img {
+    width: 18px;
+    display: block;
+    position: absolute;
+    top: 11px;
+    left: 14px;
+}
+
+.topic-list {
+    width: 100%;
+    height: 165px;
+    position: relative;
+    background: #f7f7f7;
+    -moz-box-shadow: 0px 3px 10px #909090;
+    -webkit-box-shadow: 0px 3px 10px #909090;
+    box-shadow: 0px 3px 10px #909090;
+    margin-bottom: 10px;
+}
+
+.topic-list:hover {
+    border: 1px solid #16d997;
+}
+
+.topic-list-name {
+    color: #4f4f4f;
+    font-size: 12px;
+    line-height: 12px;
+    padding-top: 14px;
+    padding-left: 25px;
+}
+
+.topic-list h2 {
+    color: #4f4f4f;
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: bold;
+    padding: 15px 0;
+    padding-left: 25px;
+    overflow: hidden;
+    max-height: 40px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.topic-list-desc {
+    width: 800px;
+    color: #4f4f4f;
+    font-size: 14px;
+    line-height: 20px;
+    padding-left: 25px;
+    overflow: hidden;
+    max-height: 40px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.like {
+    color: #4f4f4f;
+    font-size: 14px;
+    line-height: 20px;
+    padding-left: 30px;
+    background: url('../../../public/images/icon/a14.png') center left no-repeat;
+    position: absolute;
+    bottom: 12px;
+    right: 120px;
+    cursor: pointer;
+}
+
+.reply {
+    color: #4f4f4f;
+    font-size: 14px;
+    line-height: 20px;
+    padding-left: 30px;
+    background: url('../../../public/images/icon/a15.png') center left no-repeat;
+    position: absolute;
+    bottom: 12px;
+    right: 28px;
+    cursor: pointer;
+}
+
+
+/* 资料 ********** */
+.data-box {
+    height: 821px;
+    background: #fff;
+}
+
+.data-left {
+    width: 351px;
+    height: 776px;
+    display: block;
+    float: left;
+    background: #f7f7f7;
+    margin-top: 20px;
+    margin-left: 20px;
+    padding-left: 34px;
+    padding-top: 34px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    position: relative;
+}
+
+.data-right {
+    width: 1269px;
+    height: 776px;
+    display: block;
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+    position: relative;
+}
+
+.data-name {
+    color: #4f4f4f;
+    font-size: 16px;
+    line-height: 14px;
+    padding-left: 20px;
+    background: url('../../../public/images/icon/a20.png') center left no-repeat;
+    cursor: pointer;
+    position: relative;
+}
+
+/* .data-name em { */
+.data-select em{
+    width: 20px;
+    height: 20px;
+    display: block;
+    background: url('../../../public/images/icon/a21.png') center left no-repeat;
+    position: absolute;
+    top: -3px;
+    left: -20px;
+}
+
+.data-select span {
+  /* width: 23px;
+  height: 29px;
+  display: block;
+  background: url('../../../public/images/icon/a22.png') center left no-repeat;
+  position: absolute;
+  top: 15px;
+  left: -17px; */
+}
+
+.data-wrap-list{
+    padding-left: 20px;
+    /* background: url('../../../public/images/icon/a21.png')  no-repeat; */
+    background-position: 6px 26px;
+    padding-top: 20px;
+    height:0px;
+    overflow: hidden;
+}
+.data-wrap-select-list{
+    height:auto;
+}
+
+.data-left-list p {
+    color: #4f4f4f;
+    font-size: 14px;
+    line-height: 14px;
+    padding-left: 20px;
+    background: url('../../../public/images/icon/a16.png') center left no-repeat;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.dr-title {
+    width: 100%;
+    height: 46px;
+    background: #f7f7f7;
+}
+
+.dr-title p {
+    color: #969696;
+    font-size: 16px;
+    line-height: 46px;
+    text-align: center;
+    float: left;
+}
+
+.dt-1 {
+    width: 10%;
+}
+
+.dt-2 {
+    width: 20%;
+}
+
+.dt-3 {
+    width: 10%;
+}
+
+.dt-4 {
+    width: 20%;
+}
+
+.dt-5 {
+    width: 10%;
+}
+
+.dt-6 {
+    width: 30%;
+    text-align: center;
+}
+
+.dt-6 a {
+    width: 50px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+    display: inline-block;
+    border-radius: 33px;
+    color: #999;
+    border: 1px solid #999;
+}
+
+.dt-6 a:hover{
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.dr-box {
+    min-height: 680px;
+}
+
+.dr-list p {
+    color: #999;
+    float: left;
+    line-height: 46px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.dr-list {
+    display: block;
+    overflow: hidden;
+}
+
+.dr-list:nth-child(even) {
+    background: #f7f7f7;
+}
+
+
+/* 成员************ */
+.number-box {
+    height: 820px;
+    background: #fff;
+}
+
+.n-title {
+    height: 46px;
+    background: #f7f7f7;
+}
+
+.n1 {
+    width: 10%;
+}
+
+.n2 {
+    width: 10%;
+}
+
+.n3 {
+    width: 20%;
+}
+
+.n4 {
+    width: 10%;
+}
+
+.n5 {
+    width: 20%;
+}
+
+.n6 {
+    width: 28%;
+}
+
+.n1 input{
+    width: 20px;
+    height: 20px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 14px;
+}
+
+.n1 span{
+    width: 40px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+    display: inline-block;
+    border-radius: 33px;
+    margin: 0 auto;
+    margin-top: 12px;
+    color: #fff;
+    background: #16d997;
+}
+
+.n-title p,
+.n-list p {
+    color: #999;
+    float: left;
+    line-height: 46px;
+    text-align: center;
+    height: 46px;
+}
+
+.n-box {
+    min-height: 650px;
+}
+
+.n-box img {
+    width: 28px;
+    height: 28px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 9px;
+    border-radius: 5px;
+}
+
+.n6 a {
+    width: 102px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-block;
+    border-radius: 33px;
+    color: #fff;
+    background: #16d997;
+}
+
+.n-list {
+    display: block;
+    overflow: hidden;
+}
+
+.n-list:nth-child(even) {
+    background: #f7f7f7;
+}
+
+/* 测试 */
+
+.test-right-box {
+    padding-left: 24px;
+    padding-top: 24px;
+    color: #4f4f4f;
+    font-size: 14px;
+    line-height: 14px;
+    background: #edf1f0;
+    height: 720px;
+}
+
+.tr-title {
+    width: 100%;
+    height: 46px;
+    background: #f7f7f7;
+}
+
+.tr-title p {
+    color: #969696;
+    font-size: 14px;
+    line-height: 46px;
+    text-align: center;
+    float: left;
+}
+
+.tr-1 {
+    width: 20%;
+}
+
+.tr-2 {
+    width: 25%;
+}
+
+.tr-3 {
+    width: 20%;
+}
+
+.tr-4 {
+    width: 25%;
+}
+
+.tr-box {
+    min-height: 580px;
+}
+
+.tr-list p {
+    color: #999;
+    float: left;
+    line-height: 46px;
+    text-align: center;
+}
+
+.tr-list {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+}
+
+.tr-list:nth-child(even) {
+    background: #f7f7f7;
+}
+
+/* <!-- 创建新的试题 --> */
+.test-con {
+    /* height: 820px; */
+    background: #fff;
+    padding-bottom: 30px;
+}
+
+.tt-title {
+    width: 100%;
+    height: 46px;
+    background: #f7f7f7;
+}
+
+.tt-title p {
+    width: 16%;
+    color: #969696;
+    font-size: 14px;
+    line-height: 46px;
+    text-align: center;
+    float: left;
+}
+
+.tt-list p {
+    width: 16%;
+    color: #999;
+    float: left;
+    line-height: 46px;
+    text-align: center;
+}
+
+.tt-list {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+}
+
+.tt-list:nth-child(even) {
+    background: #f7f7f7;
+}
+
+.test-tm-msg {
+    color: #969696;
+    font-size: 14px;
+    line-height: 24px;
+    padding: 10px 0;
+    padding-left: 10px;
+    position: relative;
+}
+
+.re-pdf{
+    width: 74px;
+    height: 65px;
+    display: block;
+    background: url('../../../public/images/r4.jpg') center  no-repeat;
+    position: absolute;
+    top: 10px;
+    right: 110px;
+}
+
+.out-pdf{
+    width: 74px;
+    height: 65px;
+    display: block;
+    background: url('../../../public/images/r5.jpg') center no-repeat;
+    position: absolute;
+    top: 10px;
+    right: 30px;
+}
+
+.test-tm-msg span {
+    font-size: 24px;
+    line-height: 24px;
+    margin-right: 30px;
+}
+
+.test-tm-edit {
+    width: 834px;
+    /* height: 540px; */
+    position: relative;
+    text-align: center;
+    font-size: 14px;
+    display: block;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.test-tm-name {
+    width: 834px;
+    height: 60px;
+    line-height: 60px;
+    border: 1px dashed #4f4f4f;
+    text-align: center;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.test-tm-edit .msg-textarea {
+    width: 834px;
+    height: 145px;
+    line-height: 60px;
+    border: 1px dashed #4f4f4f;
+    text-align: center;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    outline: 0;
+}
+
+.test-no {
+    color: #4f4f4f;
+    font-size: 14px;
+    border: 1px dashed #4f4f4f;
+    margin-bottom: 20px;
+}
+.no-num{
+    width: 100%;
+    float: left;
+    text-align: left;
+    padding: 20px 0;
+}
+.no-desc{
+    width: 700px;
+    font-size: 14px;
+    line-height: 20px;
+    display: block;
+    margin: 0 auto 20px;
+    overflow: hidden;
+    text-align: left;
+}
+.no-option{
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+}
+
+.no-num p{
+    padding-left: 63px;
+    float: left;
+    line-height: 30px;
+}
+.no-num span{
+    padding-left: 10px;
+    float: left;
+    line-height: 30px;
+}
+.no-num input{
+    width: 60px;
+    height: 30px;
+    display: block;
+    float: left;
+    box-sizing: border-box;
+    border:1px solid #4f4f4f;
+    text-align: center;
+}
+
+
+.no-list {
+  /* float: left; */
+  text-align: left;
+  padding-bottom: 20px;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+}
+
+.no-list p {
+  margin-left: 65px;
+  float: left;
+  line-height: 28px;
+  margin-right: 30px;
+  width: 40px;
+  height: 28px;
+  text-align: center;
+  border:1px solid #4f4f4f;
+}
+
+.no-list input {
+  width: 630px;
+  height: 30px;
+  display: block;
+  float: left;
+  box-sizing: border-box;
+  border:1px solid #4f4f4f;
+}
+
+.test-no textarea{
+    width: 700px;
+    height: 100px;
+    line-height: 30px;
+    border: 1px dashed #4f4f4f;
+    text-align: left;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    border:1px solid #4f4f4f;
+    outline: none;
+}
+.test-type-box {
+    width: 834px;
+    height: 132px;
+    border: 1px dashed #4f4f4f;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.no-btn{
+    display: block;
+    overflow: hidden;
+    padding-right: 35px;
+    padding-bottom: 20px;
+}
+.no-btn a{
+    width: 80px;
+    height: 33px;
+    line-height: 33px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    border-radius: 33px;
+    color: #4f4f4f;
+    border: 1px solid #4f4f4f;
+    float: right;
+    margin-right: 30px;
+}
+
+.test-type-box p{
+    color: #4f4f4f;
+    font-size: 14px;
+    line-height: 14px;
+    padding:20px 0;
+}
+
+.test-tm-btn{
+    text-align: center;
+}
+
+.test-tm-btn a{
+    width: 140px;
+    height: 45px;
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+    line-height: 45px;
+    color: #4f4f4f;
+    border-radius: 45px;
+    border: 1px solid #4f4f4f;
+}
+
+/* 试题设置 */
+.test-setting-box{
+    height: 820px;
+    background: #fff;
+}
+
+.test-setting-desc{
+    width: 810px;
+    display: block;
+    margin: 0 auto;
+    padding-top: 45px;
+    overflow: hidden;
+}
+
+.tsd-title{
+    width: 120px;
+    float: left;
+    color: #4f4f4f;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: right;
+}
+
+.tsd-right{
+    float: left;
+}
+
+.tsd-list{
+    width: 100%;
+    float: left;
+    margin-bottom: 30px;
+}
+.tsd-list-c{
+    color: #4f4f4f;
+    font-size: 16px;
+    line-height: 16px;
+    margin-bottom: 20px;
+    /* display: block;
+    overflow: hidden; */
+}
+ .tsd-list-s{
+     display: block;
+     overflow: hidden;
+ }
+.tsd-list-c p{
+    float: left;
+    line-height: 30px;
+    min-width: 65px;
+}
+.tsd-list label{
+    color: #4f4f4f;
+    font-size: 16px;
+    line-height: 30px;
+}
+
+
+.tsd-btn{
+    width: 132px;
+    height: 42px;
+    display: block;
+    background: #16d997;
+    text-align: center;
+    font-size: 14px;
+    line-height: 42px;
+    color: #fff;
+    border-radius: 42px;
+    margin: 0 auto;
+}
+
+.tsd-time input{
+    width: 267px;
+    height: 32px;
+    line-height: 32px;
+    color: #4f4f4f;
+    font-size: 16px;
+    line-height: 16px;
+    border-radius: 5px;
+    border: 1px solid #969292;
+}
+
+
+.tsd-inp input{
+    width: 100px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    color: #4f4f4f;
+    font-size: 16px;
+    line-height: 16px;
+    border-radius: 5px;
+    border: 1px solid #969292;
+    float: left;
+    margin-right: 20px;
+}
+
+.analyse-box{
+    height:720px;
+    /* background: #fff; */
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+.analyse-box table{
+    width:100%;
+    height:100%;
+    box-shadow: border-box;
+}
+.analyse-box table td{
+    padding:10px 15px;
+    border:1px solid #ccc;
+}
+.analyse-box table thead{
+    background: #16D997;
+    text-align: center;
+}
+.analyse-box table thead td{
+    padding:30px;
+    position: relative;
+}
+.analyse-box table thead td i{
+    position: absolute;
+    top:5px;
+    right:10px;
+    width:20px;
+    height:20px;
+    background:url('../../images/icon/delete.png') no-repeat;
+    background-size:20px;
+    cursor: pointer;
+}
+.analyse-box table thead:nth-child(2){
+    background:#C4E9E1; 
+}
+.analyse-box table thead:nth-child(2) td{
+    padding:5px;
+}
+.analyse-box table tr span{
+    display: block;
+    text-align: center;
+}
+.analyse-box table tr span:first-child{
+    font-weight:bold;
+}
+/* .analyse-box table td:first-child span{
+    text-align: left;
+} */
+.analyse-box table tr td.color_back{
+    background:#F7A3A3;
+    color:#fff;
+}
+.analyse-box tbody tr td{
+    background:#fff;
+    color:#7E7777;
+    text-align: center;
+}
+/* .analyse-box tbody tr td:first-child{
+    text-align: left;
+} */
+.analyse-left{
+    width: 820px;
+    float: left;
+    margin-left: 20px;
+}
+.analyse-right{
+    width: 820px;
+    float: right;
+    margin-right: 20px;
+}
+.analyse-top{
+    height: 140px;
+    background: #f7f7f7;
+    margin:20px 0;
+}
+
+.analyse-top-name{
+    color: #fff;
+    width: 15px;
+    background: #16d997;
+    font-size: 16px;
+    line-height: 22px;
+    word-wrap: break-word;
+    padding: 20px;
+    height: 100px;
+    float: left;
+}
+.analyse-top-desc{
+    width: 764px;
+    float: left;
+    text-align: center;
+}
+
+.analyse-top-list{
+    width: 226px;
+    display: inline-block;
+    height: 100%;
+}
+
+.analyse-top-list p{
+    color: #4f4f4f;
+    font-size: 16px;
+    line-height: 16px;
+    text-align: center;
+    padding-top: 38px;
+    padding-bottom: 30px;
+}
+
+.analyse-top-list span{
+    color: #16d997;
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+}
+
+.analyse-rank,.analyse-chart{
+    width: 100%;
+    height: 606px;
+    background: #f7f7f7;
+    display: block;
+    overflow: hidden;
+}
+
+.analyse-chart img{
+    display: block;
+    margin: 0 auto;
+}
+
+.analyse-rank-name{
+    color: #4f4f4f;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: bold;
+    border-left: 4px solid #16d997;
+    margin: 14px 0;
+    margin-left: 20px;
+    padding-left: 10px;
+}
+.a-title p,.a-box p{
+    width: 20%;
+    float: left;
+    font-size: 14px;
+    line-height: 46px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.a-title {
+    background: #ebebeb;
+}
+.a-list{
+    display: block;
+    overflow: hidden;
+}
+.a-list:nth-child(even){
+    background: #ebebeb;
+}
+.a-title{
+    height: 46px;
+    display: block;
+}
+.a-box{
+    display: block;
+    overflow-y: auto;
+    height: 400px;
+}
+
+#chart_t,#chart_b{
+    width: 764px;
+    height: 230px;
+}
+#chart_p{
+    width: 764px;
+    height: 448px;
+}
+
+
+/* 换课 */
+.course-down{
+    width: 200px;
+    height: 45px;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    margin-left: -100px;
+    z-index: 102;
+    text-align: center;
+    cursor: pointer;
+}
+.course-down p{
+    color: #4f4f4f;
+    font-size: 18px;
+    line-height: 45px;
+}
+.course-down em{
+    width: 12px;
+    height: 7px;
+    background: url('../../../public/images/icon/a17.png') center right no-repeat;
+    display: inline-block;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+.course-down-box{
+    width: 100px;
+    background: #16d997;
+    position: absolute;
+    top: 60px;
+    right: 18px;
+    border-radius: 10px;
+    padding: 10px 0;
+    display: none;
+    max-height:150px;
+}
+.course-down-box div{
+    height:150px;
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+.course-down-box div::-webkit-scrollbar{
+    width:0;
+    height:0;
+}
+.course-down-box span{
+    color: #fff;
+    display: block;
+    float: left;
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
+    line-height: 32px;
+}
+
+.course-down-box span:hover{
+    background:rgba(0,0,0,.3);
+}
+
+.course-down-box i{
+    width:0;
+    height:0;
+	border-right:10px solid transparent;
+	border-left:10px solid transparent;
+	border-bottom:10px solid #16d997;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    margin-left: -10px;
+}
+
+
+/* pop */
+.pop{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    overflow-y: auto;
+}
+.pop-box{
+    width: 694px;
+    /* height: 730px; */
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 50%;
+    top: 50%;
+    margin-left: -347px;
+    margin-top: -365px;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    animation: bounceInDown 1s ease forwards;
+}
+.pop-name{
+    height: 62px;
+    font-size: 18px;
+    line-height: 62px;
+    font-weight: bold;
+    text-align: center;
+    background: #16d997;
+    color: #fff;
+}
+
+
+.pop-btn-box{
+    width: 410px;
+    display: block;
+    margin:0 auto;
+    margin-top: 30px;
+}
+.pop-btn-box a{
+    width: 195px;
+    height: 50px;
+    margin-bottom:30px;
+    line-height: 50px;
+    display: block;
+    box-sizing: border-box;
+    color: #aaa;
+    font-size: 14px;
+    line-height: 50px;
+    text-align: center;
+    border: 1px solid #aaa;
+    border-radius: 50px;
+}
+.pop-btn-box .pop-sure-btn{
+    color: #fff;
+    border:none;
+    background: #16d997;
+    float: right;
+}
+.pop-btn-box .pop-cancel-btn{
+    float: left;
+}
+
+.new-list{
+    margin-top: 20px;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+}
+
+.new-list p{
+    width: 70px;
+    color: #000;
+    font-size: 14px;
+    line-height: 42px;
+    float: left;
+    margin-left: 24px;
+    margin-right: 10px;
+}
+
+.new-class-inp{
+    width: 540px;
+    height: 42px;
+    line-height: 42px;
+    color: #333;
+    display: block;
+    text-align: left;
+    font-size: 16px;
+    border: 1px solid #e1e2e4;
+    float: left;
+    background: #e8ebf0;
+    padding-left:20px;
+}
+.new-list textarea{
+    width: 560px;
+    height: 288px;
+    border: 1px solid #e1e2e4;
+    float: left;
+    background: #e8ebf0;
+    outline: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.new-time-inp{
+    width: 253px;
+    height: 42px;
+    line-height: 42px;
+    color: #333;
+    display: block;
+    text-align: left;
+    font-size: 16px;
+    border: 1px solid #e1e2e4;
+    padding-left: 20px;
+    float: left;
+    background: #e8ebf0;
+}
+
+.new-num-inp{
+    width: 142px;
+    height: 42px;
+    line-height: 42px;
+    color: #333;
+    display: block;
+    text-align: left;
+    font-size: 16px;
+    border: 1px solid #e1e2e4;
+    float: left;
+    background: #e8ebf0;
+    margin-right: 25px;
+    padding-left: 20px;
+}
+
+.new-list label{
+    color: #000;
+    font-size: 14px;
+    line-height: 42px;
+    float: left;
+}
+
+
+@media screen and (max-width: 1400px) {
+    .data-right {
+        width: 850px;
+    }
+    .data-left{
+        width: 251px;
+    }
+    .dt-6 a{
+        width: 48px;
+    }
+
+    .analyse-right{
+        float: left;
+        margin-left: 20px;
+    }
+    .content-box{
+        padding-right: 0;
+    }
+
+    .job-list{
+        width: 99%;
+    }
+
+    .job-right{
+        float: left;
+        margin-left: 20px;
+    }
+    .job-right-box,.test-right-box{
+        margin-bottom: 20px;
+    }
+}
+
+
+/* 话题详情的样式 */
+.topic-details-content{
+    width: 100%;
+    border-radius: 5px;
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgba(255,255,255,1);
+}
+.topic-details-comment{
+    margin-top: 20px;
+    padding: 15px 10px 20px;
+    background: #FFFFFF;
+    border-radius: 5px;
+}
+.topic-details-header{
+    /* margin-left: 20px; */
+    width: 100%;
+    position: relative;
+}
+.topic-details-name{
+    color: #3e3e3e;
+    font-size: 18px;
+    font-weight: bold;
+}
+.topic-details-date{
+    text-align:right;
+    font-size: 10px;
+    color: #3e3e3e;
+    font-size:12px;
+}
+.topic-details-content>p{
+    font-size: 14px;
+    color: #000;
+    text-indent: 20px;
+    min-height: 88px;
+    margin:14px 0px;
+}
+.topic-comment-header{
+    border-bottom: 1px solid rgba(22,217,151);
+    padding-bottom: 5px;
+    text-align: right;
+    color: rgba(22,217,151);
+    position: relative;
+    font-size:18px;
+}
+.topic-comment-header::before{
+    content: "\8bc4\8bba";
+    position: absolute;
+    bottom: -1px;
+    left: 0px;
+    padding: 5px 20px 0px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 1px solid rgba(22,217,151);
+    border-bottom: 1px solid #FFFFFF;
+}
+.topic-comment-h4{
+    margin: 15px 0px 25px;
+    color: rgba(22,217,151);
+    font-size:18px;
+}
+.topic-comment-h4 i{
+    border-left: 5px solid rgba(22,217,151);
+    border-radius: 5px;
+    margin-right: 15px;
+}
+.topic-comment-box{
+    text-decoration: underline;
+    font-size:18px;
+    text-align:center;
+    cursor: pointer;
+}
+.topic-comment-reply{
+    display: flex;
+    flex-flow: row nowrap;
+    font-size: 12px;
+    line-height: 18px;
+    margin-top: 8px;
+    color: #5D5D5D;
+}
+.comment-reply-head{
+    min-width:40px;
+}
+.comment-reply-head img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+.comment-reply-content{
+    width: 100%;
+}
+.comment-reply_content a{
+    color: rgba(22,217,151);
+    text-decoration: none;
+}
+.comment-reply_content>p{
+    line-height: 20px;
+    margin:12px 0px;
+}
+.comment-reply_content>p:first-of-type{
+    text-indent: 10px;
+    font-size:16px;
+}
+.comment-reply_content>p>a{
+    display: none;
+    font-size:12px;
+    margin-left: 5px;
+    width:20px;
+    height: 15px;
+    background:url('../../images/icon/a15.png') no-repeat;
+    background-size:18px 15px;
+}
+.comment-reply_content:hover>p>a{
+    display: inline-block;
+}
+.avacter_3{
+    text-align: right;
+    font-size: 14px;
+    color: #666666;
+}
+.avacter_3 p{
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid rgba(22,217,151);
+    height: 90px;
+    padding: 10px 15px 10px;
+    box-sizing: border-box;
+    margin: 10px auto;
+}
+.avacter_3 p textarea{
+    outline: 0px;
+    width: 100%;
+    border: 0px;
+    resize: none;
+    height: 100%;
+}
+.avacter_3 input{
+    color: #FFFFFF;
+    border-radius: 10px;
+    font-size: 18px;
+    border: 0px;
+    outline: 0px;
+    background: rgba(22,217,151);
+    cursor: pointer;
+    padding: 3px 15px;
+    margin-left: 10px;
+    border-bottom-left-radius: 0px;
+}
+.avacter_3 input:hover{
+    background: rgba(22,217,151,.8);
+}
+/* 文件上传弹框 */
+.file-category-url{
+    width:440px;
+    height:42px;
+    background:#e8ebf0;
+    border:1px solid #e1e2e4;
+    outline: 0px;
+    float: left;
+    box-sizing:border-box;
+    padding-left:20px;
+    color:#333;
+}
+.file-name-url{
+    width:120px;
+    float: left;
+    height:42px;
+    position: relative;
+    text-align: center;
+    background:#16D897;
+}
+/* 文件删除提示 */
+.delete-data-hint{
+    max-width:200px;
+    margin:30px auto 0; 
+    padding-left:65px;
+    background:url('../../../public/images/icon/warning.png') 5px 5px no-repeat;
+    background-size:42px;
+}
+.delete-data-hint p:first-child{
+    font-size:20px;   
+    font-weight: bold;
+}
+.delete-data-hint p:last-child{
+    font-size:14px;
+}
+
+/* 预览试题 */
+.world-box{
+    width: 834px;
+    /* height: 540px; */
+    position: relative;
+    text-align: center;
+    font-size: 14px;
+    display: block;
+    margin:20px auto;
+    overflow: hidden;
+    background:#fff;
+    padding:20px;
+}
+
+.job-coffect-box{
+    background:#fff;
+}
+.job-coffect-box .job-coffect-right p{
+    height:30px;
+    line-height: 30px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding:0 10px;
+    font-size: 16px;
+}
+.job-coffect-box .job-coffect-right p:hover,
+.job-coffect-box .job-coffect-right p.cur{
+    background:#e6e6e6;
+}
+.job-coffect-box .job-coffect-right .job-right-box{
+    padding:20px 0px;
+    height:603px;
+    margin-right: 20px;
+    margin-bottom:0px;
+    background:transparent;
+}
+.job-coffect-title{
+    text-align: center;
+    font-size:24px;
+    padding:10px 0px;
+    height:40px;
+    box-sizing: border-box;
+    line-height: 40px;
+}
+.job-coffect-left{
+    position: relative;
+    width: 1345px;
+    height: 700px;
+    display: block;
+    float: left;
+    /* padding-left: 20px; */
+    /* overflow-y: auto; */
+    border-right:1px solid #EFEFEF;
+    box-sizing: border-box;
+    -webkit-transform-origin: top left;
+}
+.job-coffect-right{
+    width: 350px;
+    height: 100%;
+    display: block;
+    float: right;
+    /* margin-right: 20px; */
+    /* padding:0 20px; */
+    background:#FAFAFA;
+    border-left:1px solid #EFEFEF;
+    box-sizing: border-box;
+}
+.job-coffect-unleashed,.job-coffect-approved{
+    width:50%;
+    float: left;
+}
+.job-right-header{
+    padding:0 20px;
+    border-bottom:1px solid #EFEFEF;
+}
+.job-right-header h3{
+    float: left;
+    width:50%;
+    color: #4f4f4f;
+    font-size: 16px;
+    line-height: 16px;
+    padding-left: 26px;
+    background: url('../../../public/images/icon/a9.png') center left no-repeat;
+    margin: 20px 0;
+    box-sizing: border-box;
+}
+.job-edit-box{
+    width:1330px;
+    margin:20px 0px 20px;
+    height:510px;
+    overflow-y: auto;
+    overflow-x:hidden; 
+    padding: 0px 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+.job-edit-box::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    /* background: rgba(0,0,0,0.2); */
+    background: #16D997;
+}
+.job-edit-box::-webkit-scrollbar-track {
+    /* -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2); */
+    border-radius: 5px;
+    /* background: rgba(0,0,0,0.1); */
+    background: #E8EBF0;
+}
+.job-coffect-submit{
+    width:100px;
+    height:40px;
+    line-height: 40px;
+    margin:20px auto 0px;
+    /* margin-left:425px; */
+    background:#16D997;
+    text-align: center;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size:18px;
+    color: #fff;
+}
+.job-coffect-score{
+    font-size:18px;
+    background:#FAFAFA;
+    height:56px;
+    box-sizing: border-box;
+    padding-left:20px;
+}
+.job-coffect-score p{
+    display: inline-block
+}
+.job-coffect-score input{
+    margin-left:20px;
+    border:0px;
+    border-bottom:1px solid #969292;
+    font-size: 40px;
+    font-weight: bold;
+    width: 100px;
+    text-align: center;
+    color: #16d997;
+    background:transparent;
+}
+
+/* 分析 */
+.analyse-input-box{
+    text-align: right;
+    margin-bottom:20px;
+}
+.analyse-input-box input {
+    width:130px;
+    height:30px;
+    padding:0px 10px;
+    box-sizing: border-box;
+    margin: 0 10px;
+}
+
+/* canvas绘制编辑 */
+.msg-editor-box{
+    position: absolute;
+    top:0px;
+    right:0px;
+    width:360px;
+    height:56px;
+    overflow: hidden;
+}
+.msg-editor-box>div{
+    float: left;
+    width:25%;
+    height:100%;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+}
+.msg-editor-box>div.msg-edit-color{
+    width:40%;
+}
+.msg-editor-box>div.msg-edit-full{
+    width:10%;
+}
+.msg-edit-full span{
+    cursor: pointer;
+    width:30px;
+    height:34px;
+    cursor: pointer;
+}
+.msg-edit-style span{
+    cursor: pointer;
+    /* width:30px;
+    height:30px; */
+}
+.msg-edit-color span{
+    /* float: left; */
+    width:20px;
+    height:20px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.msg-edit-color span.msg-selected{
+    border:2px solid #16D897;
+}
+.msg-edit-pen span{
+    background:#CCCCCC;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.msg-edit-pen span.msg-selected{
+    background:#15D897;
+}
+.full-btn{
+    background: url('../../../public/images/icon/full.png') center no-repeat;
+    background-size: 100%;
+}
+.full-btn1{
+    background:url('../../../public/images/icon/full1.png') center no-repeat;
+    background-size: 100%;
+}
+.rect-btn {
+    background: url('../../../public/images/icon/rect.png') center no-repeat;
+    background-size: 100%;
+}
+.rect-btn1{
+    background-image:url('../../../public/images/icon/rect1.png');
+}
+
+.pen-btn {
+    background: url('../../../public/images/icon/pen.png') center no-repeat;
+    background-size: 15px 46px;
+}
+.pen-btn1 {
+    background-image: url('../../../public/images/icon/pen1.png');
+}
+
+.lang-btn {
+    background: url('../../../public/images/icon/lang.png') center no-repeat;
+    background-size: 100%;
+}
+.lang-btn1 {
+    background-image: url('../../../public/images/icon/lang1.png');
+}
+
+.msg-edit-zoom span{
+    cursor: pointer;
+    font-size:18px;
+}
+.full{
+    /* margin: 50px auto 0px; */
+    width: 1500px;
+    height: 100%;
+    border: 1px solid #ccc;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #fff;
+    position: relative;
+    top: 50px;
+    left: 50%;
+    transform: translate(-50%);
+}
+.full .job-edit-box{
+    margin:30px auto 0px;
+    height:100%;
+}
+.job-full-box{
+    position: fixed;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    background:#EDF1F0;
+    z-index: 11111;
+    display: none;
+}
+
+
+		</style>
+	</head>
+	<body>
+		  <div class="container">
+	<div>
+	<div class="bar-box">
+		<router-link :to="{ name: 'index', params: {} }" class="ec"></router-link>
+        <ul>
+            <li class="bar-zy">
+				<router-link :to="{ name: 'index', params: {} }">主页</router-link>
+            </li>
+            <li class="bar-kc">
+				<router-link :to="{ name: 'course', params: {} }">课程</router-link>
+			</li>
+			<li class="bar-rc">
+				<router-link :to="{ name: 'schedule', params: {} }">日程</router-link>
+			</li>
+			<li class="bar-sx">
+				<router-link :to="{ name: 'letter', params: {} }">私信</router-link>
+			</li>
+			<!-- <li class="bar-wk">
+				<router-link :to="{ name: 'library', params: {} }">文库</router-link>
+			</li> -->
+			<li class="bar-tz">
+				<router-link :to="{ name: 'msg', params: {} }">通知<em v-if="msgCount>0">{{msgCount}}</em></router-link>
+			</li>
+        </ul>
+    </div>
+    <div class="msg-box">
+        <p class="msg-wrap">
+            <!-- 通知：王萍萍提交了作业《黄冈密卷》 -->
+        </p>
+        <div class="user-box">
+            <div class="logined">
+                <img :src="avatar" class="header" title="进入个人中心">
+                <p class="username">{{userName}},欢迎您！</p>
+                <a href="javascript:;" class="logout" title="退出该账号">退出</a>
+            </div>
+            <div class="unlogin">
+            </div>
+        </div>
+    </div>
+</div>
+            <div class="course-down">
+                <p>{{courseNow}}课<em></em></p>
+                <div class="course-down-box">
+                    <div>
+                        <i></i>
+                        <span v-for="(item,key) in courseList" :key="key" :data-courseId="item.id">{{item.name}}</span>
+                    </div>
+                </div> 
+            </div>
+            <div class="course-top">
+                <div class="course-tab">
+                    <p class="cur">作业</p>
+                    <p>话题</p>
+                    <p>资料</p>
+                    <p>成员</p>
+                    <p>测试</p>
+                    <p>分析</p>
+                </div>
+            </div>
+            <div class="main-box">
+                <div class="content-box">
+                    <div class="course-box">
+
+                        <div class="course-res">
+
+                            <!-- 作业 -->
+                            <div class="c-res-list c-res-cur" id="new_job_box">
+                                <!--<div class="c-job-box" id="xj_job_box">
+                                    <a href="javascript:void(0)" class="new-job-btn" id="new_job_btn">创建作业</a>
+                                  </div>-->
+                                <div class="c-job-box" style="" id="pg_job_box">
+                                    <a href="javascript:void(0)" class="new-job-btn" id="job_back_btn">返回</a>
+                                    <!-- <img src="../../../public/images/r6.jpg"> -->
+                                    <div class="job-coffect-box clear">
+                                        <div class="job-coffect-left" v-show="homeworkCheck.beginview.status!=''">
+                                            <div class="job-coffect-score">
+                                                <p>姓名:<span style="font-size:24px;margin:0px 25px 0 15px;">{{jobDetails.userName}}</span></p>
+                                                <p>成绩:<input type="text" v-model="homeworkCheck.beginview.score"></p>
+                                            </div>
+                                            <div class="clear job-canvas-box">
+                                                <div class="job-coffect-title">
+                                                    《{{jobDetails.homeworkTitle}}》
+                                                </div>
+                                                <div class="job-edit-box">
+                                                
+                                                	<div class="job-edit-content"></div>
+                                                </div>
+                                            </div>
+                                            <div class="msg-editor-box" v-show="homeworkCheck.beginview.status!=2">
+                                                <div class="clear msg-edit-full">
+                                                    <span class="full-btn" title="全屏" ></span>
+                                                </div>
+                                                <div class="clear msg-edit-style">
+                                                    <span class="rect-btn" title="矩形" style="width:30px;height:34px;"></span>
+                                                    <span class="pen-btn pen-btn1" title="划线" style="width:30px;height:100%;"></span>
+                                                    <span class="lang-btn" title="文字" style="width:30px;height:34px;"></span>
+                                                </div>
+                                                <div class="clear msg-edit-pen" data-value="degree">
+                                                    <span style="width:10px;height:10px;" class="msg-selected" data-value="1"></span>
+                                                    <span style="width:20px;height:20px;" data-value="3"></span>
+                                                    <span style="width:25px;height:25px;" data-value="5"></span>
+                                                </div>
+                                                <div class="clear msg-edit-color" data-value="color">
+                                                    <span style="background:#FE0000;"></span>
+                                                    <span style="background:#FFFF01;"></span>
+                                                    <span style="background:#00FF00;"></span>
+                                                    <span style="background:#000000;" class="msg-selected"></span>
+                                                    <span style="background:#F4F4F4;"></span>
+                                                </div>
+                                                <!-- <div class="msg-edit-color"> -->
+                                                    <!-- <span class="text-top">颜色:</span> -->
+                                                    <!-- <div class="input-background-right">
+                                                        <span class="change-color">{{canvasColor}}</span>
+                                                        <input type="text" class="dtrigger" v-model="canvasColor">
+                                                    </div> -->
+                                                <!-- </div> -->
+                                            </div>
+                                            <div class="job-coffect-submit" v-show="homeworkCheck.beginview.status!=2">
+                                                提交
+                                            </div>
+                                        </div>
+                                        <div class="job-coffect-right">
+                                            <header class="job-right-header clear">
+                                                <h3>未批改列表</h3>
+                                                <h3>已批改列表</h3>
+                                            </header>
+                                            <div class="clear">
+                                                <div class="job-coffect-unleashed">
+                                                    <div class="job-right-box" v-if="homeworkCheck.unleashed.length>0">
+                                                        <p v-for="(item,key) in homeworkCheck.unleashed" :key="key" :data-id="item.id" :data-userName="item.studentName">
+                                                            <em>●</em>
+                                                            <span>{{item.studentName}}</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="job-coffect-approved">
+                                                    <div class="job-right-box" v-if="homeworkCheck.approved.length>0">
+                                                        <p v-for="(item,key) in homeworkCheck.approved" :key="key" :data-id="item.id" :data-userName="item.studentName">
+                                                            <em>●</em>
+                                                            {{item.studentName}}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="job-full-box">
+                                            <div class="clear" style="height:40px;background:#000;">
+                                                <header class="msg-editor-box" style="height:40px;width:550px;display:flex;color:#fff;">
+                                                    <div class="msg-edit-zoom">
+                                                        <span>-</span>缩放
+                                                        <span>+</span>
+                                                    </div>
+                                                    <div class="clear msg-edit-style">
+                                                        <span class="rect-btn" title="矩形" style="width:30px;height:34px;"></span>
+                                                        <span class="pen-btn pen-btn1" title="划线" style="width:30px;height:100%;"></span>
+                                                        <span class="lang-btn" title="文字" style="width:30px;height:34px;"></span>
+                                                    </div>
+                                                    <div class="clear msg-edit-pen" data-value="degree">
+                                                        <span style="width:10px;height:10px;" class="msg-selected" data-value="1"></span>
+                                                        <span style="width:20px;height:20px;" data-value="3"></span>
+                                                        <span style="width:25px;height:25px;" data-value="5"></span>
+                                                    </div>
+                                                    <div class="clear msg-edit-color" data-value="color">
+                                                        <span style="background:#FE0000;"></span>
+                                                        <span style="background:#FFFF01;"></span>
+                                                        <span style="background:#00FF00;"></span>
+                                                        <span style="background:#000000;" class="msg-selected"></span>
+                                                        <span style="background:#F4F4F4;"></span>
+                                                    </div>
+                                                    
+                                                    <div class="clear msg-edit-full">
+                                                        <span class="full-btn1" title="退出全屏" ></span>
+                                                    </div>
+                                                    
+                                                </header>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+        <button id="button" style="position: fixed;height:100px;width:100px;top:0px;left:0px;z-index:11111;">点击</button>
+        <script>
+        	var boolCanvas=true;
+//      	$(".job-edit-box").append(`<canvas id="c1" width="1330" height="510" style="width:1330px;height:510px;">
+//	        
+//	    </canvas>`);
+$("#button").on("click",function(){
+	let tpl=`<style>p{margin-top:0pt;margin-bottom:1pt;}span.X1{font-family:'Times New Roman';font-size:12.0pt;}</style><div style="width:595.3pt;margin-bottom:72.0pt;margin-top:72.0pt;margin-left:90.0pt;margin-right:90.0pt;"><p><br></p><p><br></p><p><span style="font-style:italic;white-space:pre-wrap;">Essay Question</span></p><p><br></p><p>Students will write one longer essay for the final exam. The essay prompts on the final exam address major themes from the entire course (weeks 1-10). The questions will be similar in form (but not content) to the long answer questions that were used for the midterm. As you study, think about the larger significance of lectures, readings, audiovisual materials, and discussions. Here, you must move beyond a factual understanding of the past and offer your own analysis/interpretation of the larger meanings of US history. While students are responsible for knowing ALL of the larger themes of the course, the items below represent a PARTIAL list of some of the major ideas we have covered thus far this quarter:</p><p style="margin-left:14.4pt;white-space:pre-wrap;"><br></p><p><span>1. </span>How social movements such as the labor movement, the feminist movement (1<span style="font-family:'Times New Roman';font-size:12.0pt;vertical-align:super;">st</span> and 2<span style="font-family:'Times New Roman';font-size:12.0pt;vertical-align:super;">nd</span> waves), the civil rights movement, the Chicano movement, the conservative movement, and the gay liberation movement changed the nation. Were they successful? Why? Why not?</p><p><span>2. </span>The history of liberalism and conservatism in the 20<span style="font-family:'Times New Roman';font-size:12.0pt;vertical-align:super;">th</span> and early 21<span style="font-family:'Times New Roman';font-size:12.0pt;vertical-align:super;">st</span> centuries. What are the similarities/differences in the two ideologies? When/why did they become influential? How have they changed over time? When/why did they lose favor (if ever)?</p><p><span>3. </span>The changing statuses of racial minorities, women, immigrants, members of the LGBTQ community, and other marginalized groups during the 20<span style="font-family:'Times New Roman';font-size:12.0pt;vertical-align:super;">th</span> and early 21<span style="font-family:'Times New Roman';font-size:12.0pt;vertical-align:super;">st</span> centuries. </p><p><span>4. </span>The role of fear in shaping American politics, culture, and society.</p><p><span>5. </span>The meanings and significance of mass migrations in American history, including migrations from other countries, the two Great Migrations, suburban migrations, etc.<span id="_GoBack"></span></p><p><span>6. </span>The changing statuses of workers and the poor during the 20<span style="font-family:'Times New Roman';font-size:12.0pt;vertical-align:super;">th</span> and early 21<span style="font-family:'Times New Roman';font-size:12.0pt;vertical-align:super;">st</span> centuries.</p><p><span>7. </span>The extent to which social and cultural differences have divided Americans since 1900.</p><p><span>8. </span>The changing boundaries (Who is included? Who is excluded?) and meanings of American citizenship and belonging during the 20<span style="font-family:'Times New Roman';font-size:12.0pt;vertical-align:super;">th</span> and early 21<span style="font-family:'Times New Roman';font-size:12.0pt;vertical-align:super;">st</span> centuries. How have the definitions and obligations of citizenship changed over time? How have popular American values changed (or not) regarding the boundaries of citizenship. Is the story of American citizenship one of steady progress, regression (moving backward), or some combination of the two? Explain. </p><p></p></div>
+               	`;
+$(".job-edit-content").html(tpl);
+html2canvas($('.job-edit-content')[0],{
+                backgroundColor: null,
+                useCORS:true,//保证跨域图片的显示
+                // width:width,
+                // height:height,
+                // windowWidth:width+5000,
+                // windowHeight:height+5000,
+           }).then((canvas) => {
+           	$(canvas).css({
+           		width:parseInt($(canvas).attr("width"))+"px",
+           		height:parseInt($(canvas).attr("height"))+"px"
+           	})
+                $(".job-edit-content").html(canvas);
+            });
+})
+			
+        $(".job-coffect-box")
+			.on("mousedown",".job-edit-box canvas",function(ev){
+				let oc= $(this)[0];
+		        	ogc=oc.getContext('2d');
+		        	ogc.beginPath(); ogc.lineWidth = Math.floor(Math.random()*(5-1+1)+1);
+		        	console.log(ogc.lineWidth)
+		            ogc.font=(1*12)+"px Georgia";
+		//          var ev=ev || window.event;
+		            ogc.moveTo(ev.offsetX,ev.offsetY);
+		            boolCanvas=true;
+		      })
+			.on("mousemove",".job-edit-box canvas",function(ev){
+				let oc= $(this)[0],
+		        	ogc=oc.getContext('2d');
+		//              var ev = ev || window.event;
+					if(boolCanvas){
+			            ogc.lineTo(ev.offsetX,ev.offsetY);
+			            ogc.stroke();
+					}
+		        })
+		   .on("mouseup",".job-edit-box canvas",function(ev){
+		   	let oc= $(this)[0],
+		    	ogc=oc.getContext('2d');
+		    	boolCanvas=false;
+		    	ogc.closePath();
+		   })
+		   .on("click",".msg-edit-full span",function(){
+                let _this=$(this);
+                if(_this.hasClass("full-btn")){
+                    $(".job-full-box").append($(".job-canvas-box")).show();
+                    $(".job-canvas-box").addClass("full");
+                }else{
+                    $(".job-coffect-score").after($(".job-canvas-box"))
+                    $(".job-full-box").hide();
+                    $(".job-canvas-box").removeClass("full");
+                    $(".job-edit-box").attr("data-value",1)
+                    $(".job-edit-box canvas").css("transform","scale(1)")
+                }
+            });
+        </script>
+	</body>
+</html>

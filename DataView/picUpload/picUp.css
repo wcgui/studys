@@ -1,0 +1,202 @@
+#pic-up{
+	background:#FFFFFF;
+	width:710px;
+	/*height:530px;*/
+	border-radius:5px;
+	position:fixed;
+	left:50%;
+	top:50%;
+	transform: translate(-355px,-230px);
+	box-shadow: 0px 0px 5px 5px #CCCCCC;
+}
+#pic-up>header{
+	height:50px;
+	background:#EAEAEA;
+	border-radius:5px 5px 0px 0px;
+	padding:0px 15px;
+}
+#pic-up>header>span{
+	float:left;
+	padding:0px 20px;
+	height:50px;
+	line-height:50px;
+	color:#545454;
+	cursor:pointer;
+}
+#pic-up>header>span:hover,#pic-up>header>span.btn-active{
+	background:#FFFFFF;
+}
+#pic-up>header>i{
+	float:right;
+	width:34px;
+	height:31px;
+	margin-top:8px;
+	background:url(../images/cancel.png) no-repeat;
+	background-size: 34px 31px;
+	cursor: pointer;
+}
+#pic-up div.pic-up-box,#pic-up div.pic-history-box{
+	border:1px dashed #E0E0E0;
+	height:380px;
+	margin:15px;
+	overflow-Y:auto;
+}
+/*设置滚动条样式*/
+#pic-up div.pic-up-box::-webkit-scrollbar,#pic-up div.pic-history-box::-webkit-scrollbar{/*滚动条整体样式*/
+    width: 6px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 8px;
+}
+#pic-up div.pic-up-box::-webkit-scrollbar-thumb,#pic-up div.pic-history-box::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    /* background: rgba(0,0,0,0.2); */
+    background:#7D7D7D;
+}
+#pic-up div.pic-up-box::-webkit-scrollbar-track,#pic-up div.pic-history-box::-webkit-scrollbar-track{/*滚动条里面轨道*/
+    /*-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);*/
+    border-radius: 5px;
+    /* background: rgba(0,0,0,0.1); */
+    background:#EAEAEA;
+			}
+#pic-up div.pic-up-box .pic-up-show{
+	width:300px;
+	height:100px;
+	margin:140px auto;
+	text-align: center;
+	color:#878787;
+}
+#pic-up div.pic-up-box .pic-up-show .pic-up-click{
+	display: block;
+	color:#525252;
+	border-radius:30px;
+	height:45px;
+	background:#CCCCCC;
+	text-align: center;
+	line-height:45px;
+	cursor: pointer;
+	margin-bottom:15px;
+}
+/*下方的上传按钮*/
+#pic-up #pic-form1{
+	position:relative;
+	/*height:450px;*/
+}
+#pic-up #pic-form1 #editor_contentFooter{
+	/*position:absolute;*/
+	/*bottom:10px;*/
+	/*left:30px;*/
+	height:40px;
+	line-height:40px;
+	margin-left:30px;
+	margin-bottom: 10px;
+	display: none;
+}
+#pic-up #pic-form1 #editor_contentFooter span{
+	width:100px;
+	height:40px;
+	display:inline-block;
+	text-align:center;
+	border-radius:2px;
+	cursor:pointer;
+	font-size:14px;
+}
+#pic-up #pic-form1 #editor_contentFooter span#yes{
+	background:#5caae6;
+	border:1px solid #4798d6;
+	color:#fff;
+}
+#pic-up #pic-form1 #editor_contentFooter span#yes:hover{
+	background:#4797D5;
+}
+#pic-up #pic-form1 #editor_contentFooter span#no{
+	background:#f3f3f3;
+	margin-left:10px;
+	border:1px solid #dfdfdf;
+}
+#pic-up #pic-form1 #editor_contentFooter span#no:hover{
+	background:#EAE9E9;
+}
+#pic-up #pic-form1 .upload_pictures input{
+	opacity:0;
+	width:160px;
+	height:200px;
+	top:11px;
+	cursor:pointer;
+	left:11px;
+	position:absolute;
+}
+#pic-up #pic-form1 .upload_pictures{
+	width:160px;
+	position:relative;
+	height:200px;
+	float:left;
+	padding:11px;
+	margin-left:28px;
+	margin-top:20px;
+}
+#pic-up #pic-form1 .upload_pictures div{
+	width:160px;
+	height:200px;
+	background:#F6F6F6 url(../images/add_pictures.png) no-repeat;
+	background-size:100px 100px;
+	background-position:30px 30px;
+	padding-top:120px;
+	color:#BFBFBF;
+	text-align:center;
+	box-sizing:border-box;
+	outline:1px solid #0C79B7;
+}
+#pic-up #pic-form1 .upload_pictures img{
+	width:160px;
+	height:200px;
+	position:absolute;
+	top:11px;
+	right:11px;
+	cursor:pointer;
+}
+#pic-up #pic-form1 .upload_pictures img.close_img{
+	width:11px;
+	height:11px;
+	position:absolute;
+	right:0px;
+	top:0px;
+	cursor:pointer;
+	display:none;
+}
+#pic-up #pic-form1 .upload_pictures:hover img.close_img{
+	display:block;
+}
+#pic-up #pic-hint-box{
+	position:absolute;
+	top:50%;
+	left:50%;
+	width:300px;
+	height:30px;
+	line-height:30px;
+	text-align: center;
+	transform: translate(-50%,-50%);
+	border:1px solid #F5E295;
+	background:#FFFAE2;
+	font-weight:bold;
+	color:#666;
+	display: none;
+}
+/*已经上传图片样式*/
+#pic-up .pic-history-box .pic-img-show{
+	/*width:180px;*/
+	float:left;
+	text-align: center;
+	padding:5px;
+	border-radius: 5px;
+	margin:15px;
+	box-shadow: 0px 0px 5px 5px #CCCCCC;
+	
+}
+#pic-up .pic-history-box .pic-img-show p{
+	margin:0px;
+	font-size:14px;
+}
+#pic-up .pic-history-box .pic-img-show img{
+	width:180px;
+	height:120px;
+}

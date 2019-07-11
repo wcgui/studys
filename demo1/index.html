@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>平顶山项目展示</title>
+<link href="css/swiper-4.3.5.min.css" type="text/css" rel="stylesheet">
+<script src="js/swiper-4.3.5.min.js"></script>
+<style>
+	body{
+		overflow:hidden;
+	}
+	#s61_box {
+        	width:1920px;
+        	height:1080px;
+            background: #47240E;
+        }
+        #s61_box:after{
+        	content:'';
+        	display: block;
+        	clear:both;
+        	height:0px;
+        }
+        .first-row {
+            width: 1920px;
+        }
+        .left-container,.center-container,.right-container {
+            float: left;
+        }
+        .left-container {
+            width: 450px;
+            margin-right: 5px;
+        }
+        .center-container {
+            width:1010px;
+        }
+        .right-container {
+            margin-left: 5px;
+            width: 450px;
+        }
+
+        .img-container {
+            width: inherit;
+            height: 330px;
+            margin-bottom: -4px;
+        }
+       
+
+         video {
+            object-fit: fill;
+            width: inherit;
+            margin: 0px 0 3px 0;
+            height: 660px;
+        }
+
+        .goback-btn {
+            position: absolute;
+            z-index: 2;
+            top: 50%;
+            left: 20px;
+            width: 49px;
+            height: 49px;
+            background: url(static/images/shutter_prevBtn.png) no-repeat 0 -49px;
+            margin-top: -25px;
+            cursor: pointer;
+        }
+
+
+        .second-row {
+            float: left;
+        }
+        .second-row .left {
+            float: left;
+            width: 1470;
+        }
+        
+
+        .img-container-left {
+            width: 450px;
+            height: 400px;
+            display: inline-block;
+        }
+
+         .img-container.large {
+            width: 735px;
+            height: 400px;
+            display: inline-block;
+        }
+
+        .second-row .right {
+            float: left;
+            width: 710px;
+            position: relative;
+            left: 20px;
+        }
+        .img-container-right {
+            width: 710px;
+            height: 400px;
+            display: inline-block;
+        }
+</style>
+</head>
+<body>
+<div class="swiper-container">
+  <div class="swiper-wrapper">
+  	<div class="swiper-slide" id="demo">
+  		<div id="s61_box">
+            <div class="first-row">
+                <div class="left-container">
+                    <img src="static/images/lefttop.jpg" class="img-container" >
+                    <img src="static/images/leftcenter.jpg" class="img-container">
+                    <!-- <img src="../../static/img/leftbottom.png" class="img-container"> -->
+                </div>
+                <div class="center-container">
+                    <video id="media"src="static/images/centervideo.mp4" controls autoplay loop></video>
+                </div>
+                <div class="right-container">
+                    <img src="static/images/righttop.png" class="img-container">
+                    <img src="static/images/rightcenter.png" class="img-container">
+                    <!-- <img src="../../static/img/rightbottom.png" class="img-container"> -->
+                </div>
+                <!-- <div class="goback-btn" onclick="goback()">
+                </div> -->
+            </div>
+            <div class="second-row">
+                <div class="left">
+                    <img src="static/images/leftbottom.png" class="img-container-left">
+                    <img src="static/images/internet.jpg" class="img-container large">
+                </div>
+                <div class="right">
+                    <img src="static/images/rightbottom.png" class="img-container-right" style="margin-left: -4px;"> 
+                </div>  
+            </div>
+        </div>
+  	</div>
+    <div class="swiper-slide" id="demo1"></div>
+    <div class="swiper-slide" id="demo2"></div>
+    <div class="swiper-slide" id="demo3"></div>
+    <div class="swiper-slide" id="demo4"></div>
+    <div class="swiper-slide" id="demo5"></div>
+  </div>
+  <div class="swiper-button-prev"></div><!--左箭头-->
+  <div class="swiper-button-next"></div><!--右箭头-->
+</div>
+
+<script src="js/jquery-1.11.0.min.js"></script>
+<script>
+//$("#demo").load("s61.html");	
+$("#demo1").load("demo2.html");
+$("#demo2").load("demo.html");
+$("#demo3").load("demo3.html");
+$("#demo4").load("demo4.html");
+var mySwiper = new Swiper('.swiper-container', {
+//	autoplay:{
+//		delay:5000,//自动切换的时间间隔默认3s
+//	},
+	speed:4000,//完成翻转的时间
+	effect:'coverflow',//翻转的效果
+	loop:true,//设置是否循环轮播
+	navigation: {
+	    nextEl: '.swiper-button-next',
+	    prevEl: '.swiper-button-prev',
+	},
+});
+$("div.swiper-container").hover(function(){
+	 mySwiper.autoplay.stop();//官网方法自动播放停止
+},function(){
+	mySwiper.autoplay.start();//自动播放开始
+});
+document.getElementsByTagName("video")[0].addEventListener("ended",function(){
+         console.log("结束");
+});
+</script>
+
+</body>
+</html>

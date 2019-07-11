@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            circleGeometry的使用
+        </title>
+        <style>
+            body{
+                margin:0px;
+                padding:0px;
+            }
+        </style>
+        <script src="js/three.js"></script>
+        <script src="js/SceneUtils.js"></script>
+    </head>
+    <body>
+        <script>
+            function init(){
+                //新建一个场景
+                var scene=new THREE.Scene();
+                var camera=new THREE.PerspectiveCamera(50,window.innerWidth/window.innerHeight,0.1,1000);//新建一个相机
+                var renderer=new THREE.WebGLRenderer({antialias:true});//antialias:true抗锯齿
+                camera.position.set(0,0,100);//设置相机的位置
+                camera.lookAt(scene.position);//相机聚焦的位置
+                renderer.setClearColor(0xA3D8CF);
+                renderer.setSize(window.innerWidth,window.innerHeight);
+                var circleGeometry=new THREE.CircleGeometry(10,32,0,Math.PI*3/2);
+                var circle=createMesh(circleGeometry);
+                circle.rotation.x=-Math.PI/4;
+                scene.add(circle);
+                function createMesh(geometry){
+                    var meshMaterial=new THREE.MeshNormalMaterial();//法向量网孔材料
+                    meshMaterial.side=THREE.DoubleSide;//设置裁量覆盖方式
+                    var wireframeMaterial=new THREE.MeshBasicMaterial({wireframe:true,color:0xEF217D});
+                    var mesh=new THREE.SceneUtils.createMultiMaterialObject(geometry,[meshMaterial,wireframeMaterial]);
+                    return mesh;
+                }
+                document.body.appendChild(renderer.domElement);
+                function animate(){
+                    requestAnimationFrame(animate);
+                    renderer.render(scene,camera);
+                }
+                animate();
+                window.addEventListener("resize",function(){
+                    camera.aspect=window.innerWidth/window.innerHeight;
+                    camera.aspect=window.innerWidth/window.innerHeight;
+                    console.log(1);
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth,window.innerHeight);
+                },false);
+            }
+            window.onload=init;
+        </script>
+    </body>
+</html>

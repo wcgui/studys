@@ -1,0 +1,184 @@
+<! DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>canvas练习</title>
+</head>
+<body>
+    <canvas id="myChart" width="300" height="300"></canvas>
+    <canvas id="canvas1" width="300" height="300"></canvas>
+    <canvas id="canvas2" width="300" height="300"></canvas>
+    <canvas id="canvas3" width="500" height="500">您的浏览器暂不支持，请下载最新的浏览器</canvas>
+    <canvas id="canvas4" width="500" height="500">您的浏览器暂不支持,请下载最新的浏览器</canvas>
+    <canvas id="canvas5" width="500" height="500">您的浏览器暂不支持，请下载最新的浏览器</canvas>
+    <canvas id="canvas6" width="500" height="500">您的浏览器暂不支持,请下载最新的浏览器</canvas>
+    <canvas id="canvas7" width="500" height="500">您的浏览器不支持，请下载最新的浏览器</canvas>
+    <canvas id="canvas8" width="500" height="500">您的浏览器不支持,请下载最新的浏览器</canvas>
+    <canvas id="canvas9" width="500" height="500">您的浏览器不支持,请下载最新的浏览器</canvas>
+    <canvas id="canvas10" width="500" height="500">您的浏览器暂不支持,请下载最新的浏览器</canvas>
+    <!-- <img src="img/1.jpg" alt="王" > -->
+    <script>
+        function draw(){
+            var canvas = document.getElementById('myChart');
+            if (!canvas.getContext) return;
+            var ctx = canvas.getContext("2d");
+            ctx.beginPath();
+            ctx.moveTo(50, 50);
+            //参数1、2：控制点1坐标   参数3、4：控制点2坐标  参数4：圆弧半径
+            ctx.arcTo(200, 50, 200, 200, 100);
+            ctx.lineTo(200, 200)
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.rect(50, 50, 10, 10);
+            ctx.rect(200, 50, 10, 10)
+            ctx.rect(200, 200, 10, 10)
+            ctx.fill()
+        }
+        draw();
+        //二次贝塞尔曲线
+        function draw1(){
+            var canvas=document.getElementById("canvas1");
+            if(!canvas.getContext) return;
+            var ctx=canvas.getContext("2d");
+            ctx.beginPath();
+            ctx.moveTo(10,200);//起始点
+            var cp1x=40,cp1y=100;//控制点
+            var x=200,y=200;//结束点
+            ctx.quadraticCurveTo(cp1x,cp1y,x,y);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.rect(10,200,10,10);
+            ctx.rect(cp1x,cp1y,10,10);
+            ctx.rect(x,y,10,10);
+            ctx.fill();
+        }
+        draw1();
+        function draw2(){
+            var canvas=document.getElementById("canvas2");
+            if(!canvas.getContext)return;//判断兼容性
+            var ctx=canvas.getContext("2d");
+            ctx.beginPath();
+            ctx.moveTo(40,200);//将绘制的起始点的坐标
+            var cp1x=20,cp1y=100;//控制点1
+            var cp2x=100,cp2y=120;//控制点2
+            var x=200;y=200;//结束点
+            //绘制三次贝塞尔曲线
+            ctx.bezierCurveTo(cp1x,cp1y,cp2x,cp2y,x,y);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.rect(40,200,10,10);
+            ctx.rect(cp1x,cp1y,10,10);
+            ctx.rect(cp2x,cp2y,10,10);
+            ctx.rect(x,y,10,10);
+            ctx.fill();
+        }
+        draw2();
+        function draw3(){
+            let canvas=document.getElementById("canvas3");
+            if(!canvas.getContext)return;//判断兼容性
+            let ctx=canvas.getContext("2d");
+            for(let i=0;i<6;i++){
+                for(let j=0;j<6;j++){
+                    ctx.fillStyle="rgb("+Math.floor(255-42.5*i)+","+Math.floor(255-42.5*j)+",0)";
+                    ctx.fillRect(j*50,i*50,50,50);
+                }
+            }
+        }
+        draw3();
+        function draw4(){
+           // debugger;
+           console.log(1);
+            let canvas=document.getElementById("canvas4");
+            if(!canvas.getContext)return;
+            let ctx=canvas.getContext("2d");
+            for(var i=0;i<6;i++){
+                for(var j=0;j<6;j++){
+                    //Math.random()*(max-min+1)+min
+                    ctx.strokeStyle=`rgb(${Math.random()*(255-0+1)+0},${Math.random()*(255-0+1)+0},${Math.random()*(255-0+1)+0})`;
+                    ctx.strokeRect(j*50,i*50,40,40);
+                }
+            }
+        }
+        setInterval(draw4,100)
+        //draw4();
+        function draw5(){
+            let canvas=document.getElementById("canvas5");
+            if(!canvas.getContext)return;
+            let ctx=canvas.getContext("2d");
+            ctx.setLineDash([25,5]);//实线长度，间隙长度
+            ctx.lineDashOffset=-0;
+            ctx.strokeRect(50,50,210,210);
+            console.log(ctx.getLineDash());
+        }
+        draw5();
+        function draw6(){
+            let canvas=document.getElementById("canvas6");
+            if(!canvas.getContext)return;
+            let ctx=canvas.getContext("2d");
+            ctx.font="bold 100px  sans-serif";//设置字体样式相当于css的font
+           // ctx.lineWidth=30;设置线条宽
+            ctx.fillText("天若有情",10,100);
+            ctx.strokeText("天time",10,100);
+        }
+        draw6();
+        function draw7(){
+            let canvas=document.getElementById("canvas7");
+            //判断兼容性
+            if(!canvas.getContext)return;
+            let ctx=canvas.getContext("2d");
+            var img=new Image();//创建img元素
+            img.onload=function(){
+                ctx.drawImage(img,0,0);
+            }
+            img.src='img/1.jpg';//设置图片源地址
+            ctx.drawImage(img,0,0,50,20,100,100,30,30);
+        }
+        draw7();
+       function draw8(){
+           let canvas=document.getElementById("canvas8");
+           //判断兼容性
+           if(!canvas.getContext)return;
+           let ctx=canvas.getContext("2d");
+           ctx.fillRect(0,0,150,15);//使用默认设置绘制一个矩形
+           //ctx.lineWidth=10;
+           ctx.save();//保存默认状态
+           ctx.fillStyle="red";//在原有配置基础上对颜色做改变
+           ctx.fillRect(15,15,120,120);//使用心得设置绘制一个矩形
+           ctx.save();//保存当前状态
+           ctx.fillStyle="#fff";//再次改变颜色设置
+           ctx.fillRect(30,30,90,90);//使用心得配置绘制一个矩形
+           ctx.restore();//重新加载之前的颜色状态
+           ctx.fillRect(45,45,60,60);
+           ctx.restore();
+           ctx.fillRect(60,60,30,30);//使用加载的配置绘制一个矩形
+       }
+       draw8();
+       function draw9(){
+           let canvas=document.getElementById("canvas9");
+           if(!canvas.getContext)return;
+           let ctx=canvas.getContext("2d");
+           ctx.save();//保存原状态
+           ctx.translate(100,100);
+           ctx.strokeRect(0,0,100,100);
+           ctx.restore();//恢复到原状态
+           ctx.translate(100,300);
+           ctx.fillRect(0,0,100,100);
+       }
+       draw9();
+       function draw10(){
+           let canvas = document.getElementById("canvas10");
+           if(!canvas.getContext)return;
+           let ctx=canvas.getContext("2d");
+           
+           ctx.beginPath();
+           ctx.arc(20,20,100,0,Math.PI*2);
+           ctx.clip();
+           ctx.fillStyle="pink";
+           ctx.fillRect(20,20,100,100);
+          
+           
+           //ctx.fill();
+       }
+       draw10();
+    </script>
+</body>

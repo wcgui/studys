@@ -1,0 +1,221 @@
+.seating-box > img {
+    z-index: 1;
+  }
+  .first>img,
+  .second>img,
+  .thrid>img{
+  	width:100%;
+  	height:80%;
+  }
+  .first {
+  	width:100%;
+  	height:100%;
+    position: absolute;
+    bottom: -60px;
+    left: 0;
+    z-index: -1;
+    animation: first 5s infinite;
+  }
+  .second {
+  	width:100%;
+  	height:100%;
+    position: absolute;
+    bottom: -80px;
+    left: 0;
+    z-index: -2;
+    animation: second 5s infinite;
+  }
+
+  .third {
+  	width:100%;
+  	height:100%;
+    position: absolute;
+    bottom: -100px;
+    left: 0;
+    z-index: -3;
+    animation: third 5s infinite;
+  }
+  @keyframes first {
+    from {
+      bottom: -51px;
+    }
+    to {
+      bottom: -60px;
+      opacity: 0.5;
+    }
+  }
+ 
+  @keyframes second {
+    from {
+      bottom: -52px;
+    }
+    to {
+      bottom: -80px;
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes third {
+    from {
+      bottom: -53px;
+    }
+    to {
+      bottom: -100px;
+      opacity: 0;
+    }
+  }
+		
+/* 座位表 */
+
+.staff_desk {
+	width: 18.4%;
+	height: 14.6%;
+	background: url(http://172.26.1.10:3081/image/seatComponent/staff_desk.png) no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+}
+.staff_desk > div {
+  cursor: pointer;
+}
+.staff_desk .woman1 {
+	width: 22.2%;
+  height: 37.4%;
+	background: url(http://172.26.1.10:3081/image/seatComponent/woman01.png) no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	right: 0;
+	bottom: 40%;
+}
+.staff_desk .woman2 {
+	width: 21.5%;
+  height: 38.5%;
+	background: url(http://172.26.1.10:3081/image/seatComponent/woman02.png) no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	right: 25.8%;
+	top: -1%;
+}
+.staff_desk .woman3 {
+	width: 23.4%;
+  height: 38.5%;
+	background: url(http://172.26.1.10:3081/image/seatComponent/woman03.png) no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	left: 27.2%;
+	top: -22%;
+}
+.staff_desk .man1 {
+	width: 26%;
+  height: 63.7%;
+	background: url(http://172.26.1.10:3081/image/seatComponent/man01.png) no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	right: 24%;
+	bottom: -16.5%;
+}
+.staff_desk .man2 {
+	width: 26%;
+  height: 62.6%;
+	background: url(http://172.26.1.10:3081/image/seatComponent/man02.png) no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	top: 28.6%;
+	left: 24.1%;
+}
+.staff_desk .man3 {
+	width: 26%;
+  height: 64.8%;
+	background: url(http://172.26.1.10:3081/image/seatComponent/man03.png) no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+#staff_bubel {
+	width: 515px;
+	height: 238px;
+  position: absolute;
+  color: #fff;
+  z-index: 9;
+}
+#staff_bubel > div{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.buble_aspect {
+	width: 31px;
+	height: 32px;
+	background: url(http://172.26.1.10:3081/image/seatComponent/buble_aspect.png) no-repeat;
+	background-size: 100% 100%;
+	display: inline-block;
+	position: absolute;
+	bottom: 10%;
+	left: 0;
+}
+.buble_head_circle {
+	width: 132px;
+	height: 132px;
+	background: url(http://172.26.1.10:3081/image/seatComponent/buble_head_circle.png) no-repeat;
+	background-size: 100% 100%;
+	display: inline-block;
+	position: absolute;
+	bottom: 18%;
+	left: 0;
+	z-index: 999;
+}
+.buble_head_circle img{
+  border: 1px solid #eee;
+  width: 86%;
+  height: 86%;
+  border-radius: 100px;
+  display: inline-block;
+  margin: 7% 0 0 7%;
+  background: #eee;
+}
+.buble_rectangle {
+	width: 396px;
+	height: 219px;
+	background: url(http://172.26.1.10:3081/image/seatComponent/buble_rectangle.png) no-repeat;
+	background-size: contain;
+	display: inline-block;
+	position: absolute;
+	right: 5%;
+  margin-left: -20px;
+  padding-top: 20px;
+  font-size: 14px;
+}
+.buble_rectangle p{
+  width: 70%;
+  text-align: left;
+  margin: auto;
+  line-height: 2;
+}
+.bubble_i span{
+  display: inline-block;
+  margin: 0 20px;
+}
+.filed_a {
+  background: url(http://172.26.1.10:3081/image/seatComponent/btn_rectangle.png) no-repeat;
+  background-size: 100% 100%;
+  padding: 0px 15px;
+  display: inline-block;
+  margin: 0 10px
+}
+.bubble_i .staff_name{
+  font-size: 24px;
+}
+.bubble_t {
+  color: #94cdf5;
+}
+.project_a {
+  display: inline-block;
+  vertical-align: top;
+}
+.clear:after{
+	display: block;
+	content:"";
+	width:0px;
+	height:0px;
+	clear: both;
+}

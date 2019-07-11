@@ -1,0 +1,105 @@
+<! DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            three.js添加canvas纹理
+        </title>
+        <style>
+            body{
+                margin:0px;
+                padding:0px;
+            }
+        </style>
+        <script src="js/three.js"></script>
+        <script src="js/stats.min.js"></script>
+        <script src="js/dat.gui.min.js"></script>
+    </head>
+    <body>
+        <div id="WebGL-output"></div>
+        <div id="Stats-output"></div>
+    </body>
+    <script>
+        var controls=new function(){
+            this.rotationSpeed=0.02;
+            this.bouncingSpeed=0.03;
+        }
+        var gui=new dat.GUI();
+        gui.add(controls,'rotationSpeed',0,0.5);
+        gui.add(controls,'bouncingSpeed',0,0.5);
+        function init(){
+            var stats=initStats();
+            var scene=new THREE.Scene();
+            var camera=new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,0.1,1000);
+            scene.add(camera);
+            var renderer=new THREE.WebGLRenderer();
+            renderer.setClearColor(0xEEEEEE);
+            renderer.setSize(window.innerWidth,window.innerHeight);
+            renderer.shadowMap.enabled=true;//设置渲染器要阴影效果，还需要明确那个物体投射阴影，那个物体接受阴影
+            var axes=new THREE.AxisHelper(20);
+            scene.add(axes);
+            var planeGeometry=new THREE.PlaneGeometry(60,30,1,1);//平面模型
+            var planeMaterial=new THREE.MeshLambertMaterial({color:0xcccccc});//MeshBasicMaterial基础网孔材料MashPhongMaterial用于表面有光泽的材料MeshLambertMaterial一种非发光（兰伯特）的的表面
+            var plane=new THREE.Mesh(planeGeometry,planeMaterial);
+            camera.position.set(-30,40,30);
+            camera.lookAt(scene.position)
+            plane.rotation.x=-0.5*Math.PI;
+            plane.receiveShadow=true;//接受阴影
+            // plane.position.x=15;
+            // plane.position.y=0,
+            // plane.position.z=0;
+            plane.position.set(15,0,0);
+            scene.add(plane);
+            var cubeGeometry=new THREE.BoxGeometry(4,4,4);
+            var cubeMaterial=new THREE.MeshLambertMaterial({color:0xff0000});//wireframe设置是否将材质渲染成线框
+            var cube=new THREE.Mesh(cubeGeometry,cubeMaterial);
+            cube.position.set(-4,3,0);
+            cube.castShadow=true;//投射阴影
+            scene.add(cube);
+            var sphereGeometry=new THREE.SphereGeometry(4,20,20);//球体模型
+            var sphereMaterial=new THREE.MeshLambertMaterial({color:0x7777ff});//wireframe设置是否将材质渲染成线框
+            var spher=new THREE.Mesh(sphereGeometry,sphereMaterial);
+            spher.castShadow=true;//投射阴影
+            spher.position.set(20,4,2);
+            // sphereMaterial.wireframeLinewidth=24;
+            scene.add(spher);
+            var spotLight=new THREE.SpotLight(0xffffff);//聚合光源
+            spotLight.position.set(-40,60,-10);
+            spotLight.castShadow=true;
+            scene.add(spotLight);
+            document.getElementById("WebGL-output").appendChild(renderer.domElement);
+            // renderer.render(scene,camera);
+            var step=0;
+            renderScene();
+            function renderScene(){
+                stats.update();//通知对象stats重新渲染
+                cube.rotation.x+=controls.rotationSpeed;
+                cube.rotation.y+=controls.rotationSpeed;
+                cube.rotation.z+=0.02;
+                step+=controls.bouncingSpeed;//控制速度
+                spher.position.x=20+(10*(Math.cos(step)));
+                spher.position.y=2+(10*Math.abs(Math.sin(step)));
+                requestAnimationFrame(renderScene);
+                renderer.render(scene,camera);
+            }
+            function onResize(){
+                camera.aspect=window.innerWidth/window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth,window.innerHeight);
+            }
+            
+        window.addEventListener('resize',onResize,false);
+        }
+        function initStats(){
+            var stats=new Stats();
+            stats.setMode(0);//设置初始stats显示的界面
+            stats.domElement.style.position="absolute";
+            stats.domElement.style.left="0px";
+            stats.domElement.style.top="0px";
+            document.getElementById("Stats-output").appendChild(stats.domElement);
+            return stats;
+        }
+        window.onload=init;
+        
+    </script>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script src="weather.js"></script>
+		<style>
+			.sy-weather{
+				width:500px;
+				height:500px;
+				overflow: hidden;
+				text-align: center;
+				/*color:#fff;*/
+			}
+			.sy-weather .weather_title span.city_name{
+				    /*display: block;*/
+				    /*float: left;*/
+				    /*max-width: 100px;*/
+				    height: 40px;
+				    line-height: 40px;
+				    margin-right: 15px;
+			}
+			.sy-weather .weather_day{
+				margin:0 auto;
+			}
+			.sy-weather .weather_hours{
+				display:flex;
+				padding:10px 0;
+			}
+			.sy-weather .weather_hours div{
+				width:100%;
+				text-align: center;
+			}
+			.sy-weather .weather_hours div span{
+				display: block;
+				margin-bottom:10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="sy-weather" data-type="0">
+		</div>
+		<label for="weather-falg">是否采用当前地区</label>
+		<input type="checkbox" id="weather-falg">
+		<br>
+		<input type="button" value="获取" id="input" >
+		<script>
+			$("#input").on("click",function(){
+				wsWeather.getWeather($(".sy-weather"));
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{
+				margin:0;
+				padding:0;
+				overflow:hidden;
+			}
+			#images{
+				position:fixed;
+				left:50%;
+				top:20%;
+			}
+			span{
+				position:fixed;
+				top:0px;
+				left:420px;
+				background:#C0F961;
+				padding:5px 10px;
+				border-radius:5px;
+				cursor: pointer;
+			}
+			.container{
+				position:relative;
+				padding-top:56.25%;
+				background:#00aabb;
+			}
+			.container>img{
+				position:absolute;
+				width:100%;
+				height:100%;
+				left:0;
+				top:0;
+			}
+		</style>
+		<script src="js/echarts.min.js"></script>
+		<!--<script src="js/vintage.js"></script>
+		<script src="js/halloween_theme.js"></script>-->
+		<style>
+			.canvas{
+				width:4rem;height:4rem;
+			}
+			#canvas1{
+				width:400px;
+				height:400px;
+				background: url(images/ba.png)center center no-repeat;
+			}
+		</style>
+	</head>
+	<body>
+		<!--<div class="container">
+			<img src="carousel/images/warning_details.png"
+		</div>-->
+		<div class="canvas" ></div>
+		<div id="canvas1" ></div>
+		<span onclick="down('canvas')">导出为图片</span>
+		<span style="top:400px" onclick="down('canvas1')">导出为图片</span>
+		<!--<image src="img/bg_table.png"id="images">-->
+		<div onclick="get()" style="padding:10px 20px;position:fixed;right:10px;top:0px;cursor:pointer;background:#C0F961;border-radius:5px;">改变主题</div>
+		<script>
+			echarts.registerTheme('purple-passion', {
+  "color": [
+    "#3fb1e3",
+    "#6be6c1",
+    "#626c91",
+    "#a0a7e6",
+    "#c4ebad",
+    "#96dee8"
+  ],
+  "backgroundColor": "rgba(252,252,252,0)",
+  "textStyle": {},
+  "title": {
+    "textStyle": {
+      "color": "#666666"
+    },
+    "subtextStyle": {
+      "color": "#999999"
+    }
+  },
+  "line": {
+    "itemStyle": {
+      "borderWidth": "2"
+    },
+    "lineStyle": {
+      "width": "3"
+    },
+    "symbolSize": "8",
+    "symbol": "emptyCircle",
+    "smooth": false
+  },
+  "radar": {
+    "itemStyle": {
+      "normal": {
+        "borderWidth": "2"
+      }
+    },
+    "lineStyle": {
+      "normal": {
+        "width": "3"
+      }
+    },
+    "symbolSize": "8",
+    "symbol": "emptyCircle",
+    "smooth": false
+  },
+  "bar": {
+    "itemStyle": {
+      "barBorderWidth": 0,
+      "barBorderColor": "#ccc"
+    },
+    "emphasis": {
+      "itemStyle": {
+        "barBorderWidth": 0,
+        "barBorderColor": "#ccc"
+      }
+    }
+  },
+  "pie": {
+    "itemStyle": {
+      "barBorderWidth": 0,
+      "barBorderColor": "#ccc"
+    },
+    "emphasis": {
+      "itemStyle": {
+        "barBorderWidth": 0,
+        "barBorderColor": "#ccc"
+      }
+    }
+  },
+  "scatter": {
+    "itemStyle": {
+      "normal": {
+        "borderWidth": 0,
+        "borderColor": "#ccc"
+      },
+      "emphasis": {
+        "borderWidth": 0,
+        "borderColor": "#ccc"
+      }
+    }
+  },
+  "boxplot": {
+    "itemStyle": {
+      "normal": {
+        "borderWidth": 0,
+        "borderColor": "#ccc"
+      },
+      "emphasis": {
+        "borderWidth": 0,
+        "borderColor": "#ccc"
+      }
+    }
+  },
+  "parallel": {
+    "itemStyle": {
+      "normal": {
+        "borderWidth": 0,
+        "borderColor": "#ccc"
+      },
+      "emphasis": {
+        "borderWidth": 0,
+        "borderColor": "#ccc"
+      }
+    }
+  },
+  "sankey": {
+    "itemStyle": {
+      "normal": {
+        "borderWidth": 0,
+        "borderColor": "#ccc"
+      },
+      "emphasis": {
+        "borderWidth": 0,
+        "borderColor": "#ccc"
+      }
+    }
+  },
+  "funnel": {
+    "itemStyle": {
+      "normal": {
+        "borderWidth": 0,
+        "borderColor": "#ccc"
+      },
+      "emphasis": {
+        "borderWidth": 0,
+        "borderColor": "#ccc"
+      }
+    }
+  },
+  "gauge": {
+    "itemStyle": {
+      "normal": {
+        "borderWidth": 0,
+        "borderColor": "#ccc"
+      },
+      "emphasis": {
+        "borderWidth": 0,
+        "borderColor": "#ccc"
+      }
+    }
+  },
+  "candlestick": {
+    "itemStyle": {
+      "normal": {
+        "color": "#e6a0d2",
+        "color0": "transparent",
+        "borderColor": "#e6a0d2",
+        "borderColor0": "#3fb1e3",
+        "borderWidth": "2"
+      }
+    }
+  },
+  "graph": {
+    "itemStyle": {
+      "normal": {
+        "borderWidth": 0,
+        "borderColor": "#ccc"
+      }
+    },
+    "lineStyle": {
+      "normal": {
+        "width": "1",
+        "color": "#cccccc"
+      }
+    },
+    "symbolSize": "8",
+    "symbol": "emptyCircle",
+    "smooth": false,
+    "color": [
+      "#3fb1e3",
+      "#6be6c1",
+      "#626c91",
+      "#a0a7e6",
+      "#c4ebad",
+      "#96dee8"
+    ],
+    "label": {
+      "normal": {
+        "textStyle": {
+          "color": "#ffffff"
+        }
+      }
+    }
+  },
+  "map": {
+    "itemStyle": {
+      "normal": {
+        "areaColor": "#eeeeee",
+        "borderColor": "#aaaaaa",
+        "borderWidth": 0.5
+      },
+      "emphasis": {
+        "areaColor": "rgba(63,177,227,0.25)",
+        "borderColor": "#3fb1e3",
+        "borderWidth": 1
+      }
+    },
+    "label": {
+      "normal": {
+        "textStyle": {
+          "color": "#ffffff"
+        }
+      },
+      "emphasis": {
+        "textStyle": {
+          "color": "rgb(63,177,227)"
+        }
+      }
+    }
+  },
+  "geo": {
+    "itemStyle": {
+      "normal": {
+        "areaColor": "#eeeeee",
+        "borderColor": "#aaaaaa",
+        "borderWidth": 0.5
+      },
+      "emphasis": {
+        "areaColor": "rgba(63,177,227,0.25)",
+        "borderColor": "#3fb1e3",
+        "borderWidth": 1
+      }
+    },
+    "label": {
+      "normal": {
+        "textStyle": {
+          "color": "#ffffff"
+        }
+      },
+      "emphasis": {
+        "textStyle": {
+          "color": "rgb(63,177,227)"
+        }
+      }
+    }
+  },
+  "categoryAxis": {
+    "axisLine": {
+      "show": true,
+      "lineStyle": {
+        "color": "#cccccc"
+      }
+    },
+    "axisTick": {
+      "show": false,
+      "lineStyle": {
+        "color": "#333"
+      }
+    },
+    "axisLabel": {
+      "show": true,
+      "color": "#999999"
+    },
+    "splitLine": {
+      "show": true,
+      "lineStyle": {
+        "color": [
+          "#eeeeee"
+        ]
+      }
+    },
+    "splitArea": {
+      "show": false,
+      "areaStyle": {
+        "color": [
+          "rgba(250,250,250,0.05)",
+          "rgba(200,200,200,0.02)"
+        ]
+      }
+    }
+  },
+  "valueAxis": {
+    "axisLine": {
+      "show": true,
+      "lineStyle": {
+        "color": "#cccccc"
+      }
+    },
+    "axisTick": {
+      "show": false,
+      "lineStyle": {
+        "color": "#333"
+      }
+    },
+    "axisLabel": {
+      "show": true,
+      "color": "#999999"
+    },
+    "splitLine": {
+      "show": true,
+      "lineStyle": {
+        "color": [
+          "#eeeeee"
+        ]
+      }
+    },
+    "splitArea": {
+      "show": false,
+      "areaStyle": {
+        "color": [
+          "rgba(250,250,250,0.05)",
+          "rgba(200,200,200,0.02)"
+        ]
+      }
+    }
+  },
+  "logAxis": {
+    "axisLine": {
+      "show": true,
+      "lineStyle": {
+        "color": "#cccccc"
+      }
+    },
+    "axisTick": {
+      "show": false,
+      "lineStyle": {
+        "color": "#333"
+      }
+    },
+    "axisLabel": {
+      "show": true,
+      "textStyle": {
+        "color": "#999999"
+      }
+    },
+    "splitLine": {
+      "show": true,
+      "lineStyle": {
+        "color": [
+          "#eeeeee"
+        ]
+      }
+    },
+    "splitArea": {
+      "show": false,
+      "areaStyle": {
+        "color": [
+          "rgba(250,250,250,0.05)",
+          "rgba(200,200,200,0.02)"
+        ]
+      }
+    }
+  },
+  "timeAxis": {
+    "axisLine": {
+      "show": true,
+      "lineStyle": {
+        "color": "#cccccc"
+      }
+    },
+    "axisTick": {
+      "show": false,
+      "lineStyle": {
+        "color": "#333"
+      }
+    },
+    "axisLabel": {
+      "show": true,
+      "textStyle": {
+        "color": "#999999"
+      }
+    },
+    "splitLine": {
+      "show": true,
+      "lineStyle": {
+        "color": [
+          "#eeeeee"
+        ]
+      }
+    },
+    "splitArea": {
+      "show": false,
+      "areaStyle": {
+        "color": [
+          "rgba(250,250,250,0.05)",
+          "rgba(200,200,200,0.02)"
+        ]
+      }
+    }
+  },
+  "toolbox": {
+    "iconStyle": {
+      "normal": {
+        "borderColor": "#999999"
+      },
+      "emphasis": {
+        "borderColor": "#666666"
+      }
+    }
+  },
+  "legend": {
+    "textStyle": {
+      "color": "#999999"
+    }
+  },
+  "tooltip": {
+    "axisPointer": {
+      "lineStyle": {
+        "color": "#cccccc",
+        "width": 1
+      },
+      "crossStyle": {
+        "color": "#cccccc",
+        "width": 1
+      }
+    }
+  },
+  "timeline": {
+    "lineStyle": {
+      "color": "#626c91",
+      "width": 1
+    },
+    "itemStyle": {
+      "normal": {
+        "color": "#626c91",
+        "borderWidth": 1
+      },
+      "emphasis": {
+        "color": "#626c91"
+      }
+    },
+    "controlStyle": {
+      "normal": {
+        "color": "#626c91",
+        "borderColor": "#626c91",
+        "borderWidth": 0.5
+      },
+      "emphasis": {
+        "color": "#626c91",
+        "borderColor": "#626c91",
+        "borderWidth": 0.5
+      }
+    },
+    "checkpointStyle": {
+      "color": "#3fb1e3",
+      "borderColor": "rgba(63,177,227,0.15)"
+    },
+    "label": {
+      "normal": {
+        "textStyle": {
+          "color": "#626c91"
+        }
+      },
+      "emphasis": {
+        "textStyle": {
+          "color": "#626c91"
+        }
+      }
+    }
+  },
+  "visualMap": {
+    "color": [
+      "#2a99c9",
+      "#afe8ff"
+    ]
+  },
+  "dataZoom": {
+    "backgroundColor": "rgba(255,255,255,0)",
+    "dataBackgroundColor": "rgba(222,222,222,1)",
+    "fillerColor": "rgba(114,230,212,0.25)",
+    "handleColor": "#cccccc",
+    "handleSize": "100%",
+    "textStyle": {
+      "color": "#999999"
+    }
+  },
+  "markPoint": {
+    "label": {
+      "normal": {
+        "textStyle": {
+          "color": "#ffffff"
+        }
+      },
+      "emphasis": {
+        "textStyle": {
+          "color": "#ffffff"
+        }
+      }
+    }
+  }
+}
+
+);
+			var rightAboveBar = echarts.init(document.getElementById("canvas1"),"purple-passion");
+var option1 = {
+    tooltip : {
+        trigger: 'axis',
+//      axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+//          type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+//      }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '0%',
+        containLabel: true
+    },
+    xAxis :
+        {
+            type : 'category',
+            data : ['八矿回旋车场', '建许路口', '北汴路南站', '城南三路东站', '科技路南站',
+                '六矿', '沁园小区','伟太公司','森林半岛','凤鸣路站','河南城建学院',
+                '冬勤路北站','豫美面粉公司','平煤中心站','建东站' ],
+            axisLabel:{
+                interval:0,
+                rotate:40,
+                textStyle:{
+                    fontFamily:'Microsoft YaHei'
+                }
+            },
+        },
+
+    yAxis :
+        {
+            type : 'value',
+        },
+
+    series : [
+        {
+            name:'',
+            type:'line',
+            data:[12000, 10000, 8000, 8000, 6000, 6000, 6000,5377,2000,1760,1325,1200,1000,1000,1000]
+        },
+         {
+            name:'',
+            type:'line',
+            data:[1200, 1000, 800, 800, 16000, 21000, 600,577,2500,3760,4325,3200,4000,2000,3000]
+        },
+          {
+            name:'',
+            type:'line',
+            data:[11000, 13000, 8000, 8000, 6000, 6000, 6000,5377,2000,1760,1325,1200,1000,1000,1000]
+        },
+         {
+            name:'',
+            type:'line',
+            data:[10000, 10200, 8000, 8000, 6000, 6000, 6000,5377,2000,1760,1325,1200,1000,1000,1000]
+        }
+    ]
+};
+
+//rightAboveBar.setOption(option1);
+rightAboveBar.setOption({
+      tooltip : {
+        formatter: "{a} <br/>{b} : {c}%"
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    series : [
+        {
+            name:'业务指标',
+            type:'gauge',
+            detail : {
+                formatter:'{value}'
+                
+            },
+            data:[{value: 50, name: '完成率'}]
+        }
+    ]
+});
+console.log(document.getElementsByClassName("canvas")[0],document.getElementById("canvas1"));
+			var chart =echarts.init(document.getElementsByClassName("canvas")[0],'purple-passion');
+			var option={
+//  backgroundColor:'#09183f',
+title:{
+	text:"发的发的是",
+	textStyle:{
+		fontSize:24,
+	}
+},
+    grid:{
+    	top:'3%',
+        left: '5%',
+        right: '12%',
+        bottom: '6%',
+        containLabel: true
+    },
+    yAxis: [{
+        type: "category",
+        data: ["试运行、移交", "施工阶段", "试共准备", "勘察设计"],
+        axisTick:{
+            show:false
+        },
+//      axisLine:{
+//           lineStyle:{
+//           	color:'#225b9e',
+//           }
+//      },
+//      axisLabel:{
+//      	rotate:30,
+//      	color:'white',
+//      },
+    }],
+    //color:['#5951be','#06c097','#ffad01','#0280cd'],
+//  color:'#54fbc3',
+    xAxis: [{
+        type: 'value',
+        axisTick:{
+            show:false,
+        },
+//       axisLine:{
+//           lineStyle:{
+//           	color:'#225b9e',
+//           }
+//        },
+//       splitLine:{
+//           show:false,
+////           lineStyle:{
+////               type:'dashed',
+////               color: ['#aaa', '#ddd']
+////           },
+//       },
+//       axisLabel: {
+//           show:true,
+//           color:'white',
+//       },
+         max:1000
+    }],
+    series: [{ // For shadow
+            type: 'bar',
+            itemStyle: {
+                normal: {color: 'rgba(255,255,255,0.15)'}
+            },
+            barGap:'-100%',
+            //barCategoryGap:'40%',
+            data: [1000,1000,1000,1000],
+            barWidth:25,
+            animation: false
+        },
+    	{
+            name: "辅助",
+            type: "bar",
+            stack: "总",
+            barWidth: 25,
+            itemStyle: {
+                normal: {
+                    barBorderColor: 'rgba(0,0,0,0)',
+                    color: 'rgba(0,0,0,0)'
+                }
+            },
+            data: [945,75, 30, 0]
+        },
+        {
+            name: "试运行,移交",
+            type: "bar",
+            barWidth: 20,
+            stack: "总",
+            data: [20, '', '', ''],
+            label: {
+                normal: {
+                	formatter:'20天',
+                    show: true,
+                    position: "right",
+                    textStyle: {
+                        color: '#FFFFFF',
+                        fontSize: 12
+                    }
+                }
+            },
+        },
+        {
+            name: "施工阶段",
+            type: "bar",
+            barWidth: 20,
+            stack: "总",
+            data: ['', 870, '', ''],
+            label: {
+                normal: {
+                	formatter:'935天',
+                    show: true,
+                    position: "right",
+                    textStyle: {
+                        color: '#FFFFFF',
+                        fontSize: 12
+                    }
+                }
+            },
+            
+        },
+        {
+            name: "施工准备",
+            type: "bar",
+            barWidth: 20,
+            stack: "总",
+            data: ['', '', 45, ''],
+            label: {
+                normal: {
+                	formatter:'45天',
+                    show: true,
+                    position: "right",
+                    textStyle: {
+                        color: '#FFFFFF',
+                        fontSize: 12
+                    }
+                }
+            },
+        },
+        {
+            name: "勘察设计",
+            type: "bar",
+            barWidth: 20,
+            stack: "总",
+            data: ['', '', '',30],
+            label: {
+                normal: {
+                	formatter:'30天',
+                    show: true,
+                    position: "right",
+                    textStyle: {
+                        color: '#FFFFFF',
+                        fontSize: 12
+                    }
+                }
+            },
+        }
+    ]
+};
+chart.setOption(option);
+function get(){
+//	chart.getDom().style.width="300px";
+//	chart.getDom().style.height="300px";
+//	rightAboveBar.getDom().style.width="300px";
+//	rightAboveBar.getDom().style.height="300px";
+//将图表导出为图片
+//  var image = document.getElementById("canvas").getElementsByTagName("canvas")[0].toDataURL("image/png");
+//  var $a = document.createElement('a');
+//  $a.setAttribute("href", image);
+//  $a.setAttribute("download", "图片下载");
+//  $a.click();
+	document.getElementById("images").src=rightAboveBar.getDataURL();
+	chart.dispose();
+	rightAboveBar.dispose();
+	chart=echarts.init(document.getElementById("canvas"),"undefined");
+	chart.setOption(option);
+	rightAboveBar=echarts.init(document.getElementById("canvas1"),"undefined");
+	option1=chart.getOption();
+	console.log(option1);
+	option1.title[0].textStyle.fontStyle="italic";
+	rightAboveBar.setOption(option1);
+	console.log(rightAboveBar.getOption());
+}
+function down(a){
+	console.log(a);
+	var image = document.getElementById(a).getElementsByTagName("canvas")[0].toDataURL("image/png");
+    var $a = document.createElement('a');
+    $a.setAttribute("href", image);
+    $a.setAttribute("download", new Date().getTime()+Math.floor(Math.random()*(9999-1000)+1000));
+    $a.click();
+}
+		</script>
+	</body>
+</html>

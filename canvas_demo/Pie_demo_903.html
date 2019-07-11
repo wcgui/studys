@@ -1,0 +1,132 @@
+<! DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <title>测试</title>
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+   <div id="mychart" style="width:500px;height:500px;"></div>
+   <div id="mychart1" style="width:500px;height:500px;"></div>
+   <script src="js/color.js"></script>
+   <script src="js/progress_pieRatio.js"></script>
+   <script src="js/ratio_bar.js"></script>
+   <script>
+       new Progress_pieRatio(document.getElementById("mychart"),{
+                backgroundColor:'#02172C',//最大整体的样式
+                //鼠标放上去显示信息的样式
+                tooltip:{
+                    backgroundColor:'rgba(255,255,255,0.3)',
+                    color:'#fff',
+                    fontSize:15,
+                },
+                //控制圆心的位置
+                grid:{
+                    top:'10%',
+                    left:'20%',
+                    right:'20%',
+                    bottom:'10%',
+                },
+                min:{
+                    name:'最小值',
+                    value:9000,//最小值
+                },
+                max:{
+                    name:'最大值',
+                    value:18000,//最大值
+                },
+                data:{
+                    name:'时间',
+                    value:10000, //当前值
+                    color:'#41B149',//字体颜色
+                    fontSize:16,//字体大小
+                },
+                firstCircle:{
+                    radius:50,//半径大小
+                    borderColor:'#5CDBED',//整体大致颜色
+                    lineWidth:6,//最小为3最大为15
+                },
+                progressCircle:{
+                    color:'#fff',
+                },
+                isLoopPlay:false,//是否循环播放跑马灯特效
+                isLoopOpen:false,//最大的一个圆圈是否循环加载
+       });
+       new Ratio_bar(document.getElementById("mychart1"),{
+            backgroundColor:'#07182C',//最大的背景色
+            tooltip:{
+                show:true,
+                backgroundColor:'rgba(255,255,255,0.3',
+                color:'#fff',
+                fontSize:15,
+            },
+            //控制圆心的位置
+            grid:{
+                top:'10%',
+                left:'0%',
+                right:'10%',
+                bottom:'0%',
+            },
+            Color:['#2879DC','#28BEDC'],
+            series:{
+                color:'#7B8392',//字体颜色
+                fontSize:12,//字体大小
+                data:[
+                    // {
+                    //     name:'电费',
+                    //     value:1000, //当前值
+                    // },
+                    {
+                        name:'房价',
+                        value:400, //当前值
+                    },
+                    {
+                        name:'水费',
+                        value:500, //当前值
+                    },
+                    {
+                        name:'物业费',
+                        value:4000, //当前值
+                    },
+                    {
+                        name:'保护费',
+                        value:1000, //当前值
+                    },
+                ]
+            },
+            prevData:[
+                // {
+                //     name:'亿元',
+                //     value:5000,
+                // },
+                {
+                    name:'万元',
+                    value:500, //当前值
+                },
+                {
+                    name:'元',
+                    value:400, //当前值
+                },
+                {
+                    name:'单位',
+                    value:1000, //当前值
+                },
+                {
+                    name:'单位',
+                    value:2000, //当前值
+                },
+            ],
+            xAxis:{
+                color:'#5C6473',
+                lineWidth:1,
+                data:['红红','小虎','小胡','小王','小明'],
+                textStyle:{
+                    color:'#5C6473',
+                    fontSize:12,
+                    //距离刻度线得距离
+                    top:5,
+                    left:0,
+                }
+            }
+       })
+   </script>
+   </html>

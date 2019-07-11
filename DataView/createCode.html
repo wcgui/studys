@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+			<style type="text/css">  
+      #code  
+           {  
+              font-family:Arial;  
+              font-style:italic;  
+               font-weight:bold;  
+               border:0;  
+               letter-spacing:2px;  
+               color:blue;  
+           }  
+</style> 
+
+	</head>
+	<body>
+		 <canvas id='auth-code'></canvas>
+		<!--<span id="code"></span>-->
+<script>
+//	var code; // 在全局定义验证码
+   
+// 生成验证码
+window.onload = function createCode() {
+	let code = "";
+	var codeLength = 4;// 验证码的长度
+	var checkCode = document.getElementById("code");
+	var random = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D',
+			'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
+			'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');// 随机数
+	for (var i = 0; i < codeLength; i++) {// 循环操作
+		var index = Math.floor(Math.random() * 36);// 取得随机数的索引（0~35）
+		code += random[index];// 根据索引取得随机数加到code上
+	}
+	let options = {
+	    canvasId: "auth-code",/**canvas的id*/
+	    txt: code,/**传入验证码内容*/
+	    height: 40,/**验证码高度 */
+	    width: 80/**验证码宽度 */
+	};
+	writeAuthCode(options);
+//	checkCode.value = code;// 把code值赋给验证码
+}
+   
+// 校验验证码
+function validate() {
+	var inputCode = document.getElementById("input").value.toUpperCase(); // 取得输入的验证码并转化为大写
+	if (inputCode.length <= 0) { // 若输入的验证码长度为0
+		alert("请输入验证码！"); // 则弹出请输入验证码
+		return;
+	} else if (inputCode != code) { // 若输入的验证码与产生的验证码不一致时
+		alert("验证码输入错误!"); // 则弹出验证码输入错误
+		createCode();// 刷新验证码
+		document.getElementById("input").value = "";// 清空文本框
+		return;
+	} else { 
+             // 输入正确时 执行登录逻辑
+	}
+}
+
+const writeAuthCode=function(options){
+	let canvas = document.getElementById(options.canvasId);
+	canvas.width=options.width||300
+	canvas.height=options.height||150
+	let ctx = canvas.getContext('2d');/**创建一个canvas对象*/
+	ctx.textBaseline = "middle";
+	ctx.fillStyle = randomColor(180, 255);/**这个范围的颜色作背景看起来清晰一些*/
+	ctx.fillRect(0, 0, options.width, options.height);
+	for (let i = 0; i < options.txt.length; i++) {
+		let txt = options.txt.charAt(i);/**让每个字不一样*/
+		ctx.font = '20px SimHei';
+		ctx.fillStyle = randomColor(50, 160); /**随机生成字体颜色*/
+		ctx.shadowOffsetY = randomNum(-3, 3);
+		ctx.shadowBlur = randomNum(-3, 3);
+		ctx.shadowColor = "rgba(0, 0, 0, 0.3)";
+		let x = options.width / (options.txt.length+1) * (i+1);
+		let y = options.height / 2;
+		let deg = randomNum(-30, 30);
+		/**设置旋转角度和坐标原点*/
+		ctx.translate(x, y);
+		ctx.rotate(deg * Math.PI / 180);
+		ctx.fillText(txt, 0, 0);
+		/**恢复旋转角度和坐标原点*/
+		ctx.rotate(-deg * Math.PI / 180);
+		ctx.translate(-x, -y);
+	}
+	/**1~4条随机干扰线随机出现*/
+	for (let i = 0; i < randomNum(1,4); i++) {
+		ctx.strokeStyle = randomColor(40, 180);
+		ctx.beginPath();
+		ctx.moveTo(randomNum(0, options.width), randomNum(0, options.height));
+		ctx.lineTo(randomNum(0, options.width), randomNum(0, options.height));
+		ctx.stroke();
+	}
+	/**绘制干扰点*/
+	for (let i = 0; i < options.width / 6; i++) {
+		ctx.fillStyle = randomColor(0, 255);
+		ctx.beginPath();
+		ctx.arc(randomNum(0, options.width), randomNum(0, options.height), 1, 0, 2 * Math.PI);
+		ctx.fill();
+	}
+};
+/**随机数字**/
+function randomNum(min, max) {
+	return Math.floor(Math.random() * (max - min) + min);
+}
+/**随机颜色**/
+function randomColor(min, max) {
+	let r = randomNum(min, max);
+	let g = randomNum(min, max);
+	let b = randomNum(min, max);
+	return "rgb(" + r + "," + g + "," + b + ")";
+}
+</script>
+	</body>
+</html>

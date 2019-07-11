@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/jquery-1.11.0.min.js"></script>
+<script src="../js/vticker.js"></script>
+<style>
+	.wlh-scroll{
+		width:800px;
+	}
+	.wlh-scroll ul{
+		width:100%;
+	}
+	.wlh-scroll span{
+		display: inline-block;
+	}
+</style>
+	</head>
+	<body>
+	<div id="wang" class="wlh-scroll" style="width:800px;height:100px;" data-pause="2000" data-mousePause="true" data-direction="down" data-isPaused="true">
+	    <ul>
+	        <li><span>1、新闻标题</span><span>1、新闻标题</span><span>1、新闻标题</span><span>1、新闻标题</span></li>
+	        <li><span>1、新闻标题</span><span>1、新闻标题</span><span>1、新闻标题</span><span>1、新闻标题</span></li>
+	        <li><span>1、新闻标题</span><span>1、新闻标题</span><span>1、新闻标题</span><span>1、新闻标题</span></li>
+	        <li><span>1、新闻标题</span><span>1、新闻标题</span><span>1、新闻标题</span><span>1、新闻标题</span></li>
+	        <li><span>1、新闻标题</span><span>1、新闻标题</span><span>1、新闻标题</span><span>1、新闻标题</span></li>
+	        <li><span>1、新闻标题</span><span>1、新闻标题</span><span>1、新闻标题</span><span>1、新闻标题</span></li>
+	        <li><span>1、新闻标题</span><span>1、新闻标题</span><span>1、新闻标题</span><span>1、新闻标题</span></li>
+	        <li><span>1、新闻标题</span><span>1、新闻标题</span><span>1、新闻标题</span><span>1、新闻标题</span></li>
+	    </ul>
+	</div>
+<!--<script>
+	$('.dowebok').vTicker({
+		showItems:5,
+        pause:3000,
+        animation:'fade',
+        direction:'up'
+        // speed	    整数	700	    每次滚动持续时间，单位为毫秒
+		// pause	    整数	4000	滚动间隔，单位为毫秒
+		// showItems	整数	3	    显示多少行
+		// animation	字符串		    滚动动画，默认为空，可选 ‘fade’，既滚动时首位淡入淡出
+		// mousePause	布尔值	true	鼠标悬停是否停止滚动
+		// isPaused	    布尔值	false	默认是否暂停
+		// direction	字符串	‘up’	滚动方向，可选 ‘up’ / ‘down’
+		// height	    整数	0	    容器高度，默认为 0，即根据 showItems 个数自动计算
+		speed:每次滚动持续时间
+		pause:滚动间隔，
+		showItems：显示行数
+		mousePause:鼠标悬停是否滚动，
+		isPaused刚开始是否滚动
+		direction:滚动方向
+	});</script>-->
+	<script>
+		var i=2;
+		$("#wang ul li span:nth-child("+i+")").css("width","50%");
+		console.log($("#wang ul li").children("span"));
+	</script>
+<script src="sy-scroll.js"></script>
+
+</body>
+</html>

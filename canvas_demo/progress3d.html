@@ -1,0 +1,194 @@
+<! DOCTYPE html>
+<html lang="zh" >
+<head>
+    <meta charset="utf-8" />
+    <title>3d色彩</title>
+    <style>
+        #canvas{
+            width:500px;
+            height:500px;
+            position: relative;
+            border-radius:50%;
+            /* background:radial-gradient(circle, #142A64,#132963,#133072 #1356BE); */
+            /* background:#1356BE; */
+            border:3px solid #05A9DE;
+            transform-style:preserve-3d;
+            box-shadow: 0px 0px 50px 15px #124DAE inset;
+            /* overflow:hidden; */
+        }
+        #secondCircle{
+            width:420px;
+            height:420px;
+            position: absolute;
+            border-radius: 50%;
+            left:50%;
+            top:50%;
+            transform: translate(-50%,-50%);
+            /* border:50px solid #094291; */
+            background:#0A4392;
+            overflow: hidden;
+            border:2px solid #1253A4;
+        }
+        #parent_clip{
+            width:420px;
+            height:420px;
+            position: absolute;
+            border-radius: 50%;
+            left:50%;
+            top:50%;
+            transform: translate(-50%,-50%);
+            overflow:hidden;
+        }
+        #secondCircle_1{
+            width:362px;
+            height:362px;
+            position:absolute;
+            border-radius: 50%;
+            left:50%;
+            top:50%;
+            transform: translate(-50%,-50%);
+            background:#104CA2;
+            border:2px solid #1355AC;
+            box-shadow: 0px  0px 100px 1px rgba(000,000,000,.5) inset;
+        }
+        #secondCircle_2{
+            border:31px solid transparent;
+            border-left-color: rgba(7,59,127,.9);
+            width:0px;
+            height:0px;
+            position:absolute;
+            top:404px;
+            left:104px;
+            transform: rotate(-135deg);
+            transform-origin: top left;
+        }
+        #secondCircle_3{
+            border:31px solid transparent;
+            border-left-color: rgba(7,59,127,.9);
+            width:0px;
+            height:0px;
+            position:absolute;
+            top:361px;
+            left:351px;
+            transform: rotate(-45deg);
+            transform-origin: top left;
+        }
+        #thirdCircle{
+            width:300px;
+            height:300px;
+            position: absolute;
+            border-radius: 50%;
+            display: table-cell;
+            vertical-align: middle;
+            left:100px;
+            top:100px;
+            text-align: center;
+            color:#03B9B5;
+            box-sizing: border-box;
+            /* padding-top:30px; */
+            background:#12275E;
+        }
+        #circle{
+            width:240px;
+            height:240px;
+            position: absolute;
+            top:52%;
+            left:50%;
+            transform: rotate(45deg) ;
+            transform-origin: top left;
+            border-left:5px solid #13FAB7;
+            background:rgba(12,164,175,.4);
+         }
+        #thirdCircle>p{
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+        }
+        #thirdCircle>p>span{
+            font-size:42px;
+            font-weight:bold;
+        }
+        body{
+            background-color: #12275E;
+        }
+        #Rect{
+            width:150px;
+            height:400px;
+            position:absolute;
+            bottom:-70px;
+            background:linear-gradient(to bottom,#0A4583 80%,#1254C0);
+            left:50%;
+            transform:perspective(800px) translateX(-40%) rotateX(80deg);
+        }
+        #Rect1{
+            width:199px;
+            height:200px;
+            position:absolute;
+            bottom:-15px;
+            background:linear-gradient(to bottom,#1285CB 40%,#09396E);
+            left:50%;
+            transform:translateX(-52%) rotateX(80deg);
+        }
+        #Rect2_clip{
+            width:250px;
+            height:250px;
+            position: absolute;
+            bottom:-60px;
+            left:50%;
+            background:#12275E;
+            transform: translateX(-50%) rotate(45deg);
+        }
+        #Rect1_clip{
+            width:300px;
+            height:300px;
+            position: absolute;
+            bottom:-60px;
+            left:50%;
+            background:rgba(18,39,94,.9);
+            transform: translateX(-50%) rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas">
+        <div id="Rect1_clip"></div>
+        <div id="secondCircle">
+        </div>
+        <div id="secondCircle_1"></div>
+        <i id="secondCircle_2">
+        </i>
+        <i id="secondCircle_3"></i>
+        <div id="parent_clip">
+            <div id="circle"></div>
+        </div>
+        <div id="Rect2_clip"></div>
+        <div id="Rect"></div>
+        <div id="Rect1"></div>
+        <div id="thirdCircle">
+            <p>
+                <span>876</span>
+                <br>万元
+            </p>
+        </div>
+    </div>
+    <script>
+        var number=0,count=parseFloat(document.getElementById("thirdCircle").getElementsByTagName("span")[0].innerText);
+        var circle=document.getElementById("circle");
+        var dataVal=1000;
+        var deg=count/dataVal;
+        var rotate=45;
+        var timer=setInterval(function(){
+            rotate++;
+            circle.style.transform="rotate("+rotate+"deg)"
+            if(number<count){
+                number++;
+            }else{
+                 clearInterval(timer);
+                 timer=null;
+            }
+            document.getElementById("thirdCircle").getElementsByTagName("span")[0].innerHTML=number;
+        },10)
+        timer;
+    </script>
+</body>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			let obj3 = Object.defineProperty({},'name',{
+				value:'alice',
+				enumerable:false,//是否可以在for in中循环和object.keys()枚举
+				writable:true,
+			});
+			console.log(obj3,JSON.stringify(obj3));
+			console.log(Object.getOwnPropertyNames(obj3));
+			console.log("-------");
+			const person = {
+				isHuman:false,
+				printInt:function(){
+					console.log(`my Name is ${this.name},Am i human?${this.isHuman}`);
+				}
+			}
+			const me = Object.create(person);
+			console.log(me);
+			me.name = "王长贵";
+			me.isHuman = true;
+			me.printInt();
+			console.log(me);
+			console.log("------");
+			function Obj(){
+				var a = 0;
+				var fn = function(){
+					console.log(134324);
+				}
+			}
+			var o = new Obj();
+			console.log(o.a);
+		</script>
+	</body>
+</html>

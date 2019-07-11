@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+		<script src="../js/jquery-1.11.0.min.js"></script>
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<link rel="stylesheet" href="index.css" type="text/css">
+	</head>
+	<body>
+		<div class="wlh-carousel-box sy-draggable sy-carousel" data-time="3000" style="position: absolute; top: 432.503px; left: 275.402px;" data-type="carousel" id="sy-carousel0" data-interval="454">
+    		<ul class="wlh-carousel wlh-clear">
+    	    <li>
+              <img src="images/a_02.png" alt="图片1" draggable="false">
+            </li>
+          <li>
+            <img src="images/a_04.png" alt="图片2" draggable="false">
+          </li>
+          <li>
+    		<img src="images/a_06.png" alt="图片3" draggable="false">
+          </li>
+          </ul>
+    		<div class="wlh-carousel-prev" ></div>
+    		<div class="wlh-carousel-next" ></div>
+      </div>
+		<!--<script src="sy-carousel.js"></script>-->
+		<script>
+//			let obj={
+//				id:"wang",
+//				time:2000,
+//				imgPath:[
+//				 	"images/a_02.png",
+//				 	"images/a_04.png",
+//				 	"images/a_06.png",
+//				 	"images/back.png",
+//				]
+//			}
+//			let obj1={
+//				id:"wang1",
+//				time:3000,
+//				imgPath:[
+//				 	"images/a_02.png",
+//				 	"images/warning_details.png",
+//				 	"images/a_06.png",
+//				 	"images/log_progress.png",
+//				]
+//			}
+//			wsCarousel.show("wang",2000);
+//			wsCarousel.show(obj);
+//			wsCarousel.show(obj1);
+var wsCarousel=(function(){
+	//初始化轮播的界面
+	// const initInterface=function(obj){
+	// 	let tpl=`
+	// 	<div id="${obj.id}" class="wlh-carousel-box" data-value="0">
+	// 		<ul class="wlh-carousel wlh-clear ${obj.id}">`;
+	// 		for(let i=0;i<obj.imgPath.length;i++){
+	// 			tpl+=`
+	// 				<li>
+	// 					<img src="${obj.imgPath[i]}">
+	// 				</li>
+	// 			`;
+	// 		}
+	// 		tpl+=`<li>
+	// 					<img src="${obj.imgPath[0]}">
+	// 				</li>`;
+	// 		tpl+=`</ul>
+	// 		<div class="wlh-carousel-prev" id="${obj.id+'-prev'}"></div>
+	// 		<div class="wlh-carousel-next" id="${obj.id+'-next'}"></div>
+	// 	</div>`,
+	// 	style=`<link href="index.css" rel="stylesheet" type="text/css" id="sy-carousel-css">`;
+	// 	if(!$(".wlh-carousel").length){
+	// 		$("head").append(style);
+	// 	}
+	// 	$("body").append(tpl);
+	// 	setTimeout(function(){
+	// 		$("#"+obj.id+">ul.wlh-carousel").css({width:parseInt((obj.imgPath.length+1)*$($("."+obj.id+">li")[0]).width())+"px"});
+	// 	},obj.time)
+	// 	$("#"+obj.id).attr("data-time",setInterval(function(){
+	// 		let count=parseInt($("#"+obj.id).attr("data-value"));
+	// 		let width=$($("."+obj.id+">li")[0]).width();
+	// 		if(count>=$("."+obj.id+">li").length){
+	// 			count=1;
+	// 			$("."+obj.id).css({left:0});
+	// 		}
+	// 		$("."+obj.id).stop().animate({left:-width*count},function(){
+	// 			count++;
+	// 			$("#"+obj.id).attr("data-value",count);
+	// 		});
+	// 	},obj.time));
+	// }
+	const mouseHover=function(){
+		for(let i=0;i<$(".wlh-carousel").length;i++){
+			let obj={id:$($(".wlh-carousel")[i]).parent().attr("id"),time:$($(".wlh-carousel")[i]).parent().attr("data-time")};
+			let id=obj.id,time=obj.time;
+			clearInterval($("#"+id).attr("data-interval"));
+			$("#"+id).attr("data-interval",null);
+			$("#"+id).attr("data-interval",setInterval(function(){
+				let count=parseInt($("#"+id).attr("data-value"));
+				let width=$($("."+id+">li")[0]).width();
+				if(count>=$("."+id+">li").length){
+					count=1;
+					$("."+id).css({left:0});
+				}
+				$("."+id).stop().animate({left:-width*count},function(){
+					count++;
+					$("#"+id).attr("data-value",count);
+				});
+			},time));
+			$("#"+id).hover(function(){
+				clearInterval($("#"+id).attr("data-interval"));
+				$("#"+id).attr("data-interval",null);
+			},function(){
+				$("#"+id).attr("data-interval",setInterval(function(){
+					let count=parseInt($("#"+id).attr("data-value"));
+					let width=$($("."+id+">li")[0]).width();
+					if(count>=$("."+id+">li").length){
+						count=1;
+						$("."+id).css({left:0});
+					}
+					$("."+id).stop().animate({left:-width*count},function(){
+						count++;
+						$("#"+id).attr("data-value",count);
+					});
+				},time));
+			}).on("click","#"+id+"-prev,#"+id+"-next",function(e){
+				let width=$($("."+id+">li")[0]).width();
+				let count=parseInt($("#"+id).attr("data-value"));
+				if($(e.target).attr("id")==id+"-prev"){
+					count-=2;
+					if(count<0){
+						$("."+id).css({left:-($("."+id+">li").length-1)*width});
+						count=$("."+id+">li").length-2;
+						$("#"+id).attr("data-value",count);
+					}
+				}else if(($(e.target).attr("id")==id+"-next")){
+					if(count>=$("."+id+">li").length){
+						$("."+id).css({left:0});
+						count=1;
+						$("#"+id).attr("data-value",count);
+					}
+				}
+				$("."+id).stop().animate({left:-width*count},function(){
+					count++;
+					$("#"+id).attr("data-value",count);
+				});
+			});
+		}
+	}
+	const show=function(){
+		// if(!parseInt(obj.time)){
+		// 	obj.time=3000;
+		// }else if(obj.time<1000){
+		// 	obj.time=3000;
+		// }
+		mouseHover();
+	}
+	show();
+})();
+		</script>
+	</body>
+</html>

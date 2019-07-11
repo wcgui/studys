@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>深圳安保大屏配置页面</title>
+    <style>
+        body,html{
+            width:100%;
+            height:100%;
+            margin:0;
+            padding:0;
+            overflow:hidden;
+            color:white;
+            background:url(images/back.png) no-repeat;
+        }
+        input[type="text"]{
+        	border:1px solid #ccc;
+        	background:#231452;
+        	margin-top:10px;
+        }
+       	div.left,div.center,div.right{
+        	border:1px solid #4EF7F8;
+        }
+        div.left-A1 p{
+        	margin-bottom:0px;	
+        }
+        div.center1-A6,div.center2-B1{
+        	border-bottom:1px solid #4EF7F8;
+        }
+        .main-container>div.center{
+        	margin-top:90px;
+        	width:60%;
+        	height:782px;
+        }
+        form{
+        	text-align: center;
+        }
+        #form-A1>input[type="button"],#form-B1>input[type="button"],#form-A6>input[type="button"]{
+        	
+        	margin-top:10px;
+        }
+        table{
+        	margin:0px auto;
+        }
+        .title{
+            /*top:0;*/
+            /*position: absolute;*/
+            text-align: center;
+            margin:0px auto;
+            height:45px;
+            line-height:45px;
+            /*left:50%;*/
+        }
+        .main-container{
+            width:100%;
+            height:90%;
+            display: flex;
+        }
+        .main-container>div{
+            height:100%;
+            width:480px;
+        }
+        .center1,.center2{
+        	float:left;
+        	height:100%;
+        	width:50%;
+        	box-sizing: border-box;
+        }
+        .center1{
+        	border-right:1px solid #4EF7F8;
+        }
+        .left-A1,.left-A2,.left-A3{
+            height: 28%;
+            margin-top: 40px;
+            border-bottom:1px solid #4EF7F8;
+        }
+        .left-A1{
+        	margin-top:20px;
+        }
+        .left-A2{
+        	height:30%;
+        }
+        .left-A3{
+        	margin-top: 20px;
+        	border:0px;
+        }
+        .center1-A6,.center1-A7{
+            height: 50%;
+            width:100%;
+            box-sizing: border-box;
+            padding-top:60px;
+        }
+        .center2-B1,.center2-B2{
+            height: 50%;
+            box-sizing: border-box;
+            width: 100%;       
+            padding-top:60px; 
+        }
+        .right1,.center1-A8,.center2-B3{
+            height: 28%;
+            margin-top: 40px;
+            border-bottom:1px solid #4EF7F8;
+        }
+        .center2-B3{
+        	border:0px;
+        }
+        .color{
+          background: linear-gradient(to bottom, #deefff, #73aafd);
+		  -webkit-background-clip: text;
+		  color: transparent;
+		  background-clip: text;
+        }
+    </style>
+
+    <script src="./resources/jquery-3.1.1.min.js"></script>
+    <script src="./resources/jquery.form.js"></script>
+    <script type="text/javascript">
+        var ws = new WebSocket("ws://localhost:8181");
+        function formSubmitA1() {
+            $.ajax({
+                type: "POST",                  //提交方式
+                dataType: "json",              //预期服务器返回的数据类型
+                url: "/users/formUploadA1" ,          //目标url
+                data: $('#form-A1').serialize(), //提交的数据
+                success: function (result) {
+                    console.log(result);       //打印服务端返回的数据(调试用)
+                    alert("提交成功！");
+                    ws.send(1);
+                },
+                error : function() {
+                    alert("异常！");
+                }
+            });
+        };
+
+        function formSubmitB1() {
+            $.ajax({
+                type: "POST",                  //提交方式
+                dataType: "json",              //预期服务器返回的数据类型
+                url: "/users/formUploadB1" ,          //目标url
+                data: $('#form-B1').serialize(), //提交的数据
+                success: function (result) {
+                    console.log(result);       //打印服务端返回的数据(调试用)
+                    alert("提交成功！");
+                    ws.send(1);
+                },
+                error : function() {
+                    alert("异常！");
+                }
+            });
+        };
+
+        function formSubmitA6() {
+            $.ajax({
+                type: "POST",                  //提交方式
+                dataType: "json",              //预期服务器返回的数据类型
+                url: "/users/formUploadA6" ,          //目标url
+                data: $('#form-A6').serialize(), //提交的数据
+                success: function (result) {
+                    console.log(result);       //打印服务端返回的数据(调试用)
+                    alert("提交成功！");
+                    ws.send(1)
+                },
+                error : function() {
+                    alert("异常！");
+                }
+            });
+        };
+
+        function ajaxSubmitForm(formId) {
+            var option = {
+                url : '/users/fileUpload',
+                type : 'POST',
+                dataType : 'json',
+                // headers : {"ClientCallMode" : "ajax"}, //添加请求头部
+                success : function(data) {
+                    alert("上传成功 !");
+                    console.log("success");
+                    ws.send(1);
+                },
+                error: function(data) {
+                    alert("异常！");
+                }
+            };
+            $(formId).ajaxSubmit(option);
+            return false; //最好返回false，因为如果按钮类型是submit,则表单自己又会提交一次;返回false阻止表单再次提交
+        }
+		//A2导出
+		function downloadA2(s){
+			$.ajax({
+				type:"get",
+				url:"",
+				data:{
+					s
+				},
+				success:function(){
+					
+				},
+				error:function(){
+					console.log("错误");
+				}
+			});
+		}
+    </script>
+
+</head>
+<body>
+<div class="title">
+    <p style="text-align:center;font-size: 25px;margin:0px" class="color">深圳安保大屏配置页面</p>
+</div>
+<div class="main-container">
+    <div class="left">
+        <div class="left-A1">
+            <p style="text-align:center;color: firebrick;font-size: 18px">机场进出港货运量百分比</p>
+            <form id="form-A1" name="form-A1"  action="">
+                出港货物重量(吨) : <input type="text" name="departures" value=""><br>
+                进港港货物重量(吨) : <input type="text" name="arrivals" value=""><br>
+                货站一 : <input type="text" name="goodsStation1" value=""><br>
+                货站二 : <input type="text" name="goodsStation2" value=""><br>
+                货站三 : <input type="text" name="goodsStation3" value=""><br>
+                货站四 : <input type="text" name="goodsStation4" value=""><br>
+                <input type="hidden" name="position" value="A1">
+                <input type="button" value="提交" onclick="formSubmitA1()">
+            </form>
+        </div>
+
+        <div class="left-A2">
+            <p style="text-align:center;color: firebrick;font-size: 18px">各货运公司进出港货运量占比</p>
+            <table border="1" align="center">
+                <tr>
+                    <td>快递公司名称</td>
+                    <td>快递公司占比</td>
+                    <td>进出港属性</td>
+                </tr>
+                <tr>
+                    <td>圆通快递</td>
+                    <td>2.11%</td>
+                    <td>进港</td>
+                </tr>
+                <tr>
+                    <td>中通快递</td>
+                    <td>1.88%</td>
+                    <td>进港</td>
+                </tr>
+                <tr>
+                    <td>韵达快递</td>
+                    <td>2.18%</td>
+                    <td>进港</td>
+                </tr>
+                <tr>
+                    <td>百世快递</td>
+                    <td>1.28%</td>
+                    <td>出港</td>
+                </tr>
+                <tr>
+                    <td>天天快递</td>
+                    <td>0.99%</td>
+                    <td>出港</td>
+                </tr>
+            </table>
+            <p></p>
+            <form id="upload-form-A2" action="/users/fileUpload" method="post" enctype="multipart/form-data">
+                <input type="file" id="upload-input-A2" name="upload"/>
+                <input type="hidden" name="position" value="A2">
+                <input type="button" value="提交" onclick="ajaxSubmitForm('#upload-form-A2')">
+                <input type="button" value="导出" onclick="downloadA2('#upload-form-A2')">
+            </form>
+        </div>
+
+        <div class="left-A3">
+            <p style="text-align:center;color: firebrick;font-size: 18px">需重点检查单位占比</p>
+            <table border="1" align="center">
+                <tr>
+                    <td>快递公司名称</td>
+                    <td>快递公司占比</td>
+                </tr>
+                <tr>
+                    <td>圆通快递</td>
+                    <td>2.11%</td>
+                </tr>
+                <tr>
+                    <td>中通快递</td>
+                    <td>1.88%</td>
+                </tr>
+                <tr>
+                    <td>韵达快递</td>
+                    <td>2.18%</td>
+                </tr>
+                <tr>
+                    <td>百世快递</td>
+                    <td>1.28%</td>
+                </tr>
+                <tr>
+                    <td>天天快递</td>
+                    <td>0.99%</td>
+                </tr>
+            </table>
+            <p></p>
+            <form id="upload-form-A3" action="/users/fileUpload" method="post" enctype="multipart/form-data">
+                <input type="file" id="upload-input-A3" name="upload"/>
+                <input type="hidden" name="position" value="A3">
+                <input type="button" value="提交" onclick="ajaxSubmitForm('#upload-form-A3')">
+            </form>
+        </div>
+
+    </div>
+	<div class="center">
+	    <div class="center1">
+	
+	        <div class="center1-A6">
+	            <p style="text-align:center;color: firebrick;font-size: 18px">当月事件处理情况</p>
+	            <table border="1" align="center">
+	                <tr>
+	                    <td>处理情况</td>
+	                    <td>数据</td>
+	                    <td>时间</td>
+	                </tr>
+	                <tr>
+	                    <td>待处理</td>
+	                    <td>15,2,14,2</td>
+	                    <td>10-1,10-2,10-3,10-4</td>
+	                </tr>
+	                <tr>
+	                    <td>处理中</td>
+	                    <td>23,12,12,15</td>
+	                    <td>10-1,10-2,10-3,10-4</td>
+	                </tr>
+	                <tr>
+	                    <td>处理完</td>
+	                    <td>122,32,23,21</td>
+	                    <td>10-1,10-2,10-3,10-4</td>
+	                </tr>
+	            </table>
+	            <p></p>
+	            <form id="upload-form-A6" action="/users/fileUpload" method="post" enctype="multipart/form-data">
+	                <input type="file" id="upload-input-A6" name="upload"/>
+	                <input type="hidden" name="position" value="A6">
+	                <input type="button" value="提交" onclick="ajaxSubmitForm('#upload-form-A6')">
+	            </form>
+	        </div>
+	
+	        <div class="center1-A7">
+	            <p style="text-align:center;color: firebrick;font-size: 18px">出警情况统计</p>
+	            <table border="1" align="center">
+	                <tr>
+	                    <td>出警情况</td>
+	                    <td>数据</td>
+	                    <td>时间</td>
+	                </tr>
+	                <tr>
+	                    <td>出警人员</td>
+	                    <td>3,4,5,6</td>
+	                    <td>10-1,10-2,10-3,10-4</td>
+	                </tr>
+	                <tr>
+	                    <td>出警车辆</td>
+	                    <td>1,2,1,2</td>
+	                    <td>10-1,10-2,10-3,10-4</td>
+	                </tr>
+	            </table>
+	            <p></p>
+	            <form id="upload-form-A7" action="/users/fileUpload" method="post" enctype="multipart/form-data">
+	                <input type="file" id="upload-input-A7" name="upload"/>
+	                <input type="hidden" name="position" value="A7">
+	                <input type="button" value="提交" onclick="ajaxSubmitForm('#upload-form-A7')">
+	            </form>
+	        </div>
+	
+	        
+	
+	    </div>
+		<div class="center2">
+
+        <div class="center2-B1">
+            <p style="text-align:center;color: firebrick;font-size: 18px">安检结果分析</p>
+            <form id="form-B1" name="form-B1" action="">
+                未开包 : <input type="text" name="notOpen" value=""><br>
+                已开包 : <input type="text" name="opened" value=""><br>
+                放行 : <input type="text" name="pass" value=""><br>
+                暂扣 : <input type="text" name="detain" value=""><br>
+                移交 : <input type="text" name="transfer" value=""><br>
+                退运 : <input type="text" name="returnBack" value=""><br>
+                <input type="hidden" name="position" value="B1">
+                <input type="button" value="提交" onclick="formSubmitB1()">
+            </form>
+        </div>
+
+        <div class="center2-B2">
+            <p style="text-align:center;color: firebrick;font-size: 18px">代理人开包率分析</p>
+            <table border="1" align="center">
+                <tr>
+                    <td>代理人</td>
+                    <td>代理人开包率</td>
+                </tr>
+                <tr>
+                    <td>代理人小啊</td>
+                    <td>32%</td>
+                </tr>
+                <tr>
+                    <td>代理人小啊</td>
+                    <td>32%</td>
+                </tr>
+                <tr>
+                    <td>代理人小啊</td>
+                    <td>32%</td>
+                </tr>
+                <tr>
+                    <td>代理人小啊</td>
+                    <td>32%</td>
+                </tr>
+            </table>
+            <p></p>
+            <form id="upload-form-B2" action="/users/fileUpload" method="post" enctype="multipart/form-data">
+                <input type="file" id="upload-input-B2" name="upload"/>
+                <input type="hidden" name="position" value="B2">
+                <input type="button" value="提交" onclick="ajaxSubmitForm('#upload-form-B2')">
+            </form>
+        </div>
+
+        
+
+
+    </div>
+	</div>
+    <div class="right">
+        <div class="right1">
+            <p style="text-align:center;color: firebrick;font-size: 18px">"案例流程" 全闭环</p>
+            <form id="form-A6" name="form-A6" action="">
+                安检口 : <input type="text" name="securityCheck" value=""><br>
+                指挥中心 : <input type="text" name="commandCentre" value=""><br>
+                派出所 : <input type="text" name="localPoliceStation" value=""><br>
+                公安局 : <input type="text" name="policeStation" value=""><br>
+                <input type="hidden" name="position" value="A6">
+                <input type="button" value="提交" onclick="formSubmitA6()">
+            </form>
+        </div>
+
+        <div class="center1-A8">
+            <p style="text-align:center;color: firebrick;font-size: 18px">重点包裹信息</p>
+            <table border="1" align="center">
+                <tr>
+                    <td>子包</td>
+                    <td>母包信息</td>
+                    <td>处理状态</td>
+                    <td>处理部门</td>
+                    <td>事件描述</td>
+                </tr>
+                <tr>
+                    <td>ZB5846</td>
+                    <td>MB5448514</td>
+                    <td>开包检查</td>
+                    <td>机场海关</td>
+                    <td>发现违禁品</td>
+                </tr>
+                <tr>
+                    <td>ZB5846</td>
+                    <td>MB5448514</td>
+                    <td>开包检查</td>
+                    <td>机场海关</td>
+                    <td>发现违禁品</td>
+                </tr>
+                <tr>
+                    <td>ZB5846</td>
+                    <td>MB5448514</td>
+                    <td>开包检查</td>
+                    <td>机场海关</td>
+                    <td>发现违禁品</td>
+                </tr>
+            </table>
+            <p></p>
+            <form id="upload-form-A8" action="/users/fileUpload" method="post" enctype="multipart/form-data">
+                <input type="file" id="upload-input-A8" name="upload"/>
+                <input type="hidden" name="position" value="A8">
+                <input type="button" value="提交" onclick="ajaxSubmitForm('#upload-form-A8')">
+            </form>
+        </div>
+
+        <div class="center2-B3">
+            <p style="text-align:center;color: firebrick;font-size: 18px">安检趋势分析</p>
+            <table border="1" align="center">
+                <tr>
+                    <td>安检流程</td>
+                    <td>数据</td>
+                    <td>时间</td>
+                </tr>
+                <tr>
+                    <td>开包</td>
+                    <td>4000,4000,4000,4000</td>
+                    <td>1,2,3,4</td>
+                </tr>
+                <tr>
+                    <td>暂扣</td>
+                    <td>4000,4000,4000,4000</td>
+                    <td>1,2,3,4</td>
+                </tr>
+                <tr>
+                    <td>退运</td>
+                    <td>4000,4000,4000,4000</td>
+                    <td>1,2,3,4</td>
+                </tr>
+                <tr>
+                    <td>移交</td>
+                    <td>4000,4000,4000,4000</td>
+                    <td>1,2,3,4</td>
+                </tr>
+            </table>
+            <p></p>
+            <form id="upload-form-B3" action="/users/fileUpload" method="post" enctype="multipart/form-data">
+                <input type="file" id="upload-input-B3" name="upload"/>
+                <input type="hidden" name="position" value="B3">
+                <input type="button" value="提交" onclick="ajaxSubmitForm('#upload-form-B3')">
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

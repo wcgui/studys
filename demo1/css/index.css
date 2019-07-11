@@ -1,0 +1,217 @@
+
+.main-container{
+	background-color:#08254F;
+	background: url('../static/images/dashbord-backgroud.jpg') no-repeat;
+    background-size: 100% 100%;
+    height: 1080px;
+    width: 1920px;
+    margin: 0;
+    color: #fff;
+}
+.main-container {
+    position: relative;
+    padding: 30px;
+    padding-top: 50px;
+}
+.row-one,.row-two {
+    width: inherit;
+}
+
+.row-one > div{
+  float: left;
+}
+
+.col-left,.col-right {
+    padding: 15px;
+    padding-right: 30px;
+    /* background-clip: padding-box;
+    background-origin: padding-box;
+    /* background-image: -webkit-linear-gradient(bottom right,#121f40 0%,#102945 100%); */
+    background: url('../static/images/border-big.png') no-repeat;
+    background-size: 100% 100%;
+    /* box-shadow: 5px 0 10px #2f3340; */
+}
+
+.mask {
+    /* background: radial-gradient(#060A2F,#0A0C81); */
+}
+
+.corner-title {
+    font-size: 1.2em;
+    display: flex;
+}
+
+.corner-title::before {
+    content: "";
+    margin-right: 12px;
+    display: inline-block;
+    background: url(../static/images/icon-img-1.png);
+    width: 30px;
+    height: 24px;
+}
+
+
+
+.container-indent {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.content-title {
+    display: flex;
+    align-items: center;
+    /* color: yellow; */
+    font-size: 1.4em;
+
+    background-image: -webkit-linear-gradient(top,#fff 20%,#f5a80b 100%);
+    -webkit-background-clip: text;
+    color: transparent;
+ }
+
+.content-title::before {
+    content: "";
+    display: inline-block;
+    margin-right: 30px;
+    background: url(../static/images/icon-img-2.png) no-repeat;
+    /* background-size: 50% 50%; */
+    width: 72px;
+    height: 84px;
+}
+.split-line {
+    width: inherit;
+    border: 1px dashed #5a5a5a;
+    margin: 20px 0 20px 0;
+}
+
+.three-scatter-container {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.three-scatter-container > div {
+    display: inline-block;
+}
+
+.scatter {
+   height: 10px;
+   width: 10px;
+   border-radius: 50%;
+   background: #029FC5;
+
+   margin-right: 10px;
+}
+
+.col-center {
+    position: relative;
+    left: 2%;
+    width: 800px;
+    /* border: 1px solid red; */
+}
+.col-center > .title {
+    font-weight: 500;
+    line-height: 1.2em;
+    font-size: 1.6em;
+    position: absolute;
+    left: 5%;
+    top: -4%;
+    letter-spacing: 4px;
+}
+
+.col-center > .title .digital{
+    font-size: 1.8em;
+    font-weight: 700;
+    background-image: -webkit-linear-gradient(top,#fff 5%,#0072ff  100%);
+    -webkit-background-clip: text;
+    color: transparent;
+            
+}
+
+.col-center > img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 100px;
+}
+.col-right {
+    position: relative;
+    left: 5%;
+}
+
+.row-two {
+    float: left;
+
+    margin-top: 80px;
+
+
+    display: flex;
+   
+    justify-content: space-around;
+}
+
+.bottom-card,.bottom-card-small {
+    width: 424px;
+    height: 270px;
+    position: relative;
+    background: url(../static/images/border-small.png) no-repeat;
+    background-size: 100% 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-right: 50px
+}
+
+.bottom-card-small {
+    width: 310px;
+}
+
+.bottom-card .content , .bottom-card-small .content {
+    position: relative;
+    text-align: center;
+    top: 10%;
+}
+
+
+.reward {
+    position: relative;
+    font-size: 1.4em;
+}
+
+.reward img {
+    display: inline-block;
+}
+
+.reward::before {
+    position: relative;
+    display: inline-block;
+    content: "";
+    width: 53px;
+    height: 87px;
+    background: url(../static/images/malt-left.png) no-repeat;
+    background-size: 80% 80%;
+    background-position: 50% 50%;
+    z-index: 2;
+    top: 29px;
+    left: -4px;
+
+}
+
+.reward::after {
+    content: "";
+    width: 53px;
+    height: 87px;
+    background: url(../static/images/malt-left.png) no-repeat;
+    background-size: 80% 80%;
+    background-position: 50% 50%;
+    z-index: 2;
+    position: relative;
+    top: 30px;
+    right: 0px;
+    transform: rotateY(180deg);
+    display: inline-block;
+}
+
+.bottom-card .description,.bottom-card-small .description {
+    position: relative;
+    color: #226dcc;
+    top: 30px;
+    font-weight: 500;
+}

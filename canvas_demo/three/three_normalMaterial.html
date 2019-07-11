@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            meshNormalMaterial材质的适用
+        </title>
+        <style>
+            body{
+                margin:0px;
+                padding:0px;
+            }
+        </style>
+        <script src="js/three.js"></script>
+        <script src="js/dat.gui.min.js"></script>
+    </head>
+    <body>
+        <div id="Red"></div>
+        <script>
+            function init(){
+                var scene=new THREE.Scene();//生产一个场景
+                var camera=new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,0.1,1000);
+                camera.position.set(0,0,50);
+                camera.lookAt(scene.position);
+                scene.add(camera);
+                var render=new THREE.WebGLRenderer({antialias:true});//antialias：抗锯齿
+                render.setClearColor(0x1424BA);
+                render.setSize(window.innerWidth,window.innerHeight);
+                render.shadowMap.enabled=true;
+                var ambientLight=new THREE.AmbientLight(0x0c0c0c);//自然光，环境光
+                scene.add(ambientLight);
+                var spotLight=new THREE.SpotLight(0xffffff);//聚合光
+                spotLight.position.set(-40,60,-10);
+                spotLight.castShadow=true;//投射阴影
+                scene.add(spotLight);
+                var geometry=new THREE.PlaneGeometry(10,100);
+                var materail=new THREE.MeshBasicMaterial({color:'red'});
+                var g=new THREE.Mesh(geometry,materail);
+                g.rotation.x=-Math.PI/5;
+                scene.add(g);
+                var axisHelper=new THREE.AxesHelper(50);
+                axisHelper.rotation.y=Math.PI*3/4;
+                scene.add(axisHelper);
+                //球体模型radius半径，widthSegments水平分割面的数量，heightSegments垂直分割面的数量phiStart水平起始角度，phiLength水平扫描角度，thetaStart垂直起始角度，thetaLength垂直扫描角度
+                var sphereGeometry=new THREE.SphereGeometry(14,20,20);
+                var sphereMaterial=new THREE.MeshNormalMaterial();//法向量网孔材料
+                var sphere=new THREE.Mesh(sphereGeometry,sphereMaterial);
+                sphere.position.set(0,3,2);
+                var controls=new function(){
+                    this.opacity=1;
+                    this.transparent=false;
+                    this.rotationSpeed=0.002;
+                    this.side="front";
+                    this.color="#990000";
+                }
+                for(var f=0,f1=sphere.geometry.faces.length;f<f1;f++){
+                    //获取球体的面得各个坐标
+                    var face=sphere.geometry.faces[f];
+                    f==0?console.log(face)&&console.log(sphere.geometry.vertices[face.a]):"";
+                    var centroid=new THREE.Vector3(0,0,0);
+                    let colors=[0,1,2,3,4,5,6,7,8,9,"a","b","c","d","e","f"];
+                    let color="";
+                    for(var i=0;i<6;i++){
+                        var n=Math.ceil(Math.random()*15);
+                        color+=colors[n];
+                    }
+                    centroid.add(sphere.geometry.vertices[face.a]);
+                    centroid.add(sphere.geometry.vertices[face.b]);
+                    centroid.add(sphere.geometry.vertices[face.c]);
+                    centroid.divideScalar(3);//controid各项除以divideScalar里的参数
+                    var arrow=new THREE.ArrowHelper(face.normal,centroid,2,"#"+color,1.5,0.5);//箭头辅助dir来自原点的方向，必须是单位向量，origin标量,hex颜色,headLength箭头头部的长度,headWidth箭头头部宽度
+                    // arrow.setColor(0xCB52E6);
+                    sphere.add(arrow);
+                }
+                scene.add(sphere);
+                var gui=new dat.GUI();
+                gui.add(controls,"opacity",0.1).onChange(function(e){
+                    sphereMaterial.opacity=e;
+                });
+                gui.add(controls,"transparent").onChange(function(e){
+                    sphereMaterial.transparent=e;
+                });
+                gui.addColor(controls,"color");
+                gui.add(controls,"rotationSpeed",0,0.3);
+                gui.add(controls,'side',["front","back","double"]).onChange(function(e){
+                    switch(e){
+                        case "front":
+                            sphereMaterial.side=THREE.FrontSide;
+                            break;
+                        case "back":
+                            sphereMaterial.side=THREE.BackSide;
+                            break;
+                        case "double":
+                            sphereMaterial.side=THREE.DoubleSide;
+                            break;
+                    }
+                });
+                document.getElementById("Red").appendChild(render.domElement);
+                function renderScene(){
+                    scene.traverse(function(e){
+                        if(e instanceof THREE.Mesh){
+                            e.rotation.x+=controls.rotationSpeed;
+                            e.rotation.y+=controls.rotationSpeed;
+                            e.rotation.z+=controls.rotationSpeed;
+                        }
+                        if(e instanceof THREE.ArrowHelper){
+                            // console.log(e)
+                            // e.setColor(controls.color);
+                            // e.__proto__.setColor(controls.color);
+                        }
+                    });
+                    // console.log(controls.color);
+                    requestAnimationFrame(renderScene);
+                    render.render(scene,camera);
+                }
+                renderScene();
+            }
+            window.onload=init;
+        </script>
+    </body>
+</html>

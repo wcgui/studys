@@ -1,0 +1,71 @@
+<! DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <title>测试</title>
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+        <!-- <div class="transform-style">
+            <h3>鼠标放到图片上面来查看效果哦！(图片反转360度)</h3>
+            <div class="container">
+                <div class="inner">
+                    <div class="rotate">
+                        <img src="http://images2015.cnblogs.com/blog/561794/201604/561794-20160412230412973-1641353956.jpg" alt="" width="142" height="200" />
+                    </div>
+                </div>
+            </div>
+            <h3>鼠标放到图片上面来查看效果哦！(图片反转360度--使用transform-style: preserve-3d;效果)</h3>
+            <div class="container">
+                <div class="inner">
+                    <div class="rotate three-d">
+                        <img src="http://images2015.cnblogs.com/blog/561794/201604/561794-20160412230412973-1641353956.jpg" alt="" width="142" height="200" />
+                    </div>
+                </div>
+            </div>
+        </div> -->
+   <div id="mychart" style="width:500px;height:500px;"></div>
+   <script src="js/color.js"></script>
+   <script src="js/progress_pieRatio.js"></script>
+   <script>
+       new Progress_pieRatio(document.getElementById("mychart"),{
+                backgroundColor:'#02172C',//最大整体的样式
+                //鼠标放上去显示信息的样式
+                tooltip:{
+                    backgroundColor:'rgba(255,255,255,0.3)',
+                    color:'#fff',
+                    fontSize:15,
+                },
+                //控制圆心的位置
+                grid:{
+                    top:'10%',
+                    left:'20%',
+                    right:'20%',
+                    bottom:'10%',
+                },
+                min:{
+                    name:'最小值',
+                    value:9000,//最小值
+                },
+                max:{
+                    name:'最大值',
+                    value:18000,//最大值
+                },
+                data:{
+                    name:'时间',
+                    value:10000, //当前值
+                    color:'#41B149',//字体颜色
+                    fontSize:16,//字体大小
+                },
+                firstCircle:{
+                    radius:50,//半径大小
+                    borderColor:'#5CDBED',//整体大致颜色
+                    lineWidth:6,//最小为3最大为15
+                },
+                progressCircle:{
+                    color:'#fff',
+                },
+                isLoopPlay:false,//是否循环播放跑马灯特效
+                isLoopOpen:false,//最大的一个圆圈是否循环加载
+       })
+   </script>
+   </html>

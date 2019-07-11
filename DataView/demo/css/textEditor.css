@@ -1,0 +1,90 @@
+#editor-wrapper #control-area {
+    margin-bottom: 8px;
+    padding:5px;
+    border-radius:5px 5px 0px 0px;
+    border:1px solid #D1D1D1;
+    border-bottom:0px;
+    box-shadow:0px 5px 5px #D1D1D1 ;
+    position:relative;
+    background:white;
+}
+#editor-wrapper .btn-group .btn {
+	border:1px solid #fff;
+    font-size: 12px;
+    text-decoration: none !important;
+    padding: 3px 5px;
+    border-radius:3px;
+    width:23px;
+    height:23px;
+    box-sizing: border-box;
+    background: url(../images/icons.png) -160px 0px;
+    display: inline-block;
+    cursor:pointer;
+}
+#editor-wrapper .btn-group .btn-color{
+	width:33px;
+}
+#editor-wrapper .btn-group #select-color{
+	height:205px;
+	width:210px;
+	border:1px solid #CCCCCC;
+	border-radius:5px;
+	position:absolute;
+	bottom:-220px;
+	background:#fff;
+	box-shadow: 0px 0px 5px 3px #ccc;
+	padding:10px;
+}
+#editor-wrapper .btn-group #select-color header{
+	font-size:14px;
+	color:#3399CC;
+	height:30px;
+	line-height:30px;
+	border-bottom: 1px solid #DDDDDD;
+	margin-bottom:5px;
+}
+#editor-wrapper .btn-group #select-color #backgroundShow{
+	border:1px solid #000;
+}
+#editor-wrapper .btn-group #select-color ul{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+}
+#editor-wrapper .btn-group #select-color ul:after{
+	display: block;
+	content:"";
+	width:0px;
+	height:0px;
+	clear: both;
+}
+#editor-wrapper .btn-group #select-color ul li{
+	float:left;
+	width:15px;
+	height:15px;
+	margin-left:5px;
+	cursor: pointer;
+	/*outline:1px solid #ccc;*/
+}
+#editor-wrapper .btn-group .btn:hover{
+	border:1px solid #DCAC6C;
+	background-color:#FFE69F;
+}
+#editor-wrapper .btn-group {
+    display: inline-block;
+}
+#editor-wrapper .btn-group .btn-select{
+	border:1px solid #D1D1D1;
+	outline:0px;
+	border-radius:3px;
+	float:left;
+	height:19px;
+	margin-right:5px;
+}
+#editor-wrapper .btn-group:after{
+	content:'';
+	display: inline-block;
+	width:4px;
+	height:20px;
+	background:url(../images/icons.png) -180px 0px;
+}

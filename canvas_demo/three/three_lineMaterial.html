@@ -1,0 +1,213 @@
+<! DOCTYPE>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>
+            line的材质
+        </title>
+        <style>
+            body{
+                margin:0px;
+                padding:0px;
+            }
+        </style>
+        <script src="js/three.js"></script>
+        <script src="js/OrbitControls.js"></script>
+    </head>
+    <body>
+        <script>
+// var scene=new THREE.Scene();
+// var camera=new THREE.PerspectiveCamera(50,window.innerWidth/window.innerHeight,0.1,1000);
+// camera.position.set(0,0,10);
+// var renderer=new THREE.WebGLRenderer({antialias:true});//antialias:抗锯齿
+// renderer.setClearColor(0xCB52E6);
+// renderer.setSize(window.innerWidth,window.innerHeight);
+// document.body.appendChild(renderer.domElement);
+// var points=gosper(4,60);//返回一个gosper曲线
+// var lines=new THREE.Geometry();
+// var colors=[];
+// var i=0;
+// points.forEach(function(e){
+//     lines.vertices.push(new THREE.Vector3(e.x,e.z,e.y));
+//     colors[i]=new THREE.Color(0xffffff);
+//     colors[i].setHSL(e.x/100+0.5,(e.y*20)/300,0.8);
+//     i++
+// });
+// lines.colors=colors;
+// var material=new THREE.LineBasicMaterial({opacity:1.0,linewidth:1,vertexColors:THREE.VertexColors});
+// var line =new THREE.Line(lines,material);
+// scene.add(line);
+// function animate(){
+//     requestAnimationFrame(animate);
+//     renderer.render(scene,camera);
+// }
+// animate();
+// function gosper(a, b) {
+
+// var turtle = [0, 0, 0];
+// var points = [];
+// var count = 0;
+
+// rg(a, b, turtle);
+
+
+// return points;
+
+// //右走
+// function rt(x) {
+//     turtle[2] += x;
+// }
+
+// //左走
+// function lt(x) {
+//     turtle[2] -= x;
+// }
+
+// function fd(dist) {
+// //                ctx.beginPath();
+//     points.push({x: turtle[0], y: turtle[1], z: Math.sin(count) * 5});
+// //                ctx.moveTo(turtle[0], turtle[1]);
+
+//     var dir = turtle[2] * (Math.PI / 180);
+//     turtle[0] += Math.cos(dir) * dist;
+//     turtle[1] += Math.sin(dir) * dist;
+
+//     points.push({x: turtle[0], y: turtle[1], z: Math.sin(count) * 5});
+// //                ctx.lineTo(turtle[0], turtle[1]);
+// //                ctx.stroke();
+
+// }
+
+// function rg(st, ln, turtle) {
+
+//     st--;
+//     ln = ln / 2.6457;
+//     if (st > 0) {
+// //                    ctx.strokeStyle = '#111';
+//         rg(st, ln, turtle);
+//         rt(60);
+//         gl(st, ln, turtle);
+//         rt(120);
+//         gl(st, ln, turtle);
+//         lt(60);
+//         rg(st, ln, turtle);
+//         lt(120);
+//         rg(st, ln, turtle);
+//         rg(st, ln, turtle);
+//         lt(60);
+//         gl(st, ln, turtle);
+//         rt(60);
+//     }
+//     if (st == 0) {
+//         fd(ln);
+//         rt(60);
+//         fd(ln);
+//         rt(120);
+//         fd(ln);
+//         lt(60);
+//         fd(ln);
+//         lt(120);
+//         fd(ln);
+//         fd(ln);
+//         lt(60);
+//         fd(ln);
+//         rt(60)
+//     }
+// }
+
+// function gl(st, ln, turtle) {
+//     st--;
+//     ln = ln / 2.6457;
+//     if (st > 0) {
+// //                    ctx.strokeStyle = '#555';
+//         lt(60);
+//         rg(st, ln, turtle);
+//         rt(60);
+//         gl(st, ln, turtle);
+//         gl(st, ln, turtle);
+//         rt(120);
+//         gl(st, ln, turtle);
+//         rt(60);
+//         rg(st, ln, turtle);
+//         lt(120);
+//         rg(st, ln, turtle);
+//         lt(60);
+//         gl(st, ln, turtle);
+//     }
+//     if (st == 0) {
+//         lt(60);
+//         fd(ln);
+//         rt(60);
+//         fd(ln);
+//         fd(ln);
+//         rt(120);
+//         fd(ln);
+//         rt(60);
+//         fd(ln);
+//         lt(120);
+//         fd(ln);
+//         lt(60);
+//         fd(ln);
+//     }
+// }
+// }
+    function init(){
+        var scene=new THREE.Scene();//创建一个场景
+        var camera=new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,0.1,1000);//for,aspect，near,far
+        var  renderer=new THREE.WebGLRenderer({antialias:true});//antialias抗锯齿
+        renderer.setClearColor(new THREE.Color(0x000000,0.5));//设置颜色
+        renderer.setSize(window.innerWidth,window.innerHeight);//设置大小
+        renderer.shadowMap.enabled=true;//允许阴影
+        camera.position.set(-30,40,30);
+        camera.lookAt(scene.position);
+        var ambientLight=new THREE.AmbientLight(0x0c0c0c);
+        scene.add(ambientLight);//添加环境光，自然光
+        var spotLight=new THREE.SpotLight(0xffffff);//生成一个聚光灯光源
+        spotLight.position.set(-40,60,-10);//设置灯光位置
+        spotLight.castShadow=true;//允许投射阴影
+        scene.add(spotLight);
+        var controls=new THREE.OrbitControls(camera,renderer.domElement);
+        var points=[];
+        function getPoints(){
+            var rmd_x=Math.random()*50;
+            var rmd_y=Math.random()*50;
+            var rmd_z=Math.random()*50;
+            points.push({x:rmd_x,y:rmd_y,z:rmd_z});
+        }
+        for(var j=0;j<100;j++){
+            getPoints();
+        }
+        //生成一个几何体
+        var lines=new THREE.Geometry();
+        var colors=[];
+        var i=0;
+        //该几何体的顶点getPoint函数生成的点组成
+        points.forEach(function(e){
+            lines.vertices.push(new THREE.Vector3(e.x,e.z,e.y));
+            colors[i]=new THREE.Color(0xffffff);
+            colors[i].setHSL(e.x/100+0.5,(e.y*20)/300,0.8);//色调，饱和度，亮度
+            i++;
+        });
+        lines.colors=colors;
+        console.log(lines);
+        // var material=new THREE.LineBasicMaterial({vertexColors:THREE.VertexColors});//vertexColors:THREE.VertexColors指定了这个好像默认应用geometry的颜色
+        // lines.computeLineDistances();//老版本在geometry中调用，新版本在THREE.Line中调用
+        var material=new THREE.LineDashedMaterial({vertexColors:true,color:0xffffff,dashSize:0.6,gapSize:0.2,scale:0.1});//dashSize:虚线的长度，gapSize:虚线间隔的宽度
+        console.log(material);
+        var line=new THREE.Line(lines,material);
+        line.computeLineDistances();//用来计算线段顶点之间的距离
+        line.position.set(25,-30,-60);
+        scene.add(line);
+        document.body.appendChild(renderer.domElement);
+        var step=0;
+        render();
+        function render(){
+            line.rotation.z=step+=0.01;
+            requestAnimationFrame(render);
+            renderer.render(scene,camera);
+        }
+    }
+    window.onload=init;
+        </script>
+    </body>
+</html>

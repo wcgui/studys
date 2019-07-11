@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ 
+<style type="text/css">
+*{margin:0px;}
+
+#Message{width:602px;height:140px;padding:10px; background:#fff;  margin:100px auto; border-radius:5px;
+            position:relative;}
+#Message #MesCon{width:600px;height:100px; border:1px solid #ddd; border-radius:5px;}
+#Message #MesCon .imgBut{width:100px;height:100px; border-right:1px solid #ddd;float:left; font-size:12px; color:#666; text-align:center; line-height:150px; background:url("images/162367125726955568.jpg") no-repeat 33px 30px;}
+#Message #MesCon .Edit{width:499px;height:100px; float:right; }
+ 
+#Message span.fb{width:80px;height:30px; background:#ff9933; color:#fff; text-align:center; line-height:30px;
+                display:block; margin-top:10px; float:right; border-radius:5px; font-size:12px; font-family:"微软雅黑";}
+#Message .upload{width:620px;height:220px; background:rgba(0,0,0,0.5); position:absolute;left:0px; top:160px;
+                box-shadow:0px 0px 10px #fff;display:none; }
+#Message .upload p{width:100%; height:230px; position:absolute; left:0px; top:0px;color:#fff;  font-size:26px; text-align:center;line-height:220px;}
+#Message .upload img{margin:20px 8px; border:2px solid #fff;}
+ 
+.shuoshuo{width:600px; min-height:300px; border:1px solid #ddd; border-radius:5px; margin:10px auto; background:#fff; padding:20px; display:none;
+}
+.shuoshuo .box{border-bottom:1px dotted #ddd; font-size:14px; line-height:30px;}
+</style>
+ 
+ </head>
+ <body>
+ 
+ <div id="Message">
+ 
+    <!--发表说说框开始-->
+    <div id="MesCon">
+        <div class="imgBut">上传图片</div>
+        <div class="Edit" contenteditable="true"></div>
+    </div>
+    <!--发表说说框结束-->
+ 
+    <!--发表按扭开始-->
+    <span class="fb">发表</span>
+    <!--发表按扭结束-->
+     
+    <!--图片拖拽区开始-->
+    <div class="upload">
+        <p class="tis">请将图片拖拽到此区域</p>
+         
+    </div>
+    <!--图片拖拽区结束-->
+ </div>
+ 
+ 
+<!--说说内容开始-->
+<div class="shuoshuo">
+ 
+</div>
+<!--说说内容结束-->
+<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+ 
+<script type="text/javascript">
+    //点击图片上传按扭
+    $(".imgBut").click(function(){
+        $(".upload").slideToggle(); //自动收缩和展开
+    });
+ 
+ 
+    //找到要拖进去的目标元素
+    var oDiv=$(".upload")[0];
+    var op=$(".upload p.tis");
+ 	console.log(oDiv);
+    //当进入
+    oDiv.ondragenter=function(){
+    	console.log(1)
+        op.html("可以释放元素");
+    }
+    //离开
+    oDiv.ondragleave=function(){
+    	console.log(2)
+        op.html("请将图片拖拽到此区域");
+    };
+    //在内部移动
+    oDiv.ondragover=function(e){
+         console.log(3)
+        e.preventDefault();
+         
+    }
+ 
+ 
+//释放
+    oDiv.ondrop=function(e){
+        e.preventDefault();
+        //获取拖过来的文件
+        var fs=e.dataTransfer.files;
+        console.log(fs)
+        var len=fs.length; //获取文件个数
+        for(var i=0;i<len;i++){
+            var _type=fs[i].type;
+                 console.log(_type);
+            if(_type.indexOf("image")!=-1){//判断他是不是图片文件
+                 
+                var fd=new FileReader();
+                fd.readAsDataURL(fs[i]);
+                fd.onload=function(){
+                    var oImg=$("<img src='' width='180' height='180' />");
+                        oImg.attr("src",this.result);
+                    var input=$("<input type='file'>")
+                    $(".upload").append(oImg);
+                    $(".upload").append(input);
+                    op.html("");
+                }
+ 
+ 
+            }else{
+                alert("请，上传图片文件！！");
+            }
+        }
+    }
+ 
+ 
+//点击发表说说按扭
+$("span.fb").click(function(){
+     
+    $(".upload").slideUp();
+    var txt=$(".Edit").text();
+    if(txt==""){
+        $(".Edit").focus();
+    }else{
+        $(".shuoshuo").show();
+        var html=$(".shuoshuo").html();
+        $(".shuoshuo").html(html+"<div class='box'>"+txt+"<br/>"+$(".upload").html()+"</div>");
+    }
+     
+    $(".upload").html("");
+    $(".Edit").text("");
+});
+</script>
+ </body>
+</html>

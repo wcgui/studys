@@ -1,0 +1,159 @@
+<! DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <title>webgl练习</title>
+        <script src="js/until.js"></script>
+    </head>
+    <body onload="main()">
+        <canvas id="my_canvas" width="640" height="480">您的浏览器不支持canvas，请下载最新的浏览器</canvas>
+        
+        <script>
+        //    main();
+        // // WebGL主程序部分
+        // function main() {
+        //     // ---- Canvas ----
+        //     // 获取canvas节点
+        //     let canvas = document.querySelector('#my_Canvas');
+        //     // 获取canvas上下文
+        //     let gl = canvas.getContext('webgl');
+        //     console.log(gl)
+        //     // ----GLSL程序部分----
+        //     // Vertex Shader（顶点着色器）
+        //     const vertex_source = `
+        //         void main() {
+        //         gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
+        //         gl_PointSize = 10.0;
+        //         }
+        //     `
+        //     // Fragment Shader（片元着色器）
+        //     const fragment_source = `
+        //         void main() {
+        //         gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+        //         }
+        //     `
+        //     // ----WebGL API调用部分----
+        //     program = initProgram(gl, vertex_source, fragment_source);
+        //     gl.clearColor(0.0, 0.0, 0.0, 0.5);
+        //     gl.clear(gl.COLOR_BUFFER_BIT);
+        //     gl.viewport(0,0,canvas.width,canvas.height);
+        //     gl.drawArrays(gl.Point, 3.0, 5.0);
+        // }
+
+        // // 辅助方法：初始化着色器程序
+        // function initProgram(gl, vsource, fsource) {
+        //     let vShader = initShader(gl, gl.VERTEX_SHADER, vsource);
+        //     let fShader = initShader(gl, gl.FRAGMENT_SHADER, fsource);
+        //     // 创建WebGL程序
+        //     let program = gl.createProgram();
+        //     gl.attachShader(program, vShader);
+        //     gl.attachShader(program, fShader);
+        //     gl.linkProgram(program);
+        //     // 判断是否创建成功
+        //     if(!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        //         alert('unable to initialize!');
+        //         return;
+        //     }
+        //     gl.useProgram(program);
+        //     return program;
+        // }
+        // // 辅助方法：初始化着色器
+        // function initShader(gl, type, source) {
+        //     let shader = gl.createShader(type);
+        //     gl.shaderSource(shader, source);
+        //     gl.compileShader(shader);
+        //     if(!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        //         alert('error occured compiling the shaders:' + gl.getShaderInfoLog(shader));
+        //         return null;
+        //     }
+        //     return shader;
+        // }
+            
+            function main(){
+                const canvas = document.querySelector("#my_canvas");//获取实例
+                const gl = canvas.getContext("webgl");//获取上下文
+                console.log(gl)
+                if(!gl){
+                    //判断是否支持webgl
+                    alert("您的浏览器不支持");
+                    return;
+                }
+                //清空canvas，然后填充指定颜色
+                gl.clearColor(0,0,0,1.0);
+                gl.clear(gl.COLOR_BUFFER_BIT);
+                //顶点着色器源码
+                const vsSource=`attribute vec4 aVertexPosition;
+                                uniform mat4 uModelViewMatrix;
+                                uniform mat4 uProjectionMatrix;
+                                void main(){
+                                    gl_Position=uProjectionMatrix*uModelViewMatrix*aVertexPosition;
+                                }
+                `;
+                //片段着色器源码
+                const fsSource=`
+                                void main(){
+                                    gl_FragColor=vec4(1.0,1.0,1.0,1.0);
+                                }
+                `;
+                //初始化着色器
+                function initShaderProgram(gl,vsSource,fsSource){
+                    const vertexShader=loadShader(gl,gl.VERTEX_SHADER,vsSource);//顶点着色
+                    const fragmentShader=loadShader(gl,gl.FRAGMENT_SHADER,fsSource);//片段着色
+                    // 创建着色器程序对象
+                    const shaderProgram=gl.createProgram();
+                    gl.attachShader(shaderProgram,vertexShader);//附加顶点着色器
+                    gl.attachShader(shaderProgram,fragmentShader);
+                    gl.linkProgram(shaderProgram);//链接着色器
+                    if(!gl.getProgramParameter(shaderProgram,gl.LINK_STATUS)){
+                        alert('Unable to initialize the shader program:'+gl.getProgramInfoLog(shaderProgram));
+                        return null;
+                    }
+                    return shaderProgram;
+                }
+                //创建指定类型的着色器，上传source源码编译
+                function loadShader(gl,type,source){
+                    const shader=gl.createShader(type);//创建着色器对象
+                    gl.shaderSource(shader,source);//附加源到代码到着色器对象
+                    gl.compileShader(shader);   //编译着色器对象
+                    if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS)){
+                        alert(gl.getShaderInfoLog(shader));
+                        return null;
+                    }
+                    return shader;
+                }
+                const shaderProgram = initShaderProgram(gl, vsSource, fsSource);
+                const programInfo = {
+                    program: shaderProgram,
+                    attribLocations: {
+                    vertexPosition: gl.getAttribLocation(shaderProgram, 'aVertexPosition'),
+                    },
+                    uniformLocations: {
+                    projectionMatrix: gl.getUniformLocation(shaderProgram, 'uProjectionMatrix'),
+                    modelViewMatrix: gl.getUniformLocation(shaderProgram, 'uModelViewMatrix'),
+                    },
+                };
+                var horizAspect=480.0/640.0;
+                //初始化缓冲区
+                function initBuffers(){
+                    //创建一个空的缓冲区
+                    squareVerticesBuffer=gl.createBuffer();
+                    gl.bindBuffer(gl.ARRAY_BUFFER,squareVerticesBuffer);//绑定缓冲区
+                    var vertices=[1.0,1.0,0.0,-1.0,1.0,1.0,0.0,1.0,-1.0,0.0,-1.0,-1.0,0.0];
+                    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(vertices),gl.STATIC_DRAW);//将数据传到缓冲区
+                }
+                function drawScene(){
+                    gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);//用背景色擦除上下文，接着建立相机透视矩阵
+                    perspectiveMatricx=makePerspective(45,640.0/480.0,0.1,100.0);//设置45度角，设宽高为640/480并制定相机距离0.1到100单位长度的范围内，物体可见
+                    loadIdentity();
+                    mvTranslate([-0.0,0.0,-6.0]);//把物体放在距离摄像机6个单位的位置
+                    gl.bindBuffer(gl.ARRAY_BUFFER,squareVerticesBuffer);//绑定缓冲区
+                    gl.vertexAttribPointer(vertexPositionAttribute, 3,gl.FLOAT, false,0,0);
+                    setMatrixUniforms();
+                    gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+                }
+                drawScene();
+                
+            }
+        </script>
+    </body>
+</html>

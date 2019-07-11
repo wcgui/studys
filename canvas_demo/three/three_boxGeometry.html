@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            三维几何体Geometry的使用
+        </title>
+        <style>
+            body{
+                margin:0px;
+                padding:0px;
+            }
+        </style>
+        <script src="js/three.js"></script>
+        <script src="js/SceneUtils.js"></script>
+    </head>
+    <body>
+        <script>
+            function init(){
+                var scene=new THREE.Scene();//新建一个场景
+                var renderer=new THREE.WebGLRenderer({antialias:true});//新建一个渲染器，antialias：抗锯齿
+                renderer.setSize(window.innerWidth,window.innerHeight);
+                renderer.setClearColor(0xC1A9D6);
+                var camera=new THREE.PerspectiveCamera(50,window.innerWidth/window.innerHeight,0.1,1000);//新建一个相机
+                camera.position.set(0,0,100);
+                for(var i=0;i<10;i++){
+                    var randomX=-20+Math.round(Math.random()*50);
+                camera.lookAt(scene.position);//聚焦
+                document.body.appendChild(renderer.domElement);
+                // var geometry=new THREE.BoxGeometry(10,10,5,5,5,2);//绘制一个长方体
+                //球形柱体几何类：radius:球体半径，widthSegMents:水平分割段数，heightSegments:垂直分割段数，phiStart:水平起始角度，phiLength:水平扫描角度大小，thetaStart：垂直起始角度，thetaLength:垂直扫描角度
+                // var geometry=new THREE.SphereGeometry(10,20,20,0,2*Math.PI,Math.PI/6,Math.PI*2);
+                //圆柱几何类：radiusTop:顶部圆柱的半径，radiusBottom:底部圆柱的半径，height:圆柱体的高度，radialSegments:水平分割段数，heightSegments:垂直分割段数openEnded:布尔值指示圆柱的末端是加盖还是打开，默认为false,thetaStart:起始角度，thetaLength:绘制的角度
+                // var geometry=new THREE.CylinderGeometry(-10,10,30,10,10,false,0,Math.PI*2);
+                //圆环几何类radius:圆环半径，tube:管的半径，radialSegments:沿圆环周长分割数,tubularSegments:沿管道周长分割数,arc:中心角
+                // var geometry=new THREE.TorusGeometry(10,5,15,15,Math.PI);
+                //圆环结几何类：radius:圆环的半径，tube:管的半径，tubularSegments:沿圆环周长分割数，radialSegments:沿管道周长分割数，p:确定绕对称轴的次数,q:绕内部圆圈的次数,
+                // var geometry=new THREE.TorusKnotGeometry(30,3,100,11,1,1);
+                //车床模型：points:曲线点的数组，segments:分割圆周长的数目，phiStart:起始角度，phiLength:弧度范围
+                // var points=[];
+                // for(var i=0;i<10;i++){
+                //     points.push(new THREE.Vector2(Math.sin(i*0.2)*10+5,(i-5)*2));
+                // }
+                // var geometry=new THREE.LatheGeometry(points,20,Math.PI,Math.PI*2);
+                //管道模型
+                var points=[];
+                    var randomY=-15+Math.round(Math.random()*40);
+                    var randomZ=-20+Math.round(Math.random()*40);
+                    points.push(new THREE.Vector3(randomX,randomY,randomZ));
+                }
+                console.log(points);
+                //path:路径，segments:指定分段数,radius:管的半径,radiusSegments:管道圆周分段数，closed:如果为true头和尾就会连在一起,默认为false,SplineCurve3
+                var geometry=new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points),2,10,5,true);
+                var plane=createMesh(geometry);
+                scene.add(plane);
+                window.addEventListener('resize',function(){
+                    camera.aspect=window.innerWidth/window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth,window.innerHeight);
+                },false);
+                console.log(scene);
+                function createMesh(geometry){
+                    var materialMesh=new THREE.MeshNormalMaterial();
+                    materialMesh.side=2;
+                    var wireframeMaterial=new THREE.MeshBasicMaterial({wireframe:true,color:0x7FCEEA});
+                    var mesh=new THREE.SceneUtils.createMultiMaterialObject(geometry,[materialMesh,wireframeMaterial]);
+                    return mesh;
+                }
+                function animate(){
+                    requestAnimationFrame(animate);
+                    plane.rotation.x+=0.01;
+                    plane.rotation.y+=0.01;
+                    renderer.render(scene,camera);
+                }
+                animate();
+            }
+            window.onload=init;
+        </script>
+    </body>
+</html>

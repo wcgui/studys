@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            RingGeometry的使用
+        </title>
+        <style>
+            body{
+                margin:0px;
+                padding:0px;
+            }
+        </style>
+        <script src="js/three.js"></script>
+        <script src="js/SceneUtils.js"></script>
+    </head>
+    <body>
+        <script>
+            function init(){
+                var camera=new THREE.PerspectiveCamera(50,window.innerWidth/window.innerHeight,0.1,1000);//新建一个相机
+                var renderer=new THREE.WebGLRenderer({antialias:true});//antialias:true抗锯齿
+                var scene=new THREE.Scene();
+                camera.position.set(0,0,100);
+                camera.lookAt(scene.position);
+                renderer.setClearColor(0xE198F1);
+                renderer.setSize(window.innerWidth,window.innerHeight);
+                document.body.appendChild(renderer.domElement);
+                var ringGeometry=new THREE.RingGeometry(5,10,8,8);
+                var ring=createMesh(ringGeometry);
+                ring.rotation.z=Math.PI/8;
+                scene.add(ring);
+                function createMesh(geometry){
+                    var meshMaterial=new THREE.MeshNormalMaterial();
+                    meshMaterial.side=THREE.DoubleSide;
+                    var wireframeMaterial=new THREE.MeshBasicMaterial({wireframe:true,color:0xEEDD78});
+                    var mesh=new THREE.SceneUtils.createMultiMaterialObject(geometry,[meshMaterial,wireframeMaterial]);
+                    return mesh;
+                }
+                function animate(){
+                    requestAnimationFrame(animate);
+                    ring.rotation.y+=0.01;
+                    renderer.render(scene,camera);
+                }
+                animate();
+            }
+            window.onload=init;
+        </script>
+    </body>
+</html>

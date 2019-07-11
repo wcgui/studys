@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title></title>
+        <script src="echarts.min.js"></script>
+    </head>
+    <body>
+        <div id="mychart" style="width:1000px;height:1000px;">
+
+        </div>
+        <script>
+        let mychart=echarts.init(document.getElementById("mychart")),
+        option={
+            color:["#3fb1e3","#6be6c1","#626c91","#a0a7e6","#c4ebad"],
+            title: {
+                text: '红楼梦贾府人物关系图',
+                top: 'top',
+                left: 'left',
+                "textStyle": {
+                  "fontFamily": "Microsoft YaHei",
+                  "color": "#ffffff"
+                }
+            },
+            tooltip: {},
+            
+            animationDuration: 1500,
+            animationEasingUpdate: 'quinticInOut',
+            series : [
+                {
+                    id:"0",
+                    name: '人物',
+                    type: 'graph',
+                    layout: 'force',
+                    data: [
+                            {
+                                "address": "中国上海市长宁区、闵行区",
+                                "name": "上海虹桥",
+                                // "id": 1,
+                                "category": "上海"
+                            },
+                            {
+                                "address": "上海市浦东新区祝桥镇",
+                                "name": "浦东国际机场",
+                                // "id": 2,
+                                "category": "上海"
+                            },
+                            {
+                                "address": "中国江苏省无锡市滨湖区机场路1号",
+                                "name": "苏南硕放机场",
+                                // "id": 3,
+                                "category": "无锡"
+                            },
+                            {
+                                "address": "中国山东省青岛市城阳区民航路99号",
+                                "name": "流亭国际机场",
+                                // "id": 4,
+                                "category": "青岛"
+                            },
+                            {
+                                "address": "中国北京市顺义区",
+                                "name": "首都国际机场",
+                                // "id": 5,
+                                "category": "北京"
+                            },
+                            {
+                                "address": "中国广东省广州市白云区",
+                                "name": "白云国际机场",
+                                // "id": 6,
+                                "category": "广州"
+                            },
+                            {
+                                "address": "中国广东省深圳市宝安区",
+                                "name": "宝安国际机场",
+                                // "id": 7,
+                                "category": "深圳"
+                            },
+                            {
+                                "address": "中国广西壮族自治区桂林市临桂区",
+                                "name": "两江国际机场",
+                                // "id": 8,
+                                "category": "桂林"
+                            },
+                            {
+                                "address": "中国福建省厦门市湖里区翔云一路",
+                                "name": "高崎国际机场",
+                                // "id": 9,
+                                "category": "厦门"
+                            },
+                            {
+                                "address": "中国山西省太原市小店区太榆路199号",
+                                "name": "武宿国际机场",
+                                // "id": 10,
+                                "category": "太原"
+                            },
+                            {
+                                "address": "中国江苏省南京市江宁区迎宾路禄口街道南京禄口国际机场",
+                                "name": "禄口国际机场",
+                                // "id": 11,
+                                "category": "南京"
+                            }
+        ],
+        links: [
+          {
+            // "id": 1,
+            "source": "上海虹桥",
+            "departure_time": "2019-04-30T16:40:33.000+0000",
+            "flight_duration": 120,
+            "target": "流亭国际机场"
+          },
+          {
+            // "id": 2,
+            "source": "上海虹桥",
+            "departure_time": "2019-04-23T16:41:04.000+0000",
+            "flight_duration": 180,
+            "target": "首都国际机场"
+          },
+          {
+            // "id": 3,
+            "source": "上海虹桥",
+            "departure_time": "2019-04-29T16:41:55.000+0000",
+            "flight_duration": 100,
+            "target": "武宿国际机场"
+          },
+          {
+            // "id": 4,
+            "source": "上海虹桥",
+            "departure_time": "2019-04-30T16:42:27.000+0000",
+            "flight_duration": 130,
+            "target": "高崎国际机场"
+          },
+          {
+            // "id": 5,
+            "source": "上海虹桥",
+            "departure_time": "2019-04-30T16:43:02.000+0000",
+            "flight_duration": 127,
+            "target": "白云国际机场"
+          },
+          {
+            // "id": 6,
+            "source": "上海虹桥",
+            "departure_time": "2019-04-18T16:43:30.000+0000",
+            "flight_duration": 90,
+            "target": "宝安国际机场"
+          },
+          {
+            // "id": 7,
+            "source": "浦东国际机场",
+            // "departure_time": "2019-04-30T16:45:12.000+0000",
+            // "flight_duration": 100,
+            "target": "首都国际机场"
+          },
+          {
+            // "id": 8,
+            "source": "浦东国际机场",
+            // "flight_duration": 0,
+            "target": "流亭国际机场"
+          },
+          {
+            // "id": 9,
+            "source": "浦东国际机场",
+            // "flight_duration": 0,
+            "target": "首都国际机场"
+          },
+          {
+            // "id": 10,
+            "source": "浦东国际机场",
+            // "flight_duration": 0,
+            "target": "白云国际机场"
+          },
+          {
+            // "id": 11,
+            "source": "浦东国际机场",
+            // "flight_duration": 0,
+            "target": "宝安国际机场"
+          },
+          {
+            // "id": 12,
+            "source": "浦东国际机场",
+            // "flight_duration": 0,
+            "target": "两江国际机场"
+          },
+          {
+            // "id": 13,
+            "source": "浦东国际机场",
+            // "flight_duration": 0,
+            "target": "高崎国际机场"
+          },
+          {
+            // "id": 14,
+            "source": "浦东国际机场",
+            // "flight_duration": 0,
+            "target": "禄口国际机场"
+          },
+          {
+            // "id": 15,
+            "source": "苏南硕放机场",
+            // "flight_duration": 0,
+            "target": "白云国际机场"
+          },
+          {
+            // "id": 16,
+            "source": "苏南硕放机场",
+            // "flight_duration": 0,
+            "target": "两江国际机场"
+          },
+          {
+            // "id": 17,
+            "source": "苏南硕放机场",
+            // "flight_duration": 0,
+            "target": "高崎国际机场"
+          },
+          {
+            // "id": 18,
+            "source": "苏南硕放机场",
+            // "flight_duration": 0,
+            "target": "宝安国际机场"
+          },
+          {
+            // "id": 19,
+            "source": "白云国际机场",
+            // "flight_duration": 0,
+            "target": "两江国际机场"
+          },
+          {
+            // "id": 20,
+            "source": "白云国际机场",
+            // "flight_duration": 0,
+            "target": "首都国际机场"
+          },
+          {
+            // "id": 21,
+            "source": "白云国际机场",
+            // "flight_duration": 0,
+            "target": "高崎国际机场"
+          },
+          {
+            // "id": 22,
+            "source": "白云国际机场",
+            // "flight_duration": 0,
+            "target": "浦东国际机场"
+          },
+          {
+            // "id": 23,
+            "source": "白云国际机场",
+            // "flight_duration": 0,
+            "target": "上海虹桥"
+          },
+          {
+            // "id": 24,
+            "source": "白云国际机场",
+            // "flight_duration": 0,
+            "target": "禄口国际机场"
+          },
+          {
+            // "id": 25,
+            "source": "两江国际机场",
+            // "flight_duration": 0,
+            "target": "禄口国际机场"
+          },
+          {
+            // "id": 26,
+            "source": "两江国际机场",
+            // "flight_duration": 0,
+            "target": "浦东国际机场"
+          },
+          {
+            // "id": 27,
+            "source": "两江国际机场",
+            // "flight_duration": 0,
+            "target": "上海虹桥"
+          },
+          {
+            // "id": 28,
+            "source": "两江国际机场",
+            // "flight_duration": 0,
+            "target": "高崎国际机场"
+          },
+          {
+            // "id": 29,
+            "source": "两江国际机场",
+            // "flight_duration": 0,
+            "target": "流亭国际机场"
+          },
+          {
+            // "id": 30,
+            "source": "流亭国际机场",
+            // "flight_duration": 0,
+            "target": "两江国际机场"
+          },
+          {
+            // "id": 31,
+            "source": "流亭国际机场",
+            // "flight_duration": 0,
+            "target": "浦东国际机场"
+          },
+          {
+            // "id": 32,
+            "source": "流亭国际机场",
+            // "flight_duration": 0,
+            "target": "白云国际机场"
+          },
+          {
+            // "id": 33,
+            "source": "流亭国际机场",
+            // "flight_duration": 0,
+            "target": "高崎国际机场"
+          },
+          {
+            // "id": 34,
+            "source": "流亭国际机场",
+            // "flight_duration": 0,1
+            "target": "武宿国际机场"
+          }
+        ],
+                    // categories: [
+                    //     {
+                    //         name:"一代",
+                    //     },
+                    //     {
+                    //         name:"二代",
+                    //     },
+                    //     {
+                    //         name:"三代",
+                    //     },
+                    //     {
+                    //         name:"四代",
+                    //     },
+                    //     {
+                    //         name:"五代",
+                    //     }
+                    // ],
+                    roam: true,
+                    edgeSymbol:['circle','arrow'],
+                    focusNodeAdjacency: true,
+                    itemStyle: {
+                        borderColor: '#fff',
+                        borderWidth: 1,
+                        shadowBlur: 10,
+                        shadowColor: 'rgba(0, 0, 0, 0.3)'
+                    },
+                    label: {
+                        color:"auto",
+                        position: 'right',
+                        formatter: '{b}',
+                        show:true
+                    },
+                    lineStyle: {
+                        color: '#000',
+                        curveness: 0.3
+                    },
+                    emphasis: {
+                        itemStyle:{
+                        },
+                        lineStyle: {
+                            width: 8
+                        }
+                    }
+                }
+            ],
+          }
+          mychart.setOption(option);
+          console.log(mychart.getOption())
+        </script>
+    </body>
+</html>

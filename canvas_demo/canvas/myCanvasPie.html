@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="myCanvas" style="width: 400px;height: 400px;"></div>
+
+    <script src="./soyuan-pie.js"></script>
+    <script>
+        var soyuanPie = new SoyuanPie("myCanvas",{
+            total : 250,
+            val : 150,
+            circleStrokeColor : "#4cb76f",//外圈的颜色
+            progressStrokeColor : "#f2637b",//进度条的颜色
+            textColor : "#0e0",//文字的颜色
+            backgroundColor:"#000",//画布背景色
+            fillColor:"#0f1a3d"
+        });
+        soyuanPie.init().draw();
+
+        //circleStrokeColor : "#3fa1ff",//外圈的颜色
+        //progressStrokeColor : "#f2637b",//进度条的颜色
+
+        //circleStrokeColor : "#00d3d3",//外圈的颜色
+        //progressStrokeColor : "#fad244",//进度条的颜色
+
+        //  circleStrokeColor : "#4cb76f",//外圈的颜色
+        //     progressStrokeColor : "#f2637b",//进度条的颜色
+   </script>
+</body>
+</html>

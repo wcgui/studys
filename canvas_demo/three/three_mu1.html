@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <title>three</title>
+        <style>
+            body{
+                margin:0px;
+                padding:0px;
+            }
+        </style>
+        <script src="js/three.js"></script>
+        <script src="js/SceneUtils.js"></script>
+    </head>
+    <body>
+        <script>
+            //创建一个场景
+            var scene=new THREE.Scene();
+            //创建一个相机
+            var camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
+            camera.position.z=15;
+            //渲染器
+            var renderer=new THREE.WebGLRenderer({antialias:true});//antialias:true,抗锯齿
+            renderer.setSize(window.innerWidth,window.innerHeight);
+            renderer.setClearColor(0x000000);
+            document.body.appendChild(renderer.domElement);
+            //绘制meshBasicMaterial材质的长方体
+            // transparent:定义材质是否透明，opacity透明度根据transparent
+            var geometry=new THREE.BoxGeometry(5,5,15);
+            var cubeMaterial=new THREE.MeshDepthMaterial();
+            var material=new THREE.MeshBasicMaterial({color:0xffffff,name:'cube-1',transparent:true,blending:THREE.MultiplyBlending});
+            var cube=new THREE.SceneUtils.createMultiMaterialObject(geometry,[material,cubeMaterial]);//融合材质
+            cube.children[1].scale.set(0.99,0.99,0.99);
+            console.log(cube);
+            scene.add(cube);
+            //绘制meshdepthMaterial材质的长方体
+            // var material=new  THREE.MeshDepthMaterial();
+            // var geometry=new THREE.BoxGeometry(5,5,15);
+            // var cube=new THREE.Mesh(geometry,material);
+            // cube.position.set(0,0,5);
+            // scene.add(cube);
+            //绘制线条
+            var geometry=new THREE.Geometry();
+            geometry.vertices.push(new THREE.Vector3(-10,0,0));
+            geometry.vertices.push(new THREE.Vector3(0,10,0));
+            geometry.vertices.push(new THREE.Vector3(10,0,0));
+            geometry.vertices.push(new THREE.Vector3(100,0,0));
+            var colors=["#52E689","#E252E6"];
+            geometry.colors=colors;
+            console.log(geometry);
+            var material=new THREE.LineBasicMaterial({vertexColors:THREE.VertexColors});
+            var line=new THREE.Line(geometry,material);
+            scene.add(line);
+            function animate(){
+                requestAnimationFrame(animate);
+                cube.rotation.x+=0.01;
+                cube.rotation.y+=0.01;
+                renderer.render(scene,camera);
+            }
+            animate();
+        </script>
+    </body>
+</html>

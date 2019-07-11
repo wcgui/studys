@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.warp{
+				/*width:300px;*/
+				width:100%;
+				height:900px;
+				border:1px solid red;
+			}
+		</style>
+		<script src="js/sy-editor.js"></script>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<div class="warp">
+			<div style="float:left;background:#73D12E;width:500px;">
+				<span>测试</span>
+				<div class="editor">fdfsdf</div>
+			</div>
+			<div style="float:right;background:#73D12E;width:500px;">
+				<span class="editor">测试</span>
+				<div data-type="editor" >fdfsdf</div>
+			</div>
+		</div>
+		<script>
+			document.getElementsByClassName("warp")[0].ondblclick=function(e){
+				wsEditor.show(e);
+			};
+		</script>
+	</body>
+</html>

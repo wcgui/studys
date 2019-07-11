@@ -1,0 +1,64 @@
+<! DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <title>测试</title>
+    </head>
+    <body onload="main()">
+        <canvas id="mywebgl" width="300" height="300">您的浏览器不支持</canvas>
+        <script>
+            function main(){
+                var canvas=document.getElementById("mywebgl");
+                // let gl=canvas.getContext("webgl");
+                // if(!gl){
+                //     alert("您的浏览器不支持");
+                //     return;
+                // }
+                // //定义三个顶点的三维坐标
+                // let vertices=[
+                //     -0.5,0.5,0.0,
+                //     0.0,0.5,0.0,
+                //     -0.25,0.25,0.0
+                // ];
+                // //创建缓冲区
+                // let vertex_buffer=gl.createBuffer();
+                // //绑定顶点
+                // gl.bindBuffer(gl.ARRAY_BUFFER,vertex_buffer);
+                // //给缓冲区传数据
+                // gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(vertices),gl.STATIC_DRAW);//gl.STATIC_DRAW指定数据的使用次数
+                // //取消绑定缓冲区
+                // gl.bindBuffer(gl.ARRAY_BUFFER,null);
+                // //顶点着色器源码
+                // let vertCode=`
+                //     attribute vec3 coordinates;
+                //     void main(void){
+                //         gl_Position=vec4(coordinates,1.0);
+                //         gl_TutorialsSize=10.0;
+                //     }
+                // `;
+                // // 创建着色器对象
+                // let vertShader=gl.createShader(gl.VERTEX_SHADER);
+                // gl.shaderSource(vertShader,vertCode);//附加源到着色器对象中
+                // gl.compileShader(vertShader);//编译着色起对象
+                // //片段着色器源码
+                // let fragCode=`
+                //     void main(void){
+                //         gl_FragColor=vec4(0,0,0,0.1);
+                //     }
+                // `;
+                // //闯将片段着色起对象
+                // let fragShader=gl.createShader(gl.FRAGMENT_SHADER);
+                // gl.shaderSource(fragShader,fragCode);
+                // gl.compileShader(fragShader);
+                // //创建程序对象
+                // let shaderProgram=gl.createProgram();
+                // gl.attachShader(shaderProgram,vertShader);
+                // gl.attachShader(shaderProgram,fragShader);//附加着色器
+                // gl.linkProgram(shaderProgram);
+                // gl.useProgram(shaderProgram);
+                // gl.bindBuffer(gl.ARRAY_BUFFER,vertex_buffer);
+
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Schedule</title>
+	<!--<link href="./construction.css?v=20180815" rel="stylesheet" type="text/css"/>-->
+	<!--<link href="../../static/css/public.css?v=20180815" rel="stylesheet" type="text/css">-->
+	<style>
+		.weather { 
+    background: url(img/bg1.jpg) no-repeat;width:250px; 
+    height: 88px; 
+    color:white;
+    margin: 10px 2px 10px 6px;
+    padding: 20px 2px 2px 65px; 
+}
+	</style>
+</head>
+<body >
+	
+<div class="weather">
+   <iframe width="200" scrolling="no" height="65" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&icon=1&num=1">
+   </iframe>
+ </div>
+ <div style="margin: 5px">
+    <iframe scrolling="no" href="#" frameborder="0" allowtransparency="false" target="" src="http://i.tianqi.com/index.php?c=code&id=34&icon=1&num=3"></iframe>
+</div>
+<table width="100%">  
+                <tr>  
+                    <td style="width:10%">  
+                        <img src="images/rq.png" mce_src="images/rq.png" width="15" height="14" alt="" />  
+                    </td>  
+                    <td >  
+                        <asp:Label ID="lblTQ1" runat="server"></asp:Label>  
+                    </td>  
+                    <td >  
+                        <asp:Image ID="imgTQPicture" runat="server" />  
+                    </td>  
+                    <td >  
+                        <asp:Label ID="lblTQ2" runat="server"></asp:Label>  
+                    </td>  
+                </tr>  
+            </table>  
+<script>//调用WebService，返回天气信息  
+        WeatherWebServiceSoapClient client = new WeatherWebServiceSoapClient("WeatherWebServiceSoap");  
+        string[] weatherArray = new string[23];   
+        string[] str = new string[23];  
+        str = client.getWeatherbyCityName("合肥");  
+        StringBuilder sb = new StringBuilder();  
+        StringBuilder sb2 = new StringBuilder();  
+        sb.Append("今天是");  
+        sb.Append(DateTime.Parse(str[4]).ToString("yyyy年MM月dd日"));  
+        sb2.Append(str[1]);  
+        sb2.Append(str[6].Substring(str[6].IndexOf(' ')));  
+        sb2.Append(str[5]);  
+        this.lblTQ1.Text = sb.ToString();  
+        this.imgTQPicture.ImageUrl = @"images/weather/" + str[8];  
+        this.lblTQ2.Text = sb2.ToString();  
+        </script>
+	<!--<script>
+		(function(T,h,i,n,k,P,a,g,e){
+			g=function(){
+				P=h.createElement(i);
+				a=h.getElementsByTagName(i)[0];
+				P.src=k;P.charset="utf-8";P.async=1;
+				a.parentNode.insertBefore(P,a)};
+				T["ThinkPageWeatherWidgetObject"]=n;
+				T[n]||(T[n]=function(){(T[n].q=T[n].q||[]).push(arguments)});
+				T[n].l=+new Date();
+				if(T.attachEvent){
+					T.attachEvent("onload",g)
+				}else{
+					T.addEventListener("load",g,false)
+				}
+			}(window,
+			  document,
+			  "script",
+			  "tpwidget",
+			  "//widget.seniverse.com/widget/chameleon.js")
+		)
+	</script>
+<script>
+tpwidget("init", {
+    "flavor": "bubble",
+    "location": "WX4FBXXFKE4F",
+    "geolocation": "enabled",
+    "position": "top-left",
+    "margin": "10px 10px",
+    "language": "zh-chs",
+    "unit": "c",
+    "theme": "chameleon",
+    "uid": "U1617303EA",
+    "hash": "336e0067e0900ceefeccecd1f8b52504"
+});
+tpwidget("show");
+	</script>-->
+	<script>
+		console.log(eval('http://wthrcdn.etouch.cn/weather_mini?city=%E5%90%B4%E4%B8%AD%E5%8C%BA');
+	</script>
+</body>
+</html>

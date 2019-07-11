@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>第四表格</title>
+		<link href="css/demo.css" rel="stylesheet" type="text/css"/>
+	<script src="js/echarts.min.js"></script>
+	</head>
+	<body>
+		<div id="e4" style="width:480px;height:280px;">
+					
+		</div>
+<script>
+var option1 = {
+	backgroundColor:'#000',
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        right: 10,
+        top: 20,
+        bottom: 20,
+        itemGap:20,
+        textStyle:{
+            color:'white',
+            padding:[0,0,0,20]
+        },
+        data:[
+        	{name:'20-30',icon:'circle'},
+        	{name:'31-40',icon:'circle'},
+        	{name:'41-50',icon:'circle'},
+        	{name:'51-60',icon:'circle'}
+        ]
+    },
+    color:['#0076c4','#5850bd','#ffad04','#17ba9b'],
+    series: [ {
+            name:'访问来源',
+            type:'pie',
+            //radius: ['50%', '70%'],//设置圆是否为空心
+            center: ['40%', '50%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: true,
+                    formatter:'{d}%',
+                    color:"#fff",
+                    position:'inside'
+                    
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data:[
+                {value:110, name:'20-30'},
+                {value:650, name:'31-40'},
+                {value:110, name:'41-50'},
+                {value:130, name:'51-60'}
+			    ]
+		 }]
+	};
+var anCostEcharts1 = echarts.init(document.getElementById("e4"));
+anCostEcharts1.setOption(option1);
+</script>
+	</body>
+</html>

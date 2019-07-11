@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            textGeometry的使用
+        </title>
+        <style>
+            body{
+                margin:0px;
+                padding:0px;
+            }
+        </style>
+        <script src="js/three.js"></script>
+        <script src="js/SceneUtils.js"></script>
+    </head>
+    <body>
+        <script>
+            function init(){
+                //新建一个场景
+                var scene=new THREE.Scene();
+                var renderer=new THREE.WebGLRenderer({antialias:true});//新建一个webgl渲染器，antialias：true抗锯齿
+                var camera = new THREE.PerspectiveCamera(50,window.innerWidth/window.innerHeight,0.1,1000);//新建一个透视相机
+                camera.position.set(0,0,100);
+                camera.lookAt(scene.position);//聚焦
+                renderer.setClearColor(0xAF94CE);
+                renderer.setSize(window.innerWidth,window.innerHeight);
+                document.body.appendChild(renderer.domElement);
+                var loader=new THREE.FontLoader();
+                var geometry;
+                //这个json文件夹中只有一些英文和符号
+                loader.load("fonts/helvetiker_regular.typeface.json",function(res){
+                    console.log(res);
+                    geometry = new THREE.TextGeometry( 'hong',{
+                        font:res,
+                        size:10,
+                        height:50,
+                        curveSegments:12,
+                        bevelEnabled:false,
+                        bevelThickness:10,
+                        bevelSize:8,
+                        bevelSegments:5,
+                    });
+                    var text1=createMesh(geometry);
+                    text1.position.set(-10,0,-10);
+                    scene.add(text1);
+                })
+                // var options={
+                //     size:90,文字大小
+                //     height:90,、、
+                //     weight:'normal',
+                    // font:'helvetiker',
+                    // style:'normal',
+                    // bevelThickness:2,
+                    // bevelSize:4,
+                    // bevelSegments:3,
+                    // bevelEnabled:true,
+                    // curveSegments:12,
+                    // steps:1
+                // }
+                function createMesh(geometry){
+                    var meshMaterial=new THREE.MeshNormalMaterial();
+                    meshMaterial.side=THREE.DoubleSide;
+                    var wireframeMaterial=new THREE.MeshBasicMaterial({wireframe:true,color:0xE9DDB9});
+                    return new THREE.SceneUtils.createMultiMaterialObject(geometry,[meshMaterial,wireframeMaterial]);
+                }
+                function animate(){
+                    requestAnimationFrame(animate);
+                    renderer.render(scene,camera);
+                }
+                window.addEventListener("resize",function(){
+                    camera.aspect=window.innerWidth/window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth,window.innerHeight);
+                },false)
+                animate();
+            }
+            window.onload=init;
+        </script>
+    </body>
+</html>

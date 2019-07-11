@@ -1,0 +1,46 @@
+.wlh-tabulate{
+	width:500px;
+	height:150px;
+	overflow:hidden;
+	border:1px solid #CCCCCC;
+}
+.wlh-tabulate-header{
+	user-select:none;
+	border-bottom: 1px solid #ccc;
+}
+.wlh-tabulate-header:after{
+	display: block;
+	content:"";
+	width:0px;
+	height:0px;
+	clear: both;
+}
+.wlh-tabulate-header span{
+	cursor: pointer;
+	float:left;
+}
+.wlh-tabulate-red{
+	padding:10px;
+}
+.wlh-tabulate-red:hover,
+.wlh-tabulate-red-on{
+	background:#6699CC;
+	color:#fff;
+	border-bottom:1px solid red;
+}
+.wlh-tabulate-blue{
+	padding:10px 15px;
+}
+.wlh-tabulate-blue:hover,
+.wlh-tabulate-blue-on{
+    background:#B45B3E;
+    color:#fff;
+}
+.wlh-tabulate-yellow{
+	padding:5px 10px;
+}
+.wlh-tabulate-yellow:hover,
+.wlh-tabulate-yellow-on{
+	background:#DDF3FF;
+	color:#000000;
+}

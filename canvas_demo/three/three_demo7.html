@@ -1,0 +1,117 @@
+<! DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>
+        three.js的练习
+    </title>
+    <style>
+        body{
+            margin:0px;
+            padding:0px;
+        }
+    </style>
+    <script src="js/three.js"></script>
+    <script src="js/dat.gui.min.js"></script>
+    <script src="js/stats.min.js"></script>
+</head>
+<body>
+    <div id="WebGL-output"></div>
+    <script>
+        function init(){
+            var stats=new initStats();
+            var scene=new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,0.1,1000);//fov视场，aspect长宽比，near近面far远面
+            camera.position.set(-20,40,30);//设置摄像机位置
+            camera.lookAt(scene.position);//摄像机聚焦
+            //生成一个渲染器
+            var renderer=new THREE.WebGLRenderer();
+            renderer.setClearColor(0xEEEEEE);
+            renderer.setSize(window.innerWidth,window.innerHeight);
+            renderer.shadowMap.enabled=true;//允许阴影映射，因为渲染阴影需要大量的资源，因此需要设置
+            //生成一个轴辅助
+            var axes=new THREE.AxesHelper(20);
+            scene.add(axes);
+            var planeGeometry=new THREE.PlaneGeometry(60,20,10,10);//平面几何
+            var planeMaterial=new THREE.MeshLambertMaterial({color:0xffffff,});//生成一种非发光的（兰伯特）的表面
+            var plane=new THREE.Mesh(planeGeometry,planeMaterial);
+            plane.rotateX(-0.5*Math.PI);
+            plane.position.set(0,0,0);
+            plane.receiveShadow=true;//平面接受阴影
+            scene.add(plane);
+            var cubeGeometry=new THREE.BoxGeometry(10,10,10);
+            var cubeMaterial=new THREE.MeshLambertMaterial({color:0xff0000});
+            var cube=new THREE.Mesh(cubeGeometry,cubeMaterial);
+            cube.castShadow=true;
+            scene.add(cube);
+            var spotLight=new THREE.SpotLight(0xffffff);
+            spotLight.position.set(-40,60,-10);
+            spotLight.castShadow=true;
+            spotLight.target=plane;//光源照射的方向
+            spotLight.angle=Math.PI/6;//光源的角度
+            spotLight.shadow.camera.near=2;//从距离光源的哪一点开始生成阴影
+            spotLight.shadow.camera.far=20;//从距离光源的哪一点停止生成阴影
+            console.log(spotLight)
+            scene.add(spotLight);
+            var helper = new THREE.CameraHelper(spotLight.shadow.camera );
+            scene.add(helper);//显示光源的方向
+            // var pointLight=new THREE.PointLight({color:'#ccffcc',distance:100,intensity:1});
+            // scene.add(pointLight);
+            var pointLight=new THREE.PointLight('#ccffcc');
+            pointLight.distance=100;
+            pointLight.intensity=1100;
+            scene.add(pointLight);
+            document.getElementById("WebGL-output").appendChild(renderer.domElement);
+            var controls=new function(){
+                this.rotationSpeed=0.02;
+                this.numberofObject=scene.children.length;
+                this.addCube=function(){
+                    var cubeSize=Math.ceil(Math.random()*3);
+                    var cubeGeometry=new THREE.BoxGeometry(cubeSize,cubeSize,cubeSize);
+                    var cubeMaterial=new THREE.MeshLambertMaterial({color:Math.random()*0xffffff});
+                    var cube=new THREE.Mesh(cubeGeometry,cubeMaterial);
+                    cube.castShadow=true;
+                    cube.name="cube-"+scene.children.length;
+                    cube.position.set(-30+Math.round(Math.random()*planeGeometry.parameters.width),Math.round(Math.random()*5),-20+Math.round(Math.random()*planeGeometry.parameters.height));  
+                    scene.add(cube);
+                    this.numberofObject=scene.children.length;
+               }
+               this.removeCube=function(){
+                   var allChildren=scene.children;
+                   var lastChild=allChildren[allChildren.length-1];
+                   if(lastChild instanceof THREE.Mesh){
+                       scene.remove(lastChild);
+                       this.numberofObject=scene.children.length;
+                   }
+               }
+               this.outputNumber=function(){
+                   console.log(scene,scene.children);
+               }
+            }
+            function initStats(){
+                var stats=new Stats();
+                stats.setMode(0);
+                stats.domElement.style.position="absolute";
+                stats.domElement.style.left="0px";
+                stats.domElement.style.top="0px";
+                document.getElementById("WebGL-output").appendChild(stats.domElement);
+                return stats;
+            }
+            var gui=new dat.GUI();
+               gui.add(controls,'rotationSpeed',0,1);
+               gui.add(controls,'addCube');
+               gui.add(controls,'removeCube');
+               gui.add(controls,'numberofObject').listen();;
+               gui.add(controls,'outputNumber')
+            function render(){
+                stats.update();//告诉stats重新渲染
+                // plane.position.x+=0.01;
+                requestAnimationFrame(render);
+                renderer.render(scene,camera);
+            }
+            render();
+        }
+        window.onload=init;
+    </script>
+</body>
+</html>

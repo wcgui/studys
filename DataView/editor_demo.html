@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.warp{
+				/*width:300px;*/
+				width:100%;
+				height:900px;
+				border:1px solid red;
+			}
+		</style>
+		<script src="js/textEditor.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/picUpload.js"></script>
+	</head>
+	<body>
+		<div class="warp">
+			<div style="float:left;background:#73D12E;width:500px;">
+				<span>测试</span>
+				<div class="editor">fdfsdf</div>
+			</div>
+			<div style="float:right;background:#73D12E;width:500px;">
+				<span class="editor">测试</span>
+				<div data-type="editor" >fdfsdf</div>
+			</div>
+			<div onclick="up()" style="background:#C0C0C0;width:100px;height:30px;border-radius: 5px;float:left;text-align: center;cursor: pointer;line-height: 30px;">图片上传</div>
+		</div>
+		
+		<script>
+			document.getElementsByClassName("warp")[0].ondblclick=function(e){
+				textEditor.show(e);
+			};
+			function up(){
+				picUpload.show();
+			}
+		</script>
+	</body>
+</html>

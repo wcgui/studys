@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery-1.11.0.min.js"></script>
+	</head>
+	<body>
+		<div openData="true" id="seat" params='{"font":true}'>
+			
+		</div>
+		<script type="text/template" data-type="data" >
+			{
+				"data": [
+					{
+						"name": "王一",
+						"age": "../images/buble_rectangle.png",
+						"experience_age": 1,
+						"filed": "后端开发",
+						"group": "海关产品线",
+						"projects": "人脸识别"
+					},
+					{
+						"name": "王一",
+						"age": "../images/buble_rectangle.png",
+						"experience_age": 1,
+						"filed": "后端开发",
+						"group": "海关产品线",
+						"projects": "人脸识别"
+					}
+				]
+			}
+		</script>
+		<script>
+			(function(){
+				resize=function($dom){
+					$dom = typeof($dom)!='undefined'?$dom:$(".ws-selected .ws-dragwrap div:first");
+					let ul='<ul>';
+					
+					let data=JSON.parse($dom.parent().find("script[data-type=data]").html());
+					
+					data.data.forEach(function(item){
+						let arr=Object.keys(item);
+						
+						console.log(item[arr[0]]);
+						ul+=`<li><span>${item[arr[0]]}</span></li>`;
+					});
+					ul+='</ul>';
+					
+					$dom.html("").append(ul).append(`<img src='${data.data[0].age}'>`);
+				};
+				resize($("#seat"));
+				return {
+					resize
+				}
+			})();
+		</script>
+	</body>
+</html>

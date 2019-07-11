@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<style>
+  .seating-box > img {
+    z-index: 1;
+  }
+  .first>img,
+  .second>img,
+  .thrid>img{
+  	width:100%;
+  	height:80%;
+  }
+  .first {
+  	width:100%;
+  	height:100%;
+    position: absolute;
+    bottom: -60px;
+    left: 0;
+    z-index: -1;
+    animation: first 5s infinite;
+  }
+  .second {
+  	width:100%;
+  	height:100%;
+    position: absolute;
+    bottom: -80px;
+    left: 0;
+    z-index: -2;
+    animation: second 5s infinite;
+  }
+
+  .third {
+  	width:100%;
+  	height:100%;
+    position: absolute;
+    bottom: -100px;
+    left: 0;
+    z-index: -3;
+    animation: third 5s infinite;
+  }
+  @keyframes first {
+    from {
+      bottom: -51px;
+    }
+    to {
+      bottom: -60px;
+      opacity: 0.5;
+    }
+  }
+ 
+  @keyframes second {
+    from {
+      bottom: -52px;
+    }
+    to {
+      bottom: -80px;
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes third {
+    from {
+      bottom: -53px;
+    }
+    to {
+      bottom: -100px;
+      opacity: 0;
+    }
+  }
+		
+/* 座位表 */
+
+.staff_desk {
+	width: 18.4%;
+	height: 14.6%;
+	background: url(http://172.26.1.10:3081/image/seatComponent/staff_desk.png) no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+}
+.staff_desk > div {
+  cursor: pointer;
+}
+.staff_desk .woman1 {
+	width: 22.2%;
+  height: 37.4%;
+	background: url(http://172.26.1.10:3081/image/seatComponent/woman01.png) no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	right: 0;
+	bottom: 40%;
+}
+.staff_desk .woman2 {
+	width: 21.5%;
+  height: 38.5%;
+	background: url(http://172.26.1.10:3081/image/seatComponent/woman02.png) no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	right: 25.8%;
+	top: -1%;
+}
+.staff_desk .woman3 {
+	width: 23.4%;
+  height: 38.5%;
+	background: url(http://172.26.1.10:3081/image/seatComponent/woman03.png) no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	left: 27.2%;
+	top: -22%;
+}
+.staff_desk .man1 {
+	width: 26%;
+  height: 63.7%;
+	background: url(http://172.26.1.10:3081/image/seatComponent/man01.png) no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	right: 24%;
+	bottom: -16.5%;
+}
+.staff_desk .man2 {
+	width: 26%;
+  height: 62.6%;
+	background: url(http://172.26.1.10:3081/image/seatComponent/man02.png) no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	top: 28.6%;
+	left: 24.1%;
+}
+.staff_desk .man3 {
+	width: 26%;
+  height: 64.8%;
+	background: url(http://172.26.1.10:3081/image/seatComponent/man03.png) no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+#staff_bubel {
+	width: 515px;
+	height: 238px;
+  position: absolute;
+  color: #fff;
+  z-index: 9;
+}
+#staff_bubel > div{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.buble_aspect {
+	width: 31px;
+	height: 32px;
+	background: url(http://172.26.1.10:3081/image/seatComponent/buble_aspect.png) no-repeat;
+	background-size: 100% 100%;
+	display: inline-block;
+	position: absolute;
+	bottom: 10%;
+	left: 0;
+}
+.buble_head_circle {
+	width: 132px;
+	height: 132px;
+	background: url(http://172.26.1.10:3081/image/seatComponent/buble_head_circle.png) no-repeat;
+	background-size: 100% 100%;
+	display: inline-block;
+	position: absolute;
+	bottom: 18%;
+	left: 0;
+	z-index: 999;
+}
+.buble_head_circle img{
+  border: 1px solid #eee;
+  width: 86%;
+  height: 86%;
+  border-radius: 100px;
+  display: inline-block;
+  margin: 7% 0 0 7%;
+  background: #eee;
+}
+.buble_rectangle {
+	width: 396px;
+	height: 219px;
+	background: url(http://172.26.1.10:3081/image/seatComponent/buble_rectangle.png) no-repeat;
+	background-size: contain;
+	display: inline-block;
+	position: absolute;
+	right: 5%;
+  margin-left: -20px;
+  padding-top: 20px;
+  font-size: 14px;
+}
+.buble_rectangle p{
+  width: 70%;
+  text-align: left;
+  margin: auto;
+  line-height: 2;
+}
+.bubble_i span{
+  display: inline-block;
+  margin: 0 20px;
+}
+.filed_a {
+  background: url(http://172.26.1.10:3081/image/seatComponent/btn_rectangle.png) no-repeat;
+  background-size: 100% 100%;
+  padding: 0px 15px;
+  display: inline-block;
+  margin: 0 10px
+}
+.bubble_i .staff_name{
+  font-size: 24px;
+}
+.bubble_t {
+  color: #94cdf5;
+}
+.project_a {
+  display: inline-block;
+  vertical-align: top;
+}
+.clear:after{
+	display: block;
+	content:"";
+	width:0px;
+	height:0px;
+	clear: both;
+}
+		</style>
+	</head>
+	<body>
+		
+        <div class="seating-box seating-box_anmition clear" style="width: 860px;height:624px;padding:3px;box-sizing:border-box;color:#fff;position:relative">
+            <div id="seating" style="width: 100%;height: 100%;background: url(http://172.26.1.10:3081/image/seatComponent/seating_bg1.png) no-repeat;background-size:100%;">
+                <div id="1-1" class="staff_desk" style="top: 10%;left: 50%;width: 158px;height: 91px">
+                    <div class="man1 developer" data-value='+"'"+ developer +"'"+'></div><div class="man2 developer" ></div><div class="man3 developer"></div></div>
+                <div id="1-2" class="staff_desk" style="top: 19.5%;left: 38.5%;width: 158px;height: 91px">
+                    <div class="woman1 developer" data-value='+"'"+ developer +"'"+'></div><div class="woman2 developer" ></div><div class="woman3 developer" ></div>
+                    <div class="man1 developer" data-value='+"'"+ developer +"'"+'></div><div class="man2 developer" ></div></div>
+                <div id="1-3" class="staff_desk" style="top: 29%;left: 27%;width: 158px;height: 91px">
+                    <div class="woman1 developer" data-value='+"'"+ developer +"'"+'></div><div class="woman2 developer" ></div>
+                    <div class="man2 developer" data-value='+"'"+ developer +"'"+'></div><div class="man3 developer" ></div></div>
+                <div id="1-4" class="staff_desk" style="top: 38.5%;left: 15.5%;width: 158px;height: 91px">
+                    <div class="woman2 developer" data-value='+"'"+ developer +"'"+'></div><div class="woman3 developer" ></div>
+                    <div class="man1 developer" data-value='+"'"+ developer +"'"+'></div><div class="man2 developer" ></div><div class="man3 developer" ></div></div>
+                <div id="1-5" class="staff_desk" style="top: 48%;left: 4%;width: 158px;height: 91px">
+                    <div class="woman2 developer" data-value='+"'"+ developer +"'"+'></div><div class="woman3 developer" ></div>
+                    <div class="man2 developer" data-value='+"'"+ developer +"'"+'></div><div class="man3 developer" ></div></div>
+                <div id="2-1" class="staff_desk" style="top: 44%;left: 52%;width: 158px;height: 91px">
+                    <div class="woman1 developer" data-value='+"'"+ developer +"'"+'></div><div class="woman2 developer" ></div><div class="woman3 developer"></div>
+                    <div class="man1 developer" data-value='+"'"+ developer +"'"+'></div><div class="man2 developer" ></div><div class="man3 developer" ></div></div>
+                <div id="2-2" class="staff_desk" style="top: 54%;left: 40%;width: 158px;height: 91px">
+                    <div class="woman1 developer" data-value='+"'"+ developer +"'"+'></div><div class="woman2 developer"></div><div class="woman3 developer" ></div>
+                    <div class="man1 developer" data-value='+"'"+ developer +"'"+'></div><div class="man2 developer" ></div><div class="man3 developer" ></div></div>
+                <div id="2-3" class="staff_desk" style="top: 64%;left: 28%;width: 158px;height: 91px">
+                    <div class="woman2 developer" data-value='+"'"+ developer +"'"+'></div><div class="woman3 developer" ></div></div>
+</div>
+<div class="first">
+          <img src="http://172.26.1.10:3081/image/seatComponent/first_bg.png" alt="" />
+        </div>
+      <div class="second">
+        <img src="http://172.26.1.10:3081/image/seatComponent/second_bg.png" alt="" />
+      </div>
+      <div class="third">
+        <img src="http://172.26.1.10:3081/image/seatComponent/third_bg.png" alt="" />
+      </div>
+</div>
+        <script>
+var developer = [{
+		name: '王一',
+		age: 23,
+		experience_age: 1,
+		filed: ['后端开发', ],
+		group: '海关产品线',
+		projects: ['人脸识别']
+	},
+	{
+		name: '张三',
+		age: 24,
+		experience_age: 2,
+		filed: ['前端开发', ],
+		group: '海关产品线',
+		projects: ['智慧监管', '智慧查验']
+	},
+	{
+		name: '李三',
+		age: 24,
+		experience_age: 2,
+		filed: ['后端开发', ],
+		group: '海关产品线',
+		projects: ['人脸识别', '智慧监管', '智慧查验']
+	},
+	{
+		name: '钱二',
+		age: 25,
+		experience_age: 3,
+		filed: ['后端开发', ],
+		group: '海关产品线',
+		projects: ['人脸识别', '智慧监管', '智慧查验']
+	},
+	{
+		name: '丁四',
+		age: 25,
+		experience_age: 3,
+		filed: ['后端开发', ],
+		group: '海关产品线',
+		projects: ['智慧监管', '智慧查验']
+	},
+	{
+		name: '孙五',
+		age: 25,
+		experience_age: 3,
+		filed: ['后端开发', ],
+		group: '海关产品线',
+		projects: ['人脸识别', '智慧查验']
+	},
+
+	{
+		name: '钱六',
+		age: 22,
+		experience_age: 1,
+		filed: ['后端开发', ],
+		group: '跨境快件系统',
+		projects: ['航空快件']
+	},
+	{
+		name: '周七',
+		age: 25,
+		experience_age: 3,
+		filed: ['前端开发', ],
+		group: '跨境快件系统',
+		projects: ['航空快件']
+	},
+	{
+		name: '陈八',
+		age: 26,
+		experience_age: 4,
+		filed: ['后端开发', ],
+		group: '跨境快件系统',
+		projects: ['航空快件']
+	},
+	{
+		name: '郭九',
+		age: 27,
+		experience_age: 5,
+		filed: ['后端开发', ],
+		group: '跨境快件系统',
+		projects: ['航空快件']
+	},
+
+	{
+		name: '王六',
+		age: 22,
+		experience_age: 1,
+		filed: ['前端开发', ],
+		group: '大数据可视化',
+		projects: ['大连通关时效数据可视化', '大数据应用实例']
+	},
+	{
+		name: '黄七',
+		age: 23,
+		experience_age: 2,
+		filed: ['前端开发', ],
+		group: '大数据可视化',
+		projects: ['大连通关时效数据可视化', '大数据应用实例']
+	},
+	{
+		name: '严八',
+		age: 23,
+		experience_age: 2,
+		filed: ['后端开发', ],
+		group: '大数据可视化',
+		projects: ['大连通关时效数据可视化', '大数据应用实例']
+	},
+	{
+		name: '卢九',
+		age: 29,
+		experience_age: 5,
+		filed: ['前端开发', ],
+		group: '大数据可视化',
+		projects: ['大连通关时效数据可视化', '大数据应用实例']
+	},
+
+	{
+		name: '李六',
+		age: 23,
+		experience_age: 2,
+		filed: ['后端开发', ],
+		group: '大数据产品线',
+		projects: ['大数据应用实例']
+	},
+	{
+		name: '郭晓晓',
+		age: 24,
+		experience_age: 2,
+		filed: ['后端开发', ],
+		group: '大数据产品线',
+		projects: ['大数据应用实例']
+	},
+	{
+		name: '严左',
+		age: 28,
+		experience_age: 4,
+		filed: ['后端开发', ],
+		group: '大数据产品线',
+		projects: ['大数据应用实例']
+	},
+	{
+		name: '卢冲',
+		age: 29,
+		experience_age: 5,
+		filed: ['后端开发', ],
+		group: '大数据产品线',
+		projects: ['大数据应用实例']
+	},
+	{
+		name: '王磊',
+		age: 26,
+		experience_age: 3,
+		filed: ['前端开发', ],
+		group: '大数据产品线',
+		projects: ['大数据应用实例']
+	},
+
+	{
+		name: '李依依',
+		age: 29,
+		experience_age: 5,
+		filed: ['技术总监', ],
+		group: '技术部',
+		projects: ['大数据应用实例']
+	},
+	{
+		name: '卢九',
+		age: 26,
+		experience_age: 3,
+		filed: ['产品总监', ],
+		group: '产品部',
+		projects: ['大数据应用实例']
+	},
+
+	{
+		name: '曹大大',
+		age: 35,
+		experience_age: "10 +" ,
+		filed: ['销售', ],
+		group: '销售部',
+		projects: ['销售']
+	},
+	{
+		name: '黄大大',
+		age: 40,
+		experience_age: "10 +" ,
+		filed: ['销售', ],
+		group: '销售部',
+		projects: ['销售']
+	},
+	{
+		name: '张一一',
+		age: 26,
+		experience_age: 2,
+		filed: ['销售', ],
+		group: '销售部',
+		projects: ['销售']
+	},
+	{
+		name: '李三三',
+		age: 25,
+		experience_age: 3,
+		filed: ['销售', ],
+		group: '销售部',
+		projects: ['销售']
+	},
+	{
+		name: '丁小四',
+		age: 27,
+		experience_age: 4,
+		filed: ['UI', ],
+		group: 'UI设计组',
+		projects: ['海关自贸区']
+	},
+	{
+		name: '孙大五',
+		age: 25,
+		experience_age: 3,
+		filed: ['UI', ],
+		group: 'UI设计组',
+		projects: ['海关自贸区']
+	},
+
+	{
+		name: '许一',
+		age: 30,
+		experience_age: "10 +" ,
+		filed: ['测试', ],
+		group: '测试部',
+		projects: ['变色龙测试']
+	},
+	{
+		name: '左小',
+		age: 30,
+		experience_age: "10 +" ,
+		filed: ['测试', ],
+		group: '测试部',
+		projects: ['变色龙测试']
+	},
+	{
+		name: '王大',
+		age: 26,
+		experience_age: 2,
+		filed: ['测试', ],
+		group: '测试部',
+		projects: ['变色龙测试']
+	},
+	{
+		name: '孟柳',
+		age: 25,
+		experience_age: 3,
+		filed: ['产品经理', ],
+		group: '产品部',
+		projects: ['教育产品']
+	},
+	{
+		name: '方子',
+		age: 30,
+		experience_age: "10 +" ,
+		filed: ['产品经理', ],
+		group: '产品部',
+		projects: ['海关产品']
+	},
+	{
+		name: '刘子',
+		age: 30,
+		experience_age: 3,
+		filed: ['产品经理', ],
+		group: '产品部',
+		projects: ['大数据产品']
+	},
+	{
+		name: '李子',
+		age: 30,
+		experience_age: "10 +" ,
+		filed: ['产品经理', ],
+		group: '产品部',
+		projects: ['快件产品']
+	},
+	{
+		name: '妹子',
+		age: 30,
+		experience_age: "10 +" ,
+		filed: ['产品经理', ],
+		group: '产品部',
+		projects: ['小程序']
+	}
+
+];
+function run() {
+	var ah=0;
+    $("#seating").children("div").each(function(key, element) {
+        $(element).children("div").each(function(index, item) {
+        	console.log(ah);
+            $(item).attr("data-value", JSON.stringify(developer[ah]));
+            ah++;
+        })
+    });
+    $("body").on("click",".seating-box",function() {
+        $("#staff_bubel").fadeOut()
+    }).on("click", ".seating-box .staff_desk div",function(e) {
+        e.stopPropagation();
+        var data = $(this).attr("data-value"),
+        filed_html = "",
+        projects_html = "";
+        data ? data = JSON.parse(data.replace(/syh/g, '"')) : data = {
+            name: "",
+            age: 0,
+            experience_age: 0,
+            filed: [],
+            group: "",
+            projects: []
+        };
+        for (var i = 0; i < data.filed.length; i++) {
+            filed_html = filed_html + '<span class="filed_a">' + data.filed[i] + "</span>"
+        }
+        for (var _i = 0; _i < data.projects.length; _i++) {
+            projects_html = projects_html + "<span>" + data.projects[_i] + "</span><br>"
+        }
+        var buble = '<div id="staff_bubel"><div><div class="buble_aspect"></div><div class="buble_head_circle"><img src="http://172.26.1.10:3081/image/seatComponent/pic.png"></div>' + '<div class="buble_rectangle">' + '<p class="bubble_i"><span class="staff_name">' + data.name + "</span><span>" + data.age + "岁</span><span>工作经验：" + data.experience_age + "年</span></p>" + '<p><label class="bubble_t">工作领域：</label>' + filed_html + "</p>" + '<p><label class="bubble_t">工作小组：</label>' + data.group + "</p>" + '<p><label class="bubble_t">最近项目：</label><label class="project_a">' + projects_html + "</label></p>" + "</div></div>";
+        $("#staff_bubel").remove();
+        $(".seating-box").append(buble);
+        var ele_w = $("#staff_bubel").width(),
+        ele_h = $("#staff_bubel").height(),
+        top = Number($(this).parent().css("top").slice(0, -2)),
+        left = Number($(this).parent().css("left").slice(0, -2));
+        $("#staff_bubel").css({
+            top: Number($(this).css("top").slice(0, -2)) + top - ele_h + 50,
+            left: Number($(this).css("left").slice(0, -2)) + left + Number($(this).width() / 2)
+        })
+    })
+};
+run();
+
+        </script>
+	</body>
+</html>

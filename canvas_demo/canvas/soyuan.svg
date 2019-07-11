@@ -1,0 +1,42 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <!-- 样式 -->
+    <style>
+        <!-- 小圆里的文字 -->
+        .smallCircleText {
+            fill: #fff;
+            font-size: 30px;
+        }
+
+        #process {
+            animation: process 2s linear;
+        }
+
+        @keyframes process {
+            from {
+                stroke-dashoffset: 500;
+            }
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
+    <!-- 大圆 -->
+   <circle cx="200" cy="200" r="150" stroke="#3fa1ff" stroke-width="15" fill="#0f1a3d"/>
+   <circle cx="200" cy="200" r="130" stroke="#2d6eb5" stroke-width="3" fill="none"/>
+   <!-- 进度圆环 -->
+   <circle id="process" cx="200" cy="200" r="120" stroke="#f2637b" stroke-width="20" stroke-dasharray="500 755"  transform="rotate(-90 200 200)" fill="none"/>
+
+   <circle cx="200" cy="200" r="110" stroke="#173559" stroke-width="5" fill="none"/>
+
+    <!-- 修饰符 -->
+   <!-- <rect x="200" y="300" width="10" height="24" fill="#1b3f63" transform="rotate(-35 210 325)"/> -->
+
+    <!-- 右下角小圆 -->
+    <circle cx="300" cy="300" r="50" stroke="#1a4167" stroke-width="10" fill="#0062bf"/>
+    <!-- 小圆里的文字 -->
+    <text x="265" y="310" class="smallCircleText">50%</text>
+</svg>

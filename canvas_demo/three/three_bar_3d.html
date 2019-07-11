@@ -1,0 +1,340 @@
+<! DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <title>测试3d锥形组件</title>
+        <style>
+            /* body{
+                margin:0px;
+                padding:0px;
+            }
+            #button{
+                width:700px;
+                position: fixed;
+                left:400px;
+                top:0px;
+            }
+            #button>span{
+                display: block;
+                margin-top:10px;
+                margin-left:10px;
+                background-color: #409EFF;
+                /* padding:15px; */
+                color:white;
+                border-radius: 5px;
+                width:80px;
+                height:35px;
+                text-align: center;
+                line-height:35px;
+                cursor: pointer;
+                font-size:14px;
+            }
+            #deploy ul{
+                background:#CDF6F6;
+                width:550px;
+            }
+            #deploy ul>li{
+                list-style:none;
+                width:500px;
+                border-bottom:1px solid #9BA7A8;
+                padding:10px 0px;
+                /* background:#CDF6F6; */
+            }
+            #deploy ul>li>p{
+                margin:5px 0px;
+                padding-left:20px;
+                position: relative;
+            }
+            #deploy ul>li>p i{
+                background:red;
+                width:13px;
+                height:13px;
+                display: inline-block;
+                line-height: 13px;
+                /* text-align: center; */
+                font-size:18px;
+                color:white;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+            #deploy ul>li>p span.deploy_add{
+                display: block;
+                background:#ACC2F1;
+                width:90px;
+                /* float:right; */
+                position:absolute;
+                right:20px;
+                bottom:-10px;
+                text-align: center;
+                font-size:14px;
+                color:#9776A6;
+                border-radius: 2px;
+                cursor: pointer;
+            }
+            #deploy ul>li>p:after{
+                content:'';
+                display: block;
+                clear: both;
+            }
+            #deploy ul>li>p span.deploy_add:hover{
+                background:rgba(172,194,241,.8);
+            }
+            #deploy ul>p>input{
+                background:#6ACDEA;
+                border:0px;
+                margin-bottom:10px;
+                cursor: pointer;
+                color:white;
+                outline:0px;
+            }
+            #deploy ul>p>input:hover{
+                background:rgba(106,205,234,.8);
+            }
+            #deploy ul>li input{
+                background:#CDF6F6;
+            }
+            #deploy ul>li>p>input[type=color]{
+                margin:10px;
+            }
+            #deploy ul>li input[type=number]{
+                width:60px;
+                margin:10px;
+                outline:0px;
+                border:0px;
+                text-align: center;
+            }
+            #deploy ul>li>p>input[type=text]{
+                width:100px;
+                border:0px;
+                outline:0px;
+                margin:0px 5px;
+            }
+            #deploy ul>li>input[type=text]{
+                outline:0px;
+                border:0px;
+                font-weight: bold;
+            }
+            .run{
+                width:0px;
+                height:1px;
+                background:#fff;
+                position:absolute;
+            }
+            .textShow{
+                position:absolute;
+                font-size:12px;
+                color:#fff;
+                background:rgba(209,206,206,0.2);
+                border:1px solid #fff;
+                border-radius: 2px;
+                /* height:100px; */
+                /* padding:10px; */
+                overflow:hidden;
+                box-sizing: border-box;
+            } */
+        </style>
+        <script src="js/three.js"></script>
+        <script src="js/color.js"></script>
+        <script src="js/Bar_3d.js"></script>
+    </head>
+    <body>
+        <div id="bar_3d" style="width:400px;height:400px;position:relative;"></div>
+        <div id="button">
+            <span>更改配置</span>
+            <div id="deploy" style="display: none;">
+                <ul>
+                    <li>backgroundColor(组件背景色):<input type="color"></li>
+                    <li>radius(棱柱半径):<input type="range" oninput="range(this)" onpropertychange="range(this)" min="0" max="100"><span></span></li>
+                    <li>color(棱柱颜色):<input type="color"></li>
+                    <li>rotation(棱柱旋转角度):<input type="range" min="0" max="2" oninput="range(this)" onpropertychange="range(this)" step="0.01"><span></span></li>
+                    <li>grid(图像中心点):<p>top:<input type="number" placeholder="请输值">left:<input type="number" placeholder="请输值"></p></li>
+                    <li>floatHeight(上浮高度):<input type="number" placeholder="请输值"></li>
+                    <li>dataHeight(棱柱整体高度):<input type="number" placeholder="请输值"></li>
+                    <li>该图所示用途(例：输出):<input type="text" placeholder="例：收出"></li>
+                    <li>data(棱柱数据):<p toggle-data="data"><span class="deploy_add"  onclick="inputAdd(this)">继续添加</span></p></li>
+                    <p>
+                        <input type="button" toggle-data="yes" value="确认更改">
+                        <input type="button" toggle-data="no" value="取消">
+                    </p>
+                </ul>
+            </div>
+        </div>
+        <script>
+            var Bar3D;
+            var options={
+                title:"收出",
+                backgroundColor:'#13265E',
+                radius:20,//整个柱子的半径
+                color:"#2280A4",
+                floatHeight:3,//上浮高度
+                dataHeight:30,//整个柱子的高度
+                grid:{top:0,left:0},//控制图像的中心位置，默认在最中间0，0，top的负数向下正数向上，left负数向左正数向右，
+                rotation:1/5,
+                data:[
+                    {
+                        name:'水费',value:3000
+                    },
+                    {
+                        name:'燃气费',value:1000
+                    },
+                    {
+                        name:'电费',value:3000,
+                    },
+                    {
+                        name:'租金',value:1500,
+                    },
+                    {
+                        name:'医药费',value:1500,
+                    }
+                ],//数据最少两个，最多五个
+            }
+            Bar3D=new Bar_3d(document.getElementById("bar_3d"),options);
+            var button=document.querySelector("#button>span");
+            button.addEventListener("click",function(){
+                let deploy=document.getElementById("deploy");
+                if(deploy.style.display=="none"){
+                    deploy.style.display="block";
+                    let lists=deploy.querySelectorAll("ul>li");
+                    if(lists[lists.length-1].querySelectorAll("input").length>0){
+                        lists[lists.length-1].querySelector("p").innerHTML=`<span class="deploy_add"  onclick="inputAdd(this)">继续添加</span>`;
+                    }
+                    lists[0].getElementsByTagName("input")[0].value=options.backgroundColor;
+                    lists[1].getElementsByTagName("input")[0].value=options.radius;
+                    lists[1].getElementsByTagName("span")[0].innerHTML=options.radius;
+                    lists[2].getElementsByTagName("input")[0].value=options.color;
+                    lists[3].getElementsByTagName("input")[0].value=Math.round(options.rotation*100)/100;
+                    lists[3].getElementsByTagName("span")[0].innerHTML=Math.round(options.rotation*100)/100+"π";
+                    lists[4].getElementsByTagName("input")[0].value=options.grid.top;
+                    lists[4].getElementsByTagName("input")[1].value=options.grid.left;
+                    lists[5].getElementsByTagName("input")[0].value=options.floatHeight;
+                    lists[6].getElementsByTagName("input")[0].value=options.dataHeight;
+                    lists[7].getElementsByTagName("input")[0].value=options.title;
+                    for(let i=0;i<options.data.length;i++){
+                        let input =document.createElement("input");
+                        input.type="text";
+                        input.placeholder="请输值";
+                        input.value=options.data[i].name;
+                        lists[lists.length-1].getElementsByTagName("p")[0].insertBefore(input,lists[lists.length-1].querySelector("span"));
+                        let b =document.createElement("b");
+                        b.innerHTML=":";
+                        lists[lists.length-1].getElementsByTagName("p")[0].insertBefore(b,lists[lists.length-1].querySelector("span"));
+                        input =document.createElement("input");
+                        input.type="number";
+                        input.placeholder="请输值";
+                        input.value=options.data[i].value;
+                        lists[lists.length-1].getElementsByTagName("p")[0].insertBefore(input,lists[lists.length-1].querySelector("span"));
+                        let inode=document.createElement("i");
+                        inode.title="删除此数据";
+                        inode.innerHTML="-";
+                        lists[lists.length-1].getElementsByTagName("p")[0].insertBefore(inode,lists[lists.length-1].querySelector("span"));
+                    }
+                }else{
+                    deploy.style.display="none";
+                }
+            });
+            //滑块后面显示数据
+            function range(ranges){
+                ranges.parentNode.getElementsByTagName('span')[0].innerHTML=ranges.parentNode.getElementsByTagName('input')[0].value+`${ranges.max>2?"":"π"}`;
+            }
+            //添加数据
+            function inputAdd(target){
+                let sh=target;
+                target=target.parentNode;
+                let input =document.createElement("input");
+                input.placeholder="请输值";
+                let inode=document.createElement("i");
+                if(target.querySelectorAll("i").length==5){
+                        alert("已达最大值");
+                        // sh.style.cursor="not-allowed";
+                }else{
+                    let boolean=true;
+                    for(let i=0;i<target.getElementsByTagName("input").length;i++){
+                        if(target.getElementsByTagName("input")[i].value==""){
+                            boolean=false;
+                            break;
+                        }
+                    }
+                    if(boolean){
+                        input.type="text";
+                        target.insertBefore(input,target.querySelector("span"));
+                        let b =document.createElement("b");
+                        b.innerHTML=":";
+                        target.insertBefore(b,target.querySelector("span"));
+                        input =document.createElement("input");
+                        input.type="number";
+                        input.placeholder="请输值";
+                        target.insertBefore(input,target.querySelector("span"));
+                        let inode=document.createElement("i");
+                        inode.title="删除此数据";
+                        inode.innerHTML="-";
+                        target.insertBefore(inode,target.querySelector("span"));
+                    }else{
+                        alert("有空值,请先填写");
+                    }
+                }
+            }
+            document.querySelector("#deploy>ul").onclick=function(e){
+                let target =e.target;
+                if(target.nodeName=="I"){
+                    parsent=target.parentNode;
+                    if(parsent.getAttribute("toggle-data")&&parsent.querySelectorAll("i").length==2){
+                        alert("最少需要2条数据");
+                    }else{
+                        for(let i=0;i<parsent.children.length;i++){
+                            if(parsent.children[i]==target){
+                                parsent.removeChild(parsent.children[i-1]);
+                                parsent.removeChild(target);
+                                if(parsent.getAttribute("toggle-data")){
+                                    parsent.removeChild(parsent.children[i-2]);
+                                    parsent.removeChild(parsent.children[i-3]);
+                                }
+                            }
+                        }
+                    }
+                }else if(target.nodeName=="INPUT"){
+                    if(target.getAttribute("type")=="button"){
+                        if(target.getAttribute("toggle-data")=="yes"){
+                            let boolean2=true;
+                            let inputs=document.querySelectorAll("div#deploy>ul>li input");
+                            for(let i=0;i<inputs.length-1;i++){
+                                if(!inputs[i].value!=""){
+                                    boolean2=false;
+                                    break;
+                                }
+                            }
+                            if(boolean2){
+                                document.getElementById("bar_3d").innerHTML="";
+                                let lists=deploy.querySelectorAll("#deploy>ul>li");
+                                options.backgroundColor=lists[0].getElementsByTagName("input")[0].value;
+                                options.radius=Number(lists[1].getElementsByTagName("input")[0].value);
+                                options.color=lists[2].getElementsByTagName("input")[0].value;
+                                options.rotation=Number(lists[3].getElementsByTagName("input")[0].value);
+                                options.grid.top=Number(lists[4].getElementsByTagName("input")[0].value);
+                                options.grid.left=Number(lists[4].getElementsByTagName("input")[1].value);
+                                options.floatHeight=Number(lists[5].getElementsByTagName("input")[0].value);
+                                options.dataHeight=Number(lists[6].getElementsByTagName("input")[0].value);
+                                options.title=lists[7].getElementsByTagName("input")[0].value;
+                                let inputDataName=lists[lists.length-1].querySelectorAll("input[type='text']");
+                                let inputDataValue=lists[lists.length-1].querySelectorAll("input[type='number']");
+                                for(let i=0;i<inputDataName.length;i++){
+                                    if(i==0){
+                                        options.data.length=0;
+                                    }
+                                    options.data[i]={name:inputDataName[i].value,value:Number(inputDataValue[i].value)};
+                                }
+                                window.cancelAnimationFrame(Bar3D.requestAnimation);
+                                Bar3D=new Bar_3d(document.getElementById("bar_3d"),options);
+                                document.getElementById("deploy").style.display="none";
+                            }else{
+                                alert("有空值，请先填充，或删除");
+                            }
+                        }else if(target.getAttribute("toggle-data")=="no"){
+                            if(confirm("确认放弃修改？"))
+                                document.getElementById("deploy").style.display="none";
+                        }
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
